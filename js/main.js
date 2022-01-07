@@ -1,7 +1,7 @@
 const links = [
     {
         label: 'Week01 Notes',
-        url: 'week1/index.html'
+        url: 'week1/' //index.html is automatic
     }
 ];
 
