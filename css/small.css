@@ -110,8 +110,8 @@ span {
     transition: all 200ms ease-in-out;
 }
 
-ul {
-    background-color: cornsilk;
+ol {
+    background-color: #ffd14544;
     padding: 1.5rem;
     list-style-type: none;
 }
