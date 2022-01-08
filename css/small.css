@@ -46,7 +46,7 @@ nav {
     margin: 60px 0;
 }
 
-nav h2, nav ul {
+nav h2, nav ol {
     font-family: 'Open Sans', sans-serif;
 }
 
@@ -70,6 +70,10 @@ footer {
 
 #copyright a:active {
     color: #ffd145;
+}
+
+#currentYear a {
+    text-decoration: none;
 }
 
 .dates {

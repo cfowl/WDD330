@@ -11,4 +11,4 @@ document.getElementById("currentDate").textContent = "Today: " + new Date().toLo
 document.getElementById("lastUpdated").textContent = "Last Updated: " + document.lastModified;
 
 // shows current year for copyright
-document.getElementById("currentYear").innerHTML = "&copy; " + new Date().getFullYear() + " | Chris Fowler | Utah |";
+document.getElementById("currentYear").innerHTML = "&copy; " + new Date().getFullYear() + " | <a href='../'>Chris Fowler</a> | Utah |";
