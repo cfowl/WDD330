@@ -32,10 +32,6 @@ header img {
     max-width: 165px;
 }
 
-header img:hover {
-    filter: drop-shadow(3px 2px 4px #293241);
-}
-
 h1 {
     color: #CEFF1A;
     font-family: 'Inknut Antiqua', serif;
