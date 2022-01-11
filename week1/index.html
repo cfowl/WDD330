@@ -7,12 +7,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Week01 | WDD330 Portfolio</title>
     <meta name="description" content="Template">
+
+    <!-- JavaScript -->
+    <script>
+        function loadStory() {
+            let storyName = document.getElementById('story_name').value;
+            let storyHTML = localStorage.getItem(storyName);
+            document.getElementById('story_editor').value = storyHTML;
+            if(storyHTML) {
+                document.querySelector('.message').textContent = 'Your story was loaded successfully.';
+            } else {
+                document.querySelector('.message').textContent = 'Your story was not loaded. Try again.';
+            }
+        }
+
+        function saveStory() {
+            let storyName = document.getElementById('story_name').value;
+            let storyHTML = document.getElementById('story_editor').value;
+            localStorage.setItem(storyName, storyHTML);
+            document.getElementById('message').textContent = 'Your story was saved successfully.';
+            if(localStorage.getItem(storyName)) {
+                document.querySelector('.message').textContent = 'Your story was saved successfully.';
+            } else {
+                document.querySelector('.message').textContent = 'Your story was not saved. Try again.';
+            }
+        }
+
+        function displayStory() {
+            let storyHTML = document.getElementById('story_editor').value;
+            document.getElementById('story_display').innerHTML = storyHTML;
+            document.querySelector('.message').textContent = '';
+        }
+    </script>
+
+    <!-- CSS -->
+    <style>
+        main {
+            margin: 2rem 0;
+        }
+        #story_editor {
+            width: 800px;
+            max-width: 90vw;
+        }
+
+        .message {
+            color: red;
+        }
+
+        button {
+            margin: .8rem .2rem;
+        }
+    </style>
 </head>
 <body>
 
+    <header>
+        <a href="../">WDD330 Portfolio Home</a>
+    </header>
+
     <main>
 
-        <h1>Week01 Notes</h1>
+        <h1>Week 01</h1>
+
+        <h2>Notes</h2>
 
         <ul>
             <li>Designing mobile first is not an instinct because we are designing and developing on a large screen, not mobile.</li>
@@ -23,10 +80,25 @@
             <li>The majority of people don't have the latest and greatest, so don't count on it.</li>
             <li>Make it obvious what buttons/menus are and do.</li>
         </ul>
-    
-        <footer>
-            <a href="../">WDD330 Portfolio Home</a>
-        </footer>
+
+        <h2>Story Editor</h2>
+
+        <label for="story_name">Story Name:
+            <input type="text" name="story_name" id="story_name">
+        </label>
+
+        <section class="message"></section>
+
+        <section>
+            <button onclick="loadStory()">Find & Edit</button>
+            <button onclick="saveStory()">Save</button>
+            <button onclick="displayStory()">Display</button>
+        </section>
+
+        <textarea name="story_editor" id="story_editor" rows="10"
+        placeholder="Write your story here, with or without HTML tags."></textarea>
+
+        <section id="story_display"></section>
 
     </main>
     
