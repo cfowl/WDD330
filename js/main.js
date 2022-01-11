@@ -5,7 +5,7 @@ const links = [
     }
 ];
 
-let toc = document.getElementById('toc');
+let list = document.getElementById('toc');
 
 links.forEach(link => {
     let li = document.createElement('li');
@@ -13,5 +13,5 @@ links.forEach(link => {
     a.setAttribute('href', link.url);
     a.textContent = link.label;
     li.appendChild(a);
-    toc.appendChild(li);
+    list.appendChild(li);
 });
