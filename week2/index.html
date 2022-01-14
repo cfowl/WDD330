@@ -10,14 +10,14 @@
 
     <!-- JavaScript -->
     <script>
-        // List item 1
+        // List item 1 ////////////////////////////////////////////////////
         let a = 1;
         let z = 26;
         console.log(a, z);
         [a,z] = [z,a];
         console.log(a, z);
 
-        // List item 2
+        // List item 2 ////////////////////////////////////////////////////
         function superheroQuiz() {
             const quiz = [
                 ["What is Superman's real name?","Clark Kent"],
@@ -35,11 +35,75 @@
                 }
             }
             alert(`Game over. You scored ${score} point${score !== 1 ? 's' : ''}!`);
+        }
+
+        // List item 3 ////////////////////////////////////////////////////
+        const quiz = [
+            ["What is Superman's real name?","Clark Kent"],
+            ["What is Wonder Woman's real name?","Diana Prince"],
+            ["What is Batman's real name?","Bruce Wayne"]
+        ];
+
+        function start(quiz) {
+            let score = 0;
+            for(const [question, answer] of quiz) {
+                const response = ask(question);
+                check(response, answer);
             }
+            gameOver();
+
+            function ask(question) {
+                return prompt(question);
+            }
+
+            function check(response, answer) {
+                if(response === answer) {
+                    alert('Correct!');
+                    score++;
+                } else {
+                    alert(`Wrong! The correct answer was ${answer}`);
+                }
+            }
+
+            function gameOver() {
+                alert(`Game over. You scored ${score} point${score !== 1 ? 's!' : '!'}`);
+            }
+        }
+
+        function buildChessboard() {
+            const width = parseInt(document.getElementById('width').value);
+            const height = parseInt(document.getElementById('height').value);
+            let output = '';
+            for(let y=0; y<height; y++) {
+                for(let x=0; x<width; x++) {
+                    if(y%2 === 0) {
+                        output += '&nbsp;&nbsp;&nbsp;#';
+                    } else {
+                        output += '#&nbsp;&nbsp;&nbsp;';
+                    }
+                }
+                output += '<br>';
+            }
+            document.getElementById('display').innerHTML = output;
+        }        
     </script>
 
     <!-- CSS -->
-    <style></style>
+    <style>
+        li {
+            margin: .5rem 0;
+        }
+
+        #width, #height {
+            width: 2rem;
+        }
+
+        #display {
+            border: 5px double black;
+            padding: 1rem;
+            max-width: fit-content;
+        }
+    </style>
 </head>
 <body>
 
@@ -51,11 +115,18 @@
 
         <h1>Week 02 Code</h1>
 
-        <p>The list below corresponds to JavaScript code running on this page</p>
+        <em>The list below corresponds to JavaScript code running on this page</em>
 
         <ol>
             <li>Variable swapping using destructured arrays (logged to console)</li>
-            <li><button onclick="superheroQuiz()">Superhero Quiz</button></li>
+            <li>Chapter 3 <button onclick="superheroQuiz()">Superhero Quiz</button></li>
+            <li>Chapter 4 <button onclick="start(quiz)">Superhero Quiz</button></li>
+            <li>Build a chessboard that is 
+                <input type="number" id="width" value="8"> x 
+                <input type="number" id="height" value="8"> 
+                <button onclick="buildChessboard()">Build</button>
+                <div id="display">Chessboard</div>
+            </li>
         </ol>
 
     </main>
