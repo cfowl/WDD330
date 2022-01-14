@@ -116,17 +116,21 @@ span {
     transition: all 200ms ease-in-out;
 }
 
-ol {
+#toc {
     background-color: #293241;
     padding: 1.5rem;
     color: #E0FBFC;
 }
 
-ol a {
+#toc li {
+    margin: .5rem 0;
+}
+
+#toc a {
     color: #E0FBFC;
 }
 
-ol a:hover {
+#toc a:hover {
     color: #98C1D9;
 }
 
