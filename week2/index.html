@@ -71,20 +71,34 @@
         }
 
         function buildChessboard() {
+
             const width = parseInt(document.getElementById('width').value);
             const height = parseInt(document.getElementById('height').value);
+            let display = document.getElementById('display');
+
+            if(width < 2 || height < 2) {
+                display.innerHTML = 'Height and Width must be greater than 1';
+                display.style.color = 'red';
+                return;
+            }
+            
             let output = '';
+
             for(let y=0; y<height; y++) {
-                for(let x=0; x<width; x++) {
+
+                for(let x=0; x<width/2; x++) {
+
                     if(y%2 === 0) {
-                        output += '&nbsp;&nbsp;&nbsp;#';
+                        output += '<div class="square white"></div><div class="square black"></div>';
                     } else {
-                        output += '#&nbsp;&nbsp;&nbsp;';
+                        output += '<div class="square black"></div><div class="square white"></div>';
                     }
                 }
+
                 output += '<br>';
             }
-            document.getElementById('display').innerHTML = output;
+
+            display.innerHTML = output;
         }        
     </script>
 
@@ -102,6 +116,22 @@
             border: 5px double black;
             padding: 1rem;
             max-width: fit-content;
+        }
+
+        .square {
+            display: inline-block;
+            margin: 0 0 -4px 0;
+            padding: 0;
+            width: 40px;
+            height: 40px;
+        }
+
+        .black {
+            background-color: #333;
+        }
+
+        .white {
+            background-color: papayawhip;
         }
     </style>
 </head>
@@ -122,8 +152,8 @@
             <li>Chapter 3 <button onclick="superheroQuiz()">Superhero Quiz</button></li>
             <li>Chapter 4 <button onclick="start(quiz)">Superhero Quiz</button></li>
             <li>Build a chessboard that is 
-                <input type="number" id="width" value="8"> x 
-                <input type="number" id="height" value="8"> 
+                <input type="number" id="width" value="8" min="2" max="20"> x 
+                <input type="number" id="height" value="8" min="2" max="20"> 
                 <button onclick="buildChessboard()">Build</button>
                 <div id="display">Chessboard</div>
             </li>
