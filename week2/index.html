@@ -76,8 +76,8 @@
             const height = parseInt(document.getElementById('height').value);
             let display = document.getElementById('display');
 
-            if(width < 2 || height < 2) {
-                display.innerHTML = 'Height and Width must be greater than 1';
+            if(width < 2 || height < 2 || width > 16 || height > 16) {
+                display.innerHTML = 'Height and Width must be greater than 1 and less than 17';
                 display.style.color = 'red';
                 return;
             }
@@ -124,6 +124,8 @@
             padding: 0;
             width: 40px;
             height: 40px;
+            max-width: 5vw;
+            max-height: 5vw;
         }
 
         .black {
@@ -155,9 +157,10 @@
                 <input type="number" id="width" value="8" min="2" max="20"> x 
                 <input type="number" id="height" value="8" min="2" max="20"> 
                 <button onclick="buildChessboard()">Build</button>
-                <div id="display">Chessboard</div>
             </li>
         </ol>
+
+        <div id="display">Chessboard</div>
 
     </main>
     
