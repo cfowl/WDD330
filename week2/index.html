@@ -74,7 +74,7 @@
 
             const width = parseInt(document.getElementById('width').value);
             const height = parseInt(document.getElementById('height').value);
-            let display = document.getElementById('display');
+            let display = document.getElementById('chess-display');
 
             if(width < 2 || height < 2 || width > 16 || height > 16) {
                 display.innerHTML = 'Height and Width must be greater than 1 and less than 17';
@@ -99,7 +99,23 @@
             }
 
             display.innerHTML = output;
-        }        
+        }
+        
+        function fizzBuzz() {
+            let output = '';
+            for(let i=0; i<101; i++) {
+                if(i%3 === 0 && i%5 === 0) {
+                    output += 'FIZZ BUZZ\n';
+                } else if(i%3 === 0) {
+                    output += 'FIZZ\n';
+                } else if(i%5 === 0) {
+                    output += 'BUZZ\n';
+                } else {
+                    output += i + '\n';
+                }
+            }
+            document.getElementById('fizz-display').innerText = output;
+        }
     </script>
 
     <!-- CSS -->
@@ -112,7 +128,7 @@
             width: 2rem;
         }
 
-        #display {
+        #chess-display {
             border: 5px double black;
             padding: 1rem;
             max-width: fit-content;
@@ -134,6 +150,10 @@
 
         .white {
             background-color: papayawhip;
+        }
+
+        #fizz-display {
+            font-size: .7rem;
         }
     </style>
 </head>
@@ -158,9 +178,12 @@
                 <input type="number" id="height" value="8" min="2" max="16"> 
                 <button onclick="buildChessboard()">Build</button>
             </li>
+            <li>0-100 <button onclick="fizzBuzz()">Fizz-Buzz</button></li>
         </ol>
 
-        <div id="display">Chessboard</div>
+        <div id="fizz-display">Fizz-Buzz</div>
+
+        <div id="chess-display">Chessboard</div>
 
     </main>
     
