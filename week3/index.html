@@ -180,8 +180,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             grid-template-rows: 1fr 1fr 1fr;
-            float: left;
-            margin: 0 10px 0 0;
+            margin: 0 0 10px 0;
         }
 
         #dice-display div {
@@ -217,6 +216,62 @@
         <h2>Dice Object</h2>
         <div id="dice-display"></div>
         <button onclick="dice.roll()">Roll</button>
+
+        <br><br><hr>
+
+        <h2>JavaScript Objects</h2>
+        <p>Object oriented programming (OOP) allows the developer to think in real world terms. For example, a user would have a name, age, username, password, preferences, etc. The user object would also have methods or actions that they could do, such as login, logout, edit user information, etc.
+        <br><br>
+        The keyword "this" is used for an object's method to access other properties of that method. If you had an object called "ball" that had properties of color and radius, you might have a method called "changeColor(color)". Inside that method you could do something like "this.color = color;". Using the keyword "this" rather than the object's own name allows for ineheritance.
+        <br><br>
+        The six primitive data types are strings, numbers, booleans, symbols, undefined, and null. An object is a construct of related properties (values) and methods (functions). An object literal is created by wrapping all of its contents inside curly brackets. In other objects you might need to declare a class to create an object, but in JavaScript you don't have to.
+        <br><br>
+        Using the keyword "in" will let you check if a property is in an object. However, this will return true even if the property was inherited from another object. To avoid this, you could use the "hasOwnProperty()" method.
+        <br><br>
+        New properties and methods can be added any time during the program and don't need to be included in the object's initial code block.
+        <br><br>
+        Objects are assigned and copied by reference. This means any changes to that object by a referencing variable will change the object for all other referencing variables.</p>
+
+        <h2>Date Object</h2>
+        <p>new Date(year,month,day,hour,minutes,seconds,milliseconds)</p>
+
+        <h2>RegExp Object</h2>
+        <p>A regular expression (RegExp) is a pattern used to find matches to the pattern in a given string. /[a-zA-Z]+ing$/ would match words ending in "ing". RegExp literal notation is to bookend with /. The test() method allows you to test a string to see if it matches the pattern, as in pattern.test('string');</p>
+
+        
+
+        <ul>
+            <li>const pattern = /JavaScript/; --> matches the string "JavaScript", this is a basic RegExp</li>
+            <li>const vowels = /[aeiou]/; --> matches at least one of the vowels, this is a character group</li>
+            <li>const uppercase = /[A-Z]/; --> matches A through Z, this is a character group/sequence</li>
+            <li>const digits = /[0-9]/; --> matches any of the digits, this is a character group/sequence</li>
+            <li>^ acts as a negating operator when used with a sequence, so /[^0-9]/ would match anything without a digit</li>
+            <li>. matches any character, except line breaks</li>
+            <li>\w matches any word character, and is equivalent to [A-Za-z0-9_]</li>
+            <li>\W matches any non-word character, and is equivalent to [\^A-Za-z0-9_]</li>
+            <li>\d matches any digit character, and is equivalent to [0-9]</li>
+            <li>\D matches any non-digit character, and is equivalent to [^0-9]</li>
+            <li>\s matches any whitespace character, and is equivalent to [ \t\r\n\f]</li>
+            <li>\S matches any non-whitespace character, and is equivalent to [^ \t\r\n\f]</li>
+            <li>? makes the preceding token in the regular expression optional</li>
+            <li>* matches one or more occurrences of the preceding token</li>
+            <li>+ matches one or more occurrences of the preceding token</li>
+            <li>{n} matches n occurrences of the preceding token</li>
+            <li>{n,} matches at least n occurrences of the pattern</li>
+            <li>{,m} matches at most m occurrences of the preceding token</li>
+            <li>{n,m} matches at least n and at most m occurrences of the preceding token</li>
+            <li>^ marks the position immediately before the first character in the string</li>
+            <li>$ marks the position immediately after the last character in the string</li>
+            <li>\ used to escape special characters, /\?/ searches for ?'s</li>
+            <li>const pdf = /.*\.pdf$/; --> finds anything with a .pdf extention</li>
+        </ul>
+
+        <h3>Helpful RexExp Links</h3>
+        <ul>
+            <li><a href="https://www.regextester.com/" target="blank">Online RegEx Tester</a></li>
+            <li><a href="https://regex101.com/" target="blank">Regular Expressions 101</a></li>
+            <li><a href="https://www.regular-expressions.info/" target="blank">Regular Expressions Info</a></li>
+        </ul>
 
     </main>
     
