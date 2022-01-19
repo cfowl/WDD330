@@ -8,168 +8,6 @@
     <title>Week03 | WDD330 Portfolio</title>
     <meta name="description" content="Week 03 Code Examples and Notes">
 
-    <!-- JavaScript -->
-    <script>
-        const calculator = {
-            num1: 0,
-            num2: 0,
-
-            read() {
-                this.num1 = parseFloat(document.getElementById('num1').value);
-                this.num2 = parseFloat(document.getElementById('num2').value);
-            },
-
-            display(result) {
-                document.getElementById('calc-display').textContent = result;
-            },
-
-            add() {
-                this.read();
-                const result = this.num1 + this.num2;
-                this.display(result);
-            },
-
-            subtract() {
-                this.read();
-                const result = this.num1 - this.num2;
-                this.display(result);
-            },
-
-            multiply() {
-                this.read();
-                const result = this.num1 * this.num2;
-                this.display(result);
-            },
-
-            divide() {
-                this.read();
-                const result = this.num1 / this.num2;
-                this.display(result);
-            },
-
-            power() {
-                this.read();
-                const result = this.num1 ** this.num2;
-                this.display(result);
-            }
-        };
-
-        const dice = {
-            speed: 500,
-            degree: 360,
-
-            clear() {
-                display = document.getElementById('dice-display');
-                display.innerHTML = '';
-                setTimeout(() => {  
-                    display.style.transition = 'initial';
-                    display.style.transform = 'rotate(0deg)';
-                }, this.speed);
-            },
-
-            spin() {
-                const display = document.getElementById('dice-display');
-                display.style.transition = `all ${this.speed}ms ease-out`;
-                display.style.transform = `rotate(${this.degree}deg)`;
-            },
-
-            roll() {
-                
-                this.clear();
-                this.spin();
-
-                const result = Math.floor(6 * Math.random()) + 1;
-                const display = document.getElementById('dice-display');
-
-                // DOT 1
-                const dot1 = document.createElement('div');
-
-                // DOT 2
-                const dot2 = document.createElement('div');
-                dot2.style.gridColumnStart = '3';
-
-                // DOT 3
-                const dot3 = document.createElement('div');
-                dot3.style.gridRowStart = '2';
-
-                // DOT 4
-                const dot4 = document.createElement('div');
-                dot4.style.gridRowStart = '2';
-                dot4.style.gridColumnStart = '2';
-
-                // DOT 5
-                const dot5 = document.createElement('div');
-                dot5.style.gridRowStart = '2';
-                dot5.style.gridColumnStart = '3';
-
-                // DOT 6
-                const dot6 = document.createElement('div');
-                dot6.style.gridRowStart = '3';
-
-                // DOT 7
-                const dot7 = document.createElement('div');
-                dot7.style.gridRowStart = '3';
-                dot7.style.gridColumnStart = '3';
-                
-                setTimeout(() => {
-                    switch(result) {
-                        case 1:
-                            display.appendChild(dot4);
-                            break;
-
-                        case 2:
-                            display.appendChild(dot2);
-                            display.appendChild(dot6);
-                            break;
-
-                        case 3:
-                            display.appendChild(dot2);
-                            display.appendChild(dot4);
-                            display.appendChild(dot6);
-                            break;
-
-                        case 4:
-                            display.appendChild(dot1);
-                            display.appendChild(dot2);
-                            display.appendChild(dot6);
-                            display.appendChild(dot7);
-                            break;
-
-                        case 4:
-                            display.appendChild(dot1);
-                            display.appendChild(dot2);
-                            display.appendChild(dot6);
-                            display.appendChild(dot7);
-                            break;
-
-                        case 5:
-                            display.appendChild(dot1);
-                            display.appendChild(dot2);
-                            display.appendChild(dot4);
-                            display.appendChild(dot6);
-                            display.appendChild(dot7);
-                            break;
-
-                        case 6:
-                            display.appendChild(dot1);
-                            display.appendChild(dot2);
-                            display.appendChild(dot3);
-                            display.appendChild(dot5);
-                            display.appendChild(dot6);
-                            display.appendChild(dot7);
-                            break;
-
-                        default:
-                            console.log('Something went wrong in the switch statement.');
-                            break;
-                    }
-                }, this.speed);
-            }
-        };
-        
-        //
-    </script>
-
     <!-- CSS -->
     <style>
         #dice-display {
@@ -283,3 +121,165 @@
     
 </body>
 </html>
+
+<!-- JavaScript -->
+<script>
+    const calculator = {
+        num1: 0,
+        num2: 0,
+
+        read() {
+            this.num1 = parseFloat(document.getElementById('num1').value);
+            this.num2 = parseFloat(document.getElementById('num2').value);
+        },
+
+        display(result) {
+            document.getElementById('calc-display').textContent = result;
+        },
+
+        add() {
+            this.read();
+            const result = this.num1 + this.num2;
+            this.display(result);
+        },
+
+        subtract() {
+            this.read();
+            const result = this.num1 - this.num2;
+            this.display(result);
+        },
+
+        multiply() {
+            this.read();
+            const result = this.num1 * this.num2;
+            this.display(result);
+        },
+
+        divide() {
+            this.read();
+            const result = this.num1 / this.num2;
+            this.display(result);
+        },
+
+        power() {
+            this.read();
+            const result = this.num1 ** this.num2;
+            this.display(result);
+        }
+    };
+
+    const dice = {
+        speed: 500,
+        degree: 360,
+
+        clear() {
+            display = document.getElementById('dice-display');
+            display.innerHTML = '';
+            setTimeout(() => {  
+                display.style.transition = 'initial';
+                display.style.transform = 'rotate(0deg)';
+            }, this.speed);
+        },
+
+        spin() {
+            const display = document.getElementById('dice-display');
+            display.style.transition = `all ${this.speed}ms ease-out`;
+            display.style.transform = `rotate(${this.degree}deg)`;
+        },
+
+        roll() {
+            
+            this.clear();
+            this.spin();
+
+            const result = Math.floor(6 * Math.random()) + 1;
+            const display = document.getElementById('dice-display');
+
+            // DOT 1
+            const dot1 = document.createElement('div');
+
+            // DOT 2
+            const dot2 = document.createElement('div');
+            dot2.style.gridColumnStart = '3';
+
+            // DOT 3
+            const dot3 = document.createElement('div');
+            dot3.style.gridRowStart = '2';
+
+            // DOT 4
+            const dot4 = document.createElement('div');
+            dot4.style.gridRowStart = '2';
+            dot4.style.gridColumnStart = '2';
+
+            // DOT 5
+            const dot5 = document.createElement('div');
+            dot5.style.gridRowStart = '2';
+            dot5.style.gridColumnStart = '3';
+
+            // DOT 6
+            const dot6 = document.createElement('div');
+            dot6.style.gridRowStart = '3';
+
+            // DOT 7
+            const dot7 = document.createElement('div');
+            dot7.style.gridRowStart = '3';
+            dot7.style.gridColumnStart = '3';
+            
+            setTimeout(() => {
+                switch(result) {
+                    case 1:
+                        display.appendChild(dot4);
+                        break;
+
+                    case 2:
+                        display.appendChild(dot2);
+                        display.appendChild(dot6);
+                        break;
+
+                    case 3:
+                        display.appendChild(dot2);
+                        display.appendChild(dot4);
+                        display.appendChild(dot6);
+                        break;
+
+                    case 4:
+                        display.appendChild(dot1);
+                        display.appendChild(dot2);
+                        display.appendChild(dot6);
+                        display.appendChild(dot7);
+                        break;
+
+                    case 4:
+                        display.appendChild(dot1);
+                        display.appendChild(dot2);
+                        display.appendChild(dot6);
+                        display.appendChild(dot7);
+                        break;
+
+                    case 5:
+                        display.appendChild(dot1);
+                        display.appendChild(dot2);
+                        display.appendChild(dot4);
+                        display.appendChild(dot6);
+                        display.appendChild(dot7);
+                        break;
+
+                    case 6:
+                        display.appendChild(dot1);
+                        display.appendChild(dot2);
+                        display.appendChild(dot3);
+                        display.appendChild(dot5);
+                        display.appendChild(dot6);
+                        display.appendChild(dot7);
+                        break;
+
+                    default:
+                        console.log('Something went wrong in the switch statement.');
+                        break;
+                }
+            }, this.speed);
+        }
+    };
+    
+    //
+</script>
