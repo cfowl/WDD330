@@ -8,7 +8,7 @@
     <title>Week03 | WDD330 Portfolio</title>
     <meta name="description" content="Week 03 Code Examples and Notes">
 
-    <!--////////////////////////////////////////////// CSS //////////////////////////////////////////////////////-->
+    <!----------------------------------------------------------- CSS ----------------------------------------------------------->
     <style>
 
         input[type=number] {
@@ -71,17 +71,12 @@
         <h2>Chapter 5 Notes</h2>
 
         <h3>JavaScript Objects</h3>
-        <p>Object oriented programming (OOP) allows the developer to think in real world terms. For example, a user would have a name, age, username, password, preferences, etc. The user object would also have methods or actions that they could do, such as login, logout, edit user information, etc.
-        <br><br>
-        The keyword "this" is used for an object's method to access other properties of that method. If you had an object called "ball" that had properties of color and radius, you might have a method called "changeColor(color)". Inside that method you could do something like "this.color = color;". Using the keyword "this" rather than the object's own name allows for ineheritance.
-        <br><br>
-        The six primitive data types are strings, numbers, booleans, symbols, undefined, and null. An object is a construct of related properties (values) and methods (functions). An object literal is created by wrapping all of its contents inside curly brackets. In other objects you might need to declare a class to create an object, but in JavaScript you don't have to.
-        <br><br>
-        Using the keyword "in" will let you check if a property is in an object. However, this will return true even if the property was inherited from another object. To avoid this, you could use the "hasOwnProperty()" method.
-        <br><br>
-        New properties and methods can be added any time during the program and don't need to be included in the object's initial code block.
-        <br><br>
-        Objects are assigned and copied by reference. This means any changes to that object by a referencing variable will change the object for all other referencing variables.</p>
+        <p>Object oriented programming (OOP) allows the developer to think in real world terms. For example, a user would have a name, age, username, password, preferences, etc. The user object would also have methods or actions that they could do, such as login, logout, edit user information, etc.</p>
+        <p>The keyword "this" is used for an object's method to access other properties of that method. If you had an object called "ball" that had properties of color and radius, you might have a method called "changeColor(color)". Inside that method you could do something like "this.color = color;". Using the keyword "this" rather than the object's own name allows for ineheritance.</p>
+        <p>The six primitive data types are strings, numbers, booleans, symbols, undefined, and null. An object is a construct of related properties (values) and methods (functions). An object literal is created by wrapping all of its contents inside curly brackets. In other objects you might need to declare a class to create an object, but in JavaScript you don't have to.</p>
+        <p>Using the keyword "in" will let you check if a property is in an object. However, this will return true even if the property was inherited from another object. To avoid this, you could use the "hasOwnProperty()" method.</p>
+        <p>New properties and methods can be added any time during the program and don't need to be included in the object's initial code block.</p>
+        <p>Objects are assigned and copied by reference. This means any changes to that object by a referencing variable will change the object for all other referencing variables.</p>
 
         <h3>Date Object</h3>
         <p>new Date(year,month,day,hour,minutes,seconds,milliseconds)</p>
@@ -122,8 +117,6 @@
             <li><a href="https://www.regular-expressions.info/" target="blank">Regular Expressions Info</a></li>
         </ul>
 
-        <h2>Chapter 6 Notes</h2>
-
         <h2>Chapter 7 Notes</h2>
 
     </main>
@@ -131,10 +124,10 @@
 </body>
 </html>
 
-<!--////////////////////////////////////////// JavaScript ////////////////////////////////////////////////////-->
+<!----------------------------------------------------------- JavaScript ----------------------------------------------------------->
 <script>
 
-//************************ Calc OBJECT ***************************//
+//============>>>>>>> Calculator OBJECT <<<<<<<============//
 const calculator = {
     num1: 0,
     num2: 0,
@@ -179,11 +172,18 @@ const calculator = {
     }
 };
 
-//************************ Dice OBJECT ***************************//
+//============>>>>>>> Dice OBJECT <<<<<<<============//
 const dice = {
     speed: 500,
     degree: 360,
     display: document.getElementById('dice-display'),
+
+    roll() {
+        
+        this.clear();
+        this.spin();
+        this.addDots(Math.floor(6 * Math.random()) + 1);
+    },
 
     clear() {
         this.display.innerHTML = '';
@@ -198,67 +198,56 @@ const dice = {
         this.display.style.transform = `rotate(${this.degree}deg)`;
     },
 
-    roll() {
-        
-        this.clear();
-        this.spin();
+    addDots(num) {
 
-        const result = Math.floor(6 * Math.random()) + 1;
-
-        // DOT 1
-        const dot1 = document.createElement('div');
+        let dots = [];
+        for(i=0; i<7; i++) dots[i] = document.createElement('div');
 
         // DOT 2
-        const dot2 = document.createElement('div');
-        dot2.style.gridColumnStart = '3';
+        dots[1].style.gridColumnStart = '3';
 
         // DOT 3
-        const dot3 = document.createElement('div');
-        dot3.style.gridRowStart = '2';
+        dots[2].style.gridRowStart = '2';
 
         // DOT 4
-        const dot4 = document.createElement('div');
-        dot4.style.gridRowStart = '2';
-        dot4.style.gridColumnStart = '2';
+        dots[3].style.gridRowStart = '2';
+        dots[3].style.gridColumnStart = '2';
 
         // DOT 5
-        const dot5 = document.createElement('div');
-        dot5.style.gridRowStart = '2';
-        dot5.style.gridColumnStart = '3';
+        dots[4].style.gridRowStart = '2';
+        dots[4].style.gridColumnStart = '3';
 
         // DOT 6
-        const dot6 = document.createElement('div');
-        dot6.style.gridRowStart = '3';
+        dots[5].style.gridRowStart = '3';
 
         // DOT 7
-        const dot7 = document.createElement('div');
-        dot7.style.gridRowStart = '3';
-        dot7.style.gridColumnStart = '3';
-        
+        dots[6].style.gridRowStart = '3';
+        dots[6].style.gridColumnStart = '3';
+
         setTimeout(() => {
-            switch(result) {
+            switch(num) {
                 case 1:
-                    this.display.append(dot4);
+                    this.display.append(dots[3]);
                     break;
 
                 case 2:
-                    this.display.append(dot2, dot6);
+                    this.display.append(dots[1], dots[5]);
                     break;
 
                 case 3:
-                    this.display.append(dot2, dot4, dot6);
+                    this.display.append(dots[1], dots[3], dots[5]);
                     break;
 
                 case 4:
-                    this.display.append(dot1, dot2, dot6, dot7);
+                    this.display.append(dots[0], dots[1], dots[5], dots[6]);
                     break;
 
                 case 5:
-                    this.display.append(dot1, dot2, dot4, dot6, dot7);
+                    this.display.append(dots[0], dots[1], dots[3], dots[5], dots[6]);
                     break;
 
                 case 6:
-                    this.display.append(dot1, dot2, dot3, dot5, dot6, dot7);
+                    this.display.append(dots[0], dots[1], dots[2], dots[4], dots[5], dots[6]);
                     break;
 
                 default:
