@@ -190,7 +190,11 @@ const calculator = {
 const dice = {
     speed: 500,
     degree: 360,
-    display: document.getElementById('dice-display'),
+    display: '',
+
+    setDisplay(id) {
+        this.display = document.getElementById(id);
+    },
 
     roll() {
         dice.clear();
@@ -271,5 +275,7 @@ const dice = {
     }
 };
 
+dice.setDisplay('dice-display');
+dice.addDots(5);
 document.getElementById('dice-btn').addEventListener('click', dice.roll);
 </script>
