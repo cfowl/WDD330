@@ -64,7 +64,7 @@
 
         <h3>Dice Object</h3>
         <div id="dice-display"></div>
-        <button onclick="dice.roll()">Roll</button>
+        <button id="dice-btn">Roll</button>
 
         <hr>
 
@@ -118,6 +118,20 @@
         </ul>
 
         <h2>Chapter 7 Notes</h2>
+
+        <h3>Event Listeners</h3>
+
+        <p>The JavaScript will wait for an event to occur before executing a block of JavaScript code. Events can be user clicks, key presses, taps, double clicks, mouse movements, mouse hovers, etc.</p>
+
+        <p>Inline Event Handlers are something like &lt;button id="sound-btn" onclick="makeSound()"&gt;Make a Sound&lt;/button&gt;. This works, is discouraged for a few reasons. First, it mixes JavaScript into the HTML. Second, only one event handler per event type is allowed with the inline method. Third, the JavaScript is harder to code as a string.</p>
+
+        <p>Older Event Handlers are a little better because they're separated from the HTML, but they still have the one per one restriction. An example of an older event handler would be document.onclick = makeSound() {// make a sound};</p>
+
+        <p>Instead of using the above two methods, add an event listener by doing something like document.getElementById('sound-btn').addEventListener('click', makeSound);</p>
+
+        <p>Even listeners can be removed just as easily as they can be added. If you want to remove an event listener, make sure not to use an anonymous function when adding the event listener.</p>
+
+        <p>Event delegation means you create an event listener on a parent that is used to capture events that are triggered by one of its many children. To do this, use the event.target property. The target property returns a reference to the node that triggered the event.</p>
 
     </main>
     
@@ -179,10 +193,9 @@ const dice = {
     display: document.getElementById('dice-display'),
 
     roll() {
-        
-        this.clear();
-        this.spin();
-        this.addDots(Math.floor(6 * Math.random()) + 1);
+        dice.clear();
+        dice.spin();
+        dice.addDots(Math.floor(6 * Math.random()) + 1);
     },
 
     clear() {
@@ -257,4 +270,6 @@ const dice = {
         }, this.speed);
     }
 };
+
+document.getElementById('dice-btn').addEventListener('click', dice.roll);
 </script>
