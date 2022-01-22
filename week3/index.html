@@ -55,11 +55,11 @@
         <h3>Calculator Object</Object></h3>
         <input type="number" name="num1" id="num1">
         <input type="number" name="num2" id="num2">
-        <button onclick="calculator.add()">+</button>
-        <button onclick="calculator.subtract()">-</button>
-        <button onclick="calculator.multiply()">*</button>
-        <button onclick="calculator.divide()">/</button>
-        <button onclick="calculator.power()">^</button>
+        <button id="add-btn">+</button>
+        <button id="subtract-btn">-</button>
+        <button id="multiply-btn">*</button>
+        <button id="divide-btn">/</button>
+        <button id="power-btn">^</button>
         <div id="calc-display"></div>
 
         <h3>Dice Object</h3>
@@ -156,50 +156,58 @@ const calculator = {
     },
 
     add() {
-        this.read();
-        const result = this.num1 + this.num2;
-        this.display(result);
+        calculator.read();
+        const result = calculator.num1 + calculator.num2;
+        calculator.display(result);
     },
 
     subtract() {
-        this.read();
-        const result = this.num1 - this.num2;
-        this.display(result);
+        calculator.read();
+        const result = calculator.num1 - calculator.num2;
+        calculator.display(result);
     },
 
     multiply() {
-        this.read();
-        const result = this.num1 * this.num2;
-        this.display(result);
+        calculator.read();
+        const result = calculator.num1 * calculator.num2;
+        calculator.display(result);
     },
 
     divide() {
-        this.read();
-        const result = this.num1 / this.num2;
-        this.display(result);
+        calculator.read();
+        const result = calculator.num1 / calculator.num2;
+        calculator.display(result);
     },
 
     power() {
-        this.read();
-        const result = this.num1 ** this.num2;
-        this.display(result);
+        calculator.read();
+        const result = calculator.num1 ** calculator.num2;
+        calculator.display(result);
     }
 };
+
+document.getElementById('add-btn').addEventListener('click', calculator.add);
+document.getElementById('subtract-btn').addEventListener('click', calculator.subtract);
+document.getElementById('multiply-btn').addEventListener('click', calculator.multiply);
+document.getElementById('divide-btn').addEventListener('click', calculator.divide);
+document.getElementById('power-btn').addEventListener('click', calculator.power);
 
 //============>>>>>>> Dice OBJECT <<<<<<<============//
 const dice = {
     speed: 500,
     degree: 360,
     display: '',
+    dots: [],
 
     setDisplay(id) {
         this.display = document.getElementById(id);
+        this.addDots();
     },
 
     roll() {
         dice.clear();
         dice.spin();
-        dice.addDots(Math.floor(6 * Math.random()) + 1);
+        dice.showDots(Math.floor(6 * Math.random()) + 1);
     },
 
     clear() {
@@ -215,56 +223,56 @@ const dice = {
         this.display.style.transform = `rotate(${this.degree}deg)`;
     },
 
-    addDots(num) {
-
-        let dots = [];
-        for(i=0; i<7; i++) dots[i] = document.createElement('div');
+    addDots() {
+        for(i=0; i<7; i++) this.dots[i] = document.createElement('div');
 
         // DOT 2
-        dots[1].style.gridColumnStart = '3';
+        this.dots[1].style.gridColumnStart = '3';
 
         // DOT 3
-        dots[2].style.gridRowStart = '2';
+        this.dots[2].style.gridRowStart = '2';
 
         // DOT 4
-        dots[3].style.gridRowStart = '2';
-        dots[3].style.gridColumnStart = '2';
+        this.dots[3].style.gridRowStart = '2';
+        this.dots[3].style.gridColumnStart = '2';
 
         // DOT 5
-        dots[4].style.gridRowStart = '2';
-        dots[4].style.gridColumnStart = '3';
+        this.dots[4].style.gridRowStart = '2';
+        this.dots[4].style.gridColumnStart = '3';
 
         // DOT 6
-        dots[5].style.gridRowStart = '3';
+        this.dots[5].style.gridRowStart = '3';
 
         // DOT 7
-        dots[6].style.gridRowStart = '3';
-        dots[6].style.gridColumnStart = '3';
+        this.dots[6].style.gridRowStart = '3';
+        this.dots[6].style.gridColumnStart = '3';
+    },
 
+    showDots(num) {
         setTimeout(() => {
             switch(num) {
                 case 1:
-                    this.display.append(dots[3]);
+                    this.display.append(this.dots[3]);
                     break;
 
                 case 2:
-                    this.display.append(dots[1], dots[5]);
+                    this.display.append(this.dots[1], this.dots[5]);
                     break;
 
                 case 3:
-                    this.display.append(dots[1], dots[3], dots[5]);
+                    this.display.append(this.dots[1], this.dots[3], this.dots[5]);
                     break;
 
                 case 4:
-                    this.display.append(dots[0], dots[1], dots[5], dots[6]);
+                    this.display.append(this.dots[0], this.dots[1], this.dots[5], this.dots[6]);
                     break;
 
                 case 5:
-                    this.display.append(dots[0], dots[1], dots[3], dots[5], dots[6]);
+                    this.display.append(this.dots[0], this.dots[1], this.dots[3], this.dots[5], this.dots[6]);
                     break;
 
                 case 6:
-                    this.display.append(dots[0], dots[1], dots[2], dots[4], dots[5], dots[6]);
+                    this.display.append(this.dots[0], this.dots[1], this.dots[2], this.dots[4], this.dots[5], this.dots[6]);
                     break;
 
                 default:
@@ -276,6 +284,6 @@ const dice = {
 };
 
 dice.setDisplay('dice-display');
-dice.addDots(5);
+dice.showDots(5);
 document.getElementById('dice-btn').addEventListener('click', dice.roll);
 </script>
