@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Chris Fowler">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week04 | WDD330 Portfolio</title>
+    <meta name="description" content="Week 04 Code Examples and Notes">
+
+    <!----------------------------------------------------------- CSS ----------------------------------------------------------->
+    <style>
+        #ttt {
+            border: 5px ridge #11aa11;
+            padding: 30px;
+            height: 240px;
+            width: 240px;
+            display: grid;
+            grid-template-columns: repeat(3, 80px);
+            grid-template-rows: repeat(3, 80px);
+        }
+
+        .cell {
+            border: 1px solid black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: sans-serif;
+            font-size: 3rem;
+        }
+
+        .top {
+            border-top: none;
+        }
+
+        .bottom {
+            border-bottom: none;
+        }
+
+        .left {
+            border-left: none;
+        }
+
+        .right {
+            border-right: none;
+        }
+
+        #ttt-reset {
+            display: block;
+            margin: 0 0 1rem 0;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#">WDD330 Portfolio Home</a>
+    </header>
+
+    <main>
+
+        <h1>Week 04</h1>
+
+        <h2>Code Examples</h2>
+
+        <h3>Tic Tac Toe</h3>
+        <button id="ttt-reset">Reset</button>
+        <div id="ttt">
+            <div class="cell top left"></div><div class="cell top"></div><div class="cell top right"></div>
+            <div class="cell left"></div><div class="cell "></div><div class="cell right"></div>
+            <div class="cell bottom left"></div><div class="cell bottom"></div><div class="cell bottom right"></div>
+        </div>
+
+    </main>
+    
+</body>
+</html>
+
+<!----------------------------------------------------------- JavaScript ----------------------------------------------------------->
+<script>
+    // TIC TAC TOE
+    let turn = 1;
+    let player = 1;
+    let gameOver = false;
+    const cells = Array.from(document.getElementsByClassName('cell'));
+
+    // reset click
+    document.getElementById('ttt-reset').addEventListener('click', () => {
+        cells.forEach(c => c.textContent = '');
+        turn = 1;
+        player = 1;
+        gameOver = false;
+    });
+
+    // cell clicks
+    cells.forEach(c => c.addEventListener('click', () => {
+        if(c.textContent === '') {
+            if(player === 1) c.textContent = 'X';
+            else c.textContent = 'O';
+            setTimeout(checkWin, 20);
+        }        
+    }));
+
+    function checkWin() {
+        if(turn++ > 4) {
+            // top row
+            if(cells[0].textContent === 'X' && cells[1].textContent === 'X' && cells[2].textContent === 'X') gameOver = true;
+            else if(cells[0].textContent === 'O' && cells[1].textContent === 'O' && cells[2].textContent === 'O') gameOver = true;
+            // middle row
+            else if(cells[3].textContent === 'X' && cells[4].textContent === 'X' && cells[5].textContent === 'X') gameOver = true;
+            else if(cells[3].textContent === 'O' && cells[4].textContent === 'O' && cells[5].textContent === 'O') gameOver = true;
+            // bottom row
+            else if(cells[6].textContent === 'X' && cells[7].textContent === 'X' && cells[8].textContent === 'X') gameOver = true;
+            else if(cells[6].textContent === 'O' && cells[7].textContent === 'O' && cells[8].textContent === 'O') gameOver = true;
+            // forward slash
+            else if(cells[0].textContent === 'X' && cells[4].textContent === 'X' && cells[8].textContent === 'X') gameOver = true;
+            else if(cells[0].textContent === 'O' && cells[4].textContent === 'O' && cells[8].textContent === 'O') gameOver = true;
+            // back slash
+            else if(cells[2].textContent === 'X' && cells[4].textContent === 'X' && cells[6].textContent === 'X') gameOver = true;
+            else if(cells[2].textContent === 'O' && cells[4].textContent === 'O' && cells[6].textContent === 'O') gameOver = true;
+            // left column
+            else if(cells[0].textContent === 'X' && cells[3].textContent === 'X' && cells[6].textContent === 'X') gameOver = true;
+            else if(cells[0].textContent === 'O' && cells[3].textContent === 'O' && cells[6].textContent === 'O') gameOver = true;
+            // middle column
+            else if(cells[1].textContent === 'X' && cells[4].textContent === 'X' && cells[7].textContent === 'X') gameOver = true;
+            else if(cells[1].textContent === 'O' && cells[4].textContent === 'O' && cells[7].textContent === 'O') gameOver = true;
+            // right column
+            else if(cells[2].textContent === 'X' && cells[5].textContent === 'X' && cells[8].textContent === 'X') gameOver = true;
+            else if(cells[2].textContent === 'O' && cells[5].textContent === 'O' && cells[8].textContent === 'O') gameOver = true;
+
+            if(gameOver) alert(`Player ${player} wins!!`);
+            else checkTie();
+        }
+        
+        player === 1 ? player = 2 : player = 1;
+    }
+
+    function checkTie() {
+        console.log('checking for tie');
+    }
+</script>
