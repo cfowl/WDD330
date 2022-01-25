@@ -11,7 +11,8 @@
     <!----------------------------------------------------------- CSS ----------------------------------------------------------->
     <style>
         #ttt {
-            border: 5px ridge #11aa11;
+            box-shadow: 0 0 7px black;
+            border-radius: 5%;
             padding: 30px;
             height: 240px;
             width: 240px;
@@ -82,6 +83,7 @@
     let turn = 1;
     let player = 1;
     let gameOver = false;
+    let tie = false;
     const cells = Array.from(document.getElementsByClassName('cell'));
 
     // reset click
@@ -90,16 +92,37 @@
         turn = 1;
         player = 1;
         gameOver = false;
+        tie = false;
     });
 
     // cell clicks
-    cells.forEach(c => c.addEventListener('click', () => {
-        if(c.textContent === '') {
-            if(player === 1) c.textContent = 'X';
-            else c.textContent = 'O';
-            setTimeout(checkWin, 20);
-        }        
-    }));
+    document.getElementById('ttt').addEventListener('click', () => {
+        let div = event.target;
+        if(div.textContent === '') {
+            if(player === 1) div.textContent = 'X';
+            else div.textContent = 'O';
+            setTimeout(check, 20);
+        }
+    });
+
+    // // cell clicks
+    // cells.forEach(c => c.addEventListener('click', () => {
+    //     if(c.textContent === '') {
+    //         if(player === 1) c.textContent = 'X';
+    //         else c.textContent = 'O';
+    //         setTimeout(check, 20);
+    //     }        
+    // }));
+
+    function check() {
+        checkTie();
+        if(!tie) checkWin();
+    }
+
+    function checkTie() {
+        if(turn === 10 && !gameOver) tie = true;
+        if(tie) alert('You tied!! Game over!!');
+    }
 
     function checkWin() {
         if(turn++ > 4) {
@@ -129,13 +152,7 @@
             else if(cells[2].textContent === 'O' && cells[5].textContent === 'O' && cells[8].textContent === 'O') gameOver = true;
 
             if(gameOver) alert(`Player ${player} wins!!`);
-            else checkTie();
         }
-        
         player === 1 ? player = 2 : player = 1;
-    }
-
-    function checkTie() {
-        console.log('checking for tie');
     }
 </script>
