@@ -10,6 +10,15 @@
 
     <!----------------------------------------------------------- CSS ----------------------------------------------------------->
     <style>
+        #ttt-reset {
+            margin: 0 0 1rem 0;
+        }
+
+        #ttt-message {
+            margin: 0 0 1rem 0;
+            color: red;
+        }
+
         #ttt {
             box-shadow: 0 0 7px black;
             border-radius: 5%;
@@ -45,11 +54,6 @@
         .right {
             border-right: none;
         }
-
-        #ttt-reset {
-            display: block;
-            margin: 0 0 1rem 0;
-        }
     </style>
 </head>
 <body>
@@ -66,6 +70,7 @@
 
         <h3>Tic Tac Toe</h3>
         <button id="ttt-reset">Reset</button>
+        <div id="ttt-message"></div>
         <div id="ttt">
             <div class="cell top left"></div><div class="cell top"></div><div class="cell top right"></div>
             <div class="cell left"></div><div class="cell "></div><div class="cell right"></div>
@@ -84,6 +89,7 @@
     let player = 1;
     let gameOver = false;
     let tie = false;
+    let tttMessage = document.getElementById('ttt-message');
     const cells = Array.from(document.getElementsByClassName('cell'));
 
     // reset click
@@ -93,6 +99,7 @@
         player = 1;
         gameOver = false;
         tie = false;
+        tttMessage.textContent = '';
     });
 
     // cell clicks
@@ -115,13 +122,13 @@
     // }));
 
     function check() {
+        checkWin();
         checkTie();
-        if(!tie) checkWin();
     }
 
     function checkTie() {
         if(turn === 10 && !gameOver) tie = true;
-        if(tie) alert('You tied!! Game over!!');
+        if(tie) tttMessage.textContent = 'The game ended in a tie.';
     }
 
     function checkWin() {
@@ -151,7 +158,7 @@
             else if(cells[2].textContent === 'X' && cells[5].textContent === 'X' && cells[8].textContent === 'X') gameOver = true;
             else if(cells[2].textContent === 'O' && cells[5].textContent === 'O' && cells[8].textContent === 'O') gameOver = true;
 
-            if(gameOver) alert(`Player ${player} wins!!`);
+            if(gameOver) tttMessage.textContent = `Congratualtions, player ${player} wins!`;
         }
         player === 1 ? player = 2 : player = 1;
     }
