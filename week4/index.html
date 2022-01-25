@@ -115,11 +115,13 @@
 
     // cell clicks
     document.getElementById('ttt').addEventListener('click', () => {
-        let div = event.target;
-        if(div.textContent === '') {
-            if(player === 1) div.textContent = 'X';
-            else div.textContent = 'O';
-            setTimeout(check, 20);
+        if(!gameOver) {
+            let div = event.target;
+            if(div.textContent === '') {
+                if(player === 1) div.textContent = 'X';
+                else div.textContent = 'O';
+                setTimeout(check, 20);
+            }
         }
     });
 
