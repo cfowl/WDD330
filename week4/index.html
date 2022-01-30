@@ -181,4 +181,30 @@
         }
         player === 1 ? player = 2 : player = 1;
     }
+
+
+    // ~~~~~~~ CLASS ~~~~~~~~
+    // TURTLE ////////////////////////////////////////////////////////////////////////////////////
+    class Turtle {
+        constructor(name) {
+            this.name = name;
+        }
+        sayHi() {
+            return `Hi dude, my name is ${this.name}`;
+        }
+    }
+
+    let raph = new Turtle();
+
+    Turtle.prototype.weapon = 'Hands';
+    Turtle.prototype.attack = function() {
+        return `Feel the wrath of my ${this.weapon}`;
+    }
+
+    let leo = new Turtle();
+
+    leo.weapon = 'Sword';
+
+    console.log(raph.attack());
+    console.log(leo.attack());
 </script>
