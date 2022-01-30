@@ -10,6 +10,35 @@
 
     <!----------------------------------------------------------- CSS ----------------------------------------------------------->
     <style>
+
+        input[type=number] {
+            width: 5rem;
+        }
+
+        hr {
+            margin: 2rem 0 0 0;
+        }
+
+        #dice-display {
+            width: 50px;
+            height: 50px;
+            border: 2px solid black;
+            border-radius: 15%;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr 1fr;
+            margin: 0 0 10px 0;
+        }
+
+        #dice-display div {
+            border-radius: 100%;
+            background-color: black;
+            height: 12px;
+            width: 12px;
+            justify-self: center;
+            align-self: center;
+        }
+
         #ttt-reset {
             margin: 0 0 1rem 0;
             padding: .5rem;
@@ -79,9 +108,27 @@
 
         <h2>Code Examples</h2>
 
+        <h3>Turtle Class</h3>
+        <p>Check the console. I was experimenting with some aspects of prototypes.</p>
+
+        <h3>Calculator Class</Object></h3>
+        <p>I refactored my code from week 3 so the Calculator is now a class.</p>
+        <input type="number" name="num1" id="num1">
+        <input type="number" name="num2" id="num2">
+        <button id="add-btn">+</button>
+        <button id="subtract-btn">-</button>
+        <button id="multiply-btn">*</button>
+        <button id="divide-btn">/</button>
+        <button id="power-btn">^</button>
+        <div id="calc-display"></div>
+
+        <h3>Dice Class</h3>
+        <p>I refactored my code from week 3 so the Dice is now a class.</p>
+        <div id="dice-display"></div>
+        <button id="dice-btn">Roll</button>
+
         <h3>Tic Tac Toe</h3>
-        <button id="ttt-reset">Reset</button>
-        <div id="ttt-message"></div>
+        <p>My version of the Tic Tac Toe team activity.</p>
         <div id="ttt">
             <div class="cell top left"></div>
             <div class="cell top"></div>
@@ -93,6 +140,26 @@
             <div class="cell bottom"></div>
             <div class="cell bottom right"></div>
         </div>
+        <div id="ttt-message"></div>
+        <button id="ttt-reset">Reset</button>
+
+        <h2>Chapter 12 Notes - Object Oriented Programming</h2>
+
+        <h3>Ecapsulation</h3>
+        <p>The user doesn't know or need to know how to innards work, only that they do. The only thing the user needs to know is how to interact with the outward interface. I don't need to know how a car works or even how it starts, just that I need to turn the key to start it.</p>
+
+        <h3>Polymorphism</h3>
+        <p>The same processes or methods can but used for different object, just with different inner functionality. Many devices have an 'ON' button, thought each device does something different when the 'ON' button is pushed. All people can communicate, thought some communicate verbally, non-verbally, written, different languages, etc. In OOP objects can override shared methods and the methods become polymorphic.</p>
+
+        <h3>Inheritance</h3>
+        <p>An object can inherit properties and methods from another object. The inheriting object can also add its own additional properties and methods.</p>
+
+        <h3>Static Method</h3>
+        <p>Adding the static keyword to a class method makes it so the method is called by the class itself rather than an instance of the class.</p>
+
+        <h3>Prototype</h3>
+        <p>Used to add shared properties and methods to a class that is already defined. All prototype methods and properties will be shared by all instances of the class, no matter when they were instantiated. **Never use arrays or objects as a default value in prototype.**</p>
+
 
     </main>
     
@@ -101,110 +168,232 @@
 
 <!----------------------------------------------------------- JavaScript ----------------------------------------------------------->
 <script>
-    // TIC TAC TOE
-    let turn = 1;
-    let player = 1;
-    let gameOver = false;
-    let tie = false;
-    let tttMessage = document.getElementById('ttt-message');
-    const cells = Array.from(document.getElementsByClassName('cell'));
 
-    // reset click
-    document.getElementById('ttt-reset').addEventListener('click', () => {
-        cells.forEach(c => c.textContent = '');
-        turn = 1;
-        player = 1;
-        gameOver = false;
-        tie = false;
-        tttMessage.textContent = '';
-    });
+//============>>>>>>> Calculator CLASS <<<<<<<============//
+class Calculator {
 
-    // cell clicks
-    document.getElementById('ttt').addEventListener('click', () => {
-        if(!gameOver) {
-            let div = event.target;
-            if(div.textContent === '') {
-                if(player === 1) div.textContent = 'X';
-                else div.textContent = 'O';
-                setTimeout(check, 20);
+    constructor(num1, num2, display) {
+        this.num1 = document.getElementById(num1);
+        this.num2 = document.getElementById(num2);
+        this.display = document.getElementById(display);
+    }
+
+    add = () => {
+        this.display.textContent = parseFloat(this.num1.value) + parseFloat(this.num2.value);
+    }
+
+    subtract = () => {
+        this.display.textContent = parseFloat(this.num1.value) - parseFloat(this.num2.value);
+    }
+
+    multiply = () => {
+        this.display.textContent = parseFloat(this.num1.value) * parseFloat(this.num2.value);
+    }
+
+    divide = () => {
+        this.display.textContent = parseFloat(this.num1.value) / parseFloat(this.num2.value);
+    }
+
+    power = () => {
+        this.display.textContent = parseFloat(this.num1.value) ** parseFloat(this.num2.value);
+    }
+}
+
+const calc = new Calculator('num1', 'num2', 'calc-display');
+document.getElementById('add-btn').addEventListener('click', calc.add);
+document.getElementById('subtract-btn').addEventListener('click', calc.subtract);
+document.getElementById('multiply-btn').addEventListener('click', calc.multiply);
+document.getElementById('divide-btn').addEventListener('click', calc.divide);
+document.getElementById('power-btn').addEventListener('click', calc.power);
+
+
+//============>>>>>>> Dice CLASS <<<<<<<============//
+class Dice {
+
+    constructor(display, speed=500, degree = 360) {
+        this.speed = speed;
+        this.degree = degree;
+        this.display = document.getElementById(display);
+        this.dots;
+        this.addDots();
+        this.showDots();
+    }
+
+    roll = () => {
+        this.clear();
+        this.spin();
+        this.showDots(Math.floor(6 * Math.random()) + 1);
+    }
+
+    clear = () => {
+        this.display.innerHTML = '';
+        setTimeout(() => {  
+            this.display.style.transition = 'initial';
+            this.display.style.transform = 'rotate(0deg)';
+        }, this.speed);
+    }
+
+    spin = () => {
+        this.display.style.transition = `all ${this.speed}ms ease-out`;
+        this.display.style.transform = `rotate(${this.degree}deg)`;
+    }
+
+    addDots = () => {
+        this.dots = [];
+
+        for(let i=0; i<7; i++) this.dots[i] = document.createElement('div');
+
+        // DOT 2
+        this.dots[1].style.gridColumnStart = '3';
+        // DOT 3
+        this.dots[2].style.gridRowStart = '2';
+        // DOT 4
+        this.dots[3].style.gridRowStart = '2';
+        this.dots[3].style.gridColumnStart = '2';
+        // DOT 5
+        this.dots[4].style.gridRowStart = '2';
+        this.dots[4].style.gridColumnStart = '3';
+        // DOT 6
+        this.dots[5].style.gridRowStart = '3';
+        // DOT 7
+        this.dots[6].style.gridRowStart = '3';
+        this.dots[6].style.gridColumnStart = '3';
+    }
+
+    showDots = (num=5) => {
+        setTimeout(() => {
+            switch(num) {
+                case 1:
+                    this.display.append(this.dots[3]);
+                    break;
+
+                case 2:
+                    this.display.append(this.dots[1], this.dots[5]);
+                    break;
+
+                case 3:
+                    this.display.append(this.dots[1], this.dots[3], this.dots[5]);
+                    break;
+
+                case 4:
+                    this.display.append(this.dots[0], this.dots[1], this.dots[5], this.dots[6]);
+                    break;
+
+                case 5:
+                    this.display.append(this.dots[0], this.dots[1], this.dots[3], this.dots[5], this.dots[6]);
+                    break;
+
+                case 6:
+                    this.display.append(this.dots[0], this.dots[1], this.dots[2], this.dots[4], this.dots[5], this.dots[6]);
+                    break;
+
+                default:
+                    console.log('Something went wrong in the switch statement.');
+                    break;
             }
-        }
-    });
-
-    // // cell clicks
-    // cells.forEach(c => c.addEventListener('click', () => {
-    //     if(c.textContent === '') {
-    //         if(player === 1) c.textContent = 'X';
-    //         else c.textContent = 'O';
-    //         setTimeout(check, 20);
-    //     }        
-    // }));
-
-    function check() {
-        checkWin();
-        checkTie();
+        }, this.speed);
     }
+}
 
-    function checkTie() {
-        if(turn === 10 && !gameOver) tie = true;
-        if(tie) tttMessage.textContent = 'The game ended in a tie.';
-    }
-
-    function checkWin() {
-        if(turn++ > 4) {
-            // top row
-            if(cells[0].textContent === 'X' && cells[1].textContent === 'X' && cells[2].textContent === 'X') gameOver = true;
-            else if(cells[0].textContent === 'O' && cells[1].textContent === 'O' && cells[2].textContent === 'O') gameOver = true;
-            // middle row
-            else if(cells[3].textContent === 'X' && cells[4].textContent === 'X' && cells[5].textContent === 'X') gameOver = true;
-            else if(cells[3].textContent === 'O' && cells[4].textContent === 'O' && cells[5].textContent === 'O') gameOver = true;
-            // bottom row
-            else if(cells[6].textContent === 'X' && cells[7].textContent === 'X' && cells[8].textContent === 'X') gameOver = true;
-            else if(cells[6].textContent === 'O' && cells[7].textContent === 'O' && cells[8].textContent === 'O') gameOver = true;
-            // forward slash
-            else if(cells[0].textContent === 'X' && cells[4].textContent === 'X' && cells[8].textContent === 'X') gameOver = true;
-            else if(cells[0].textContent === 'O' && cells[4].textContent === 'O' && cells[8].textContent === 'O') gameOver = true;
-            // back slash
-            else if(cells[2].textContent === 'X' && cells[4].textContent === 'X' && cells[6].textContent === 'X') gameOver = true;
-            else if(cells[2].textContent === 'O' && cells[4].textContent === 'O' && cells[6].textContent === 'O') gameOver = true;
-            // left column
-            else if(cells[0].textContent === 'X' && cells[3].textContent === 'X' && cells[6].textContent === 'X') gameOver = true;
-            else if(cells[0].textContent === 'O' && cells[3].textContent === 'O' && cells[6].textContent === 'O') gameOver = true;
-            // middle column
-            else if(cells[1].textContent === 'X' && cells[4].textContent === 'X' && cells[7].textContent === 'X') gameOver = true;
-            else if(cells[1].textContent === 'O' && cells[4].textContent === 'O' && cells[7].textContent === 'O') gameOver = true;
-            // right column
-            else if(cells[2].textContent === 'X' && cells[5].textContent === 'X' && cells[8].textContent === 'X') gameOver = true;
-            else if(cells[2].textContent === 'O' && cells[5].textContent === 'O' && cells[8].textContent === 'O') gameOver = true;
-
-            if(gameOver) tttMessage.textContent = `Congratualtions, player ${player} wins!`;
-        }
-        player === 1 ? player = 2 : player = 1;
-    }
+const dice = new Dice('dice-display');
+document.getElementById('dice-btn').addEventListener('click', dice.roll);
 
 
-    // ~~~~~~~ CLASS ~~~~~~~~
-    // TURTLE ////////////////////////////////////////////////////////////////////////////////////
-    class Turtle {
-        constructor(name) {
-            this.name = name;
-        }
-        sayHi() {
-            return `Hi dude, my name is ${this.name}`;
+//============>>>>>>> Tic Tac Toe <<<<<<<============//
+let turn = 1;
+let player = 1;
+let gameOver = false;
+let tie = false;
+let tttMessage = document.getElementById('ttt-message');
+const cells = Array.from(document.getElementsByClassName('cell'));
+
+// Reset Button Click
+document.getElementById('ttt-reset').addEventListener('click', () => {
+    cells.forEach(c => c.textContent = '');
+    turn = 1;
+    player = 1;
+    gameOver = false;
+    tie = false;
+    tttMessage.textContent = '';
+});
+
+// Cell Click
+document.getElementById('ttt').addEventListener('click', () => {
+    if(!gameOver) {
+        let div = event.target;
+        if(div.textContent === '') {
+            if(player === 1) div.textContent = 'X';
+            else div.textContent = 'O';
+            setTimeout(check, 20);
         }
     }
+});
 
-    let raph = new Turtle();
+function check() {
+    checkWin();
+    checkTie();
+}
 
-    Turtle.prototype.weapon = 'Hands';
-    Turtle.prototype.attack = function() {
-        return `Feel the wrath of my ${this.weapon}`;
+function checkTie() {
+    if(turn === 10 && !gameOver) tie = true;
+    if(tie) tttMessage.textContent = 'The game ended in a tie.';
+}
+
+function checkWin() {
+    if(turn++ > 4) {
+        // top row
+        if(cells[0].textContent === 'X' && cells[1].textContent === 'X' && cells[2].textContent === 'X') gameOver = true;
+        else if(cells[0].textContent === 'O' && cells[1].textContent === 'O' && cells[2].textContent === 'O') gameOver = true;
+        // middle row
+        else if(cells[3].textContent === 'X' && cells[4].textContent === 'X' && cells[5].textContent === 'X') gameOver = true;
+        else if(cells[3].textContent === 'O' && cells[4].textContent === 'O' && cells[5].textContent === 'O') gameOver = true;
+        // bottom row
+        else if(cells[6].textContent === 'X' && cells[7].textContent === 'X' && cells[8].textContent === 'X') gameOver = true;
+        else if(cells[6].textContent === 'O' && cells[7].textContent === 'O' && cells[8].textContent === 'O') gameOver = true;
+        // forward slash
+        else if(cells[0].textContent === 'X' && cells[4].textContent === 'X' && cells[8].textContent === 'X') gameOver = true;
+        else if(cells[0].textContent === 'O' && cells[4].textContent === 'O' && cells[8].textContent === 'O') gameOver = true;
+        // back slash
+        else if(cells[2].textContent === 'X' && cells[4].textContent === 'X' && cells[6].textContent === 'X') gameOver = true;
+        else if(cells[2].textContent === 'O' && cells[4].textContent === 'O' && cells[6].textContent === 'O') gameOver = true;
+        // left column
+        else if(cells[0].textContent === 'X' && cells[3].textContent === 'X' && cells[6].textContent === 'X') gameOver = true;
+        else if(cells[0].textContent === 'O' && cells[3].textContent === 'O' && cells[6].textContent === 'O') gameOver = true;
+        // middle column
+        else if(cells[1].textContent === 'X' && cells[4].textContent === 'X' && cells[7].textContent === 'X') gameOver = true;
+        else if(cells[1].textContent === 'O' && cells[4].textContent === 'O' && cells[7].textContent === 'O') gameOver = true;
+        // right column
+        else if(cells[2].textContent === 'X' && cells[5].textContent === 'X' && cells[8].textContent === 'X') gameOver = true;
+        else if(cells[2].textContent === 'O' && cells[5].textContent === 'O' && cells[8].textContent === 'O') gameOver = true;
+
+        if(gameOver) tttMessage.textContent = `Congratualtions, player ${player} wins!`;
     }
+    // change players
+    player === 1 ? player = 2 : player = 1;
+}
 
-    let leo = new Turtle();
 
-    leo.weapon = 'Sword';
+//============>>>>>>> Turtle CLASS <<<<<<<============//
+class Turtle {
+    constructor(name) {
+        this.name = name;
+    }
+    sayHi() {
+        return `Hi dude, my name is ${this.name}`;
+    }
+}
 
-    console.log(raph.attack());
-    console.log(leo.attack());
+let raph = new Turtle();
+
+Turtle.prototype.weapon = 'Hands';
+Turtle.prototype.attack = function() {
+    return `Feel the wrath of my ${this.weapon}`;
+}
+
+let leo = new Turtle();
+
+leo.weapon = 'Sword';
+
+console.log(raph.attack());
+console.log(leo.attack());
 </script>
