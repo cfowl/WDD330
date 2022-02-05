@@ -22,13 +22,14 @@
 
         #errorDisplay {
             background-color: yellow;
+            width: fit-content;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <a href="#">WDD330 Portfolio Home</a>
+        <a href="../">WDD330 Portfolio Home</a>
     </header>
 
     <main>
@@ -43,7 +44,7 @@
                         <input id="posNum">
                     </label>
                     <button id="checkPositiveBtn">Check</button>
-                    <span>Check the console to see if your first character was a positive number or not. Try entering negative numbers or even letters as the first character.</span>
+                    <span>Check the console to see if your first character was a positive number or not. Try entering negative numbers or even letters.</span>
                 </div>
             </li>
 
@@ -58,6 +59,24 @@
                 </div>
             </li>
         </ul>
+
+        <h2>Chapter 10 Notes</h2>
+
+        <h3>Errors, exceptions, and warnings</h3>
+        <p>Errors occur when something goes wrong in the program. The three main causes of errors are System Errors, Programmer Errors, and User Errors. System Errors might be caused by the browser, device, or other external connection. Programmer errors are caused by typos, syntax errors, faulty logic, and broken code. User errors are caused by the user interacting with the program incorrectly.</p>
+
+        <p>An exception is when an error gives feedback on what went wrong. This helps the user, programmer, or system fix or respond when an error occurs.</p>
+
+        <p>A warning is like an error only it doesn't cause anything to crash. Warnings could still result in things going wrong later.</p>
+
+        <h3>Strict mode</h3>
+        <p>Type 'use strict'; to enter strict mode. Strict mode has scope just like variables. Strict mode makes errors from what used to simply be considered as poor coding styles. Strict mode ensures a cleaner and higher quality code.</p>
+
+        <h3>Feature Detection</h3>
+        <p>You might want to consider using an if statement to check if the browser supports a certain feature before trying to use it.</p>
+
+        <h3>Error objects</h3>
+        <p>There are different types of Error objects (Error, EvalError, RangeError, ReferenceError, SytaxError, TypeError, URIError, InternalError). You can THROW an error object with a string as the parameter. If you surround the code you're trying to run in a TRY block, you can throw an error from within it. If an error is thrown in the try block it can be handled in the CATCH block. You can then decide what to do with the error or as a result of it inside the catch block. There is also an optional FINALLY block that can go after the catch block. Any code in the finally block will run no matter what happened in the try and catch blocks.</p>
 
     </main>
     
