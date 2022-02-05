@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Chris Fowler">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week05 | WDD330 Portfolio</title>
+    <meta name="description" content="Week 05">
+
+    <!----------------------------------------------------------- CSS ----------------------------------------------------------->
+    <style>
+        li {
+            margin-bottom: 1.25rem;
+        }
+
+        span {
+            display: block;
+            color: red;
+            font-style: italic;
+        }
+
+        #errorDisplay {
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#">WDD330 Portfolio Home</a>
+    </header>
+
+    <main>
+
+        <h1>Week 05 Notes</h1>
+
+        <h2>Code Examples</h2>
+        <ul>
+            <li>
+                <div>
+                    <label for="posNum">Enter anything starting with a positive number:
+                        <input id="posNum">
+                    </label>
+                    <button id="checkPositiveBtn">Check</button>
+                    <span>Check the console to see if your first character was a positive number or not. Try entering negative numbers or even letters as the first character.</span>
+                </div>
+            </li>
+
+            <li>
+                <div>
+                    <label for="posNum">Enter anything starting with a positive number:
+                        <input id="posNumCatch">
+                    </label>
+                    <button id="checkPositiveCatchBtn">Check</button>
+                    <span>Now we catch any errors and display them below.</span>
+                    <div id="errorDisplay"></div>
+                </div>
+            </li>
+        </ul>
+
+    </main>
+    
+</body>
+</html>
+
+<!--------------------------------------------------------- JavaScript --------------------------------------------------------->
+<script>
+    'use strict';
+
+    //____________ Check Positive Number, Throw Errors if not Positive or if not Number ____________\\
+    const checkPositiveBtn = document.getElementById('checkPositiveBtn');
+    checkPositiveBtn.addEventListener('click', checkPositive);
+
+    function checkPositive() {
+        console.log('checkPostive() invoked')
+        const num = parseFloat(document.getElementById('posNum').value);
+        if(num <= 0) {
+            throw new RangeError('You must enter a positive number!');
+        } else if (Number.isNaN(num)) {
+            throw new TypeError('You must enter a number!');
+        }
+        console.log('You entered a positive number');
+    }
+
+    //____________ Check Positive Number, Catch the Errors if not Positive or if not Number ____________\\
+    const checkPositiveCatchBtn = document.getElementById('checkPositiveCatchBtn');
+    checkPositiveCatchBtn.addEventListener('click', checkPositiveCatch);
+
+    function checkPositiveCatch() {
+        console.log('checkPostiveCatch() invoked')
+        const num = parseFloat(document.getElementById('posNumCatch').value);
+        const display = document.getElementById('errorDisplay');
+        
+        try {
+            if(num <= 0) {
+            throw new RangeError('You must enter a positive number!');
+            } else if (Number.isNaN(num)) {
+                throw new TypeError('You must enter a number!');
+            }
+        display.innerHTML = 'You entered a positive number';
+        } catch (error) {
+            display.innerHTML = error;
+        }
+    }   
+</script>
