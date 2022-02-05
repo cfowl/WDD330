@@ -1,19 +1,23 @@
 const links = [
     {
-        label: 'Week01 Code & Notes',
+        label: 'Week 01 Code & Notes',
         url: 'week1/' //index.html is automatic
     },
     {
-        label: 'Week02 Code',
+        label: 'Week 02 Code',
         url: 'week2/'
     },
     {
-        label: 'Week03 Code & Notes',
+        label: 'Week 03 Code & Notes',
         url: 'week3/'
     },
     {
-        label: 'Week04 Code & Notes',
+        label: 'Week 04 Code & Notes',
         url: 'week4/'
+    },
+    {
+        label: 'Week 05 Code & Notes',
+        url: 'week5/'
     }
 ];
 
