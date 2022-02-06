@@ -108,7 +108,8 @@
 
     function checkPositiveCatch() {
         console.log('checkPostiveCatch() invoked')
-        const num = parseFloat(document.getElementById('posNumCatch').value);
+        const numCatchInput = document.getElementById('posNumCatch');
+        const num = parseFloat(numCatchInput.value);
         const display = document.getElementById('errorDisplay');
         
         try {
@@ -120,6 +121,9 @@
         display.innerHTML = 'You entered a positive number';
         } catch (error) {
             display.innerHTML = error;
+        } finally {
+            numCatchInput.setAttribute('type', 'number');
+            numCatchInput.setAttribute('min', '1');
         }
     }   
 </script>
