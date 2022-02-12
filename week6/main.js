@@ -1,6 +1,5 @@
 import Todo from './todo.js';
 
-const todoList = document.getElementById('todoList');
 const localStorageName = 'todoList';
 
 let todoArray = [];
@@ -17,29 +16,81 @@ function addNewTodo(event) {
 
     const todo = new Todo();
     todo.content = newContent;
-
     todoArray.push(todo);
-
-    let li = document.createElement('li');
-    li.classList.add('item');
-    li.innerHTML = `<label for'${todo.id}'><input type='checkbox' id='${todo.id}'>${todo.content}</label>`;
-    li.appendChild(todo.delete);
-    todoList.appendChild(li);
     saveList();
-    console.table(todoArray);
 }
 
 function saveList() {
-    localStorage.setItem(localStorageName, todoList.innerHTML);
-    if(localStorage.getItem(localStorageName)) console.log('ToDo List Saved :)');
-    else console.log('TODO LIST NOT SAVED!!');
+    localStorage.setItem(localStorageName, JSON.stringify(todoArray));
+    displayList();
 }
 
 function loadList() {
-    const savedTodoList = localStorage.getItem(localStorageName);
-    todoList.innerHTML = savedTodoList;
-    if(savedTodoList) console.log('ToDo List Loaded :)');
-    else console.log('TODO LIST NOT LOADED!!');
+    const savedTodoArray = JSON.parse(localStorage.getItem(localStorageName));
+    todoArray = savedTodoArray;
+    displayList();
+}
+
+function displayList() {
+    const todoList = document.getElementById('todoList');
+    todoList.innerHTML = '';
+
+    for(let i=0; i< todoArray.length; i++) {
+        const li = document.createElement('li');
+        li.classList.add('item');
+        const check = todoArray[i].completed ? 'checked' : 'unchecked';
+        li.innerHTML = `<label for'${todoArray[i].id}'><input type='checkbox' id='${todoArray[i].id}' ${check}>${todoArray[i].content}</label>`;
+        const button = document.createElement('button');
+        button.classList.add('delete-btn');
+        button.textContent = "X";
+
+        // delete button event listener
+        button.addEventListener('click', event => {
+            deleteTodo(i, event);
+        });
+
+        li.appendChild(button);
+        todoList.appendChild(li);
+
+        const label = li.firstElementChild;
+
+        // checkmark event listener
+        label.addEventListener('click', event => {
+            addRemoveCheck(i, event);
+        });
+
+        // strike through if checked and turn button red on hover
+        if(todoArray[i].completed) {
+            label.style.textDecoration = 'line-through';
+            button.style.backgroundColor = 'orange';
+            button.addEventListener('mouseover', () => {
+                button.style.backgroundColor = 'red';
+            });
+            button.addEventListener('mouseleave', () => {
+                button.style.backgroundColor = 'orange';
+            });
+        }
+    }
+}
+
+function deleteTodo(i, event) {
+    event.preventDefault();
+    todoArray.splice(i, 1);
+    saveList();
+}
+
+function addRemoveCheck(i, event) {
+    // stop event propogation
+    event.preventDefault();
+    // check or uncheck manually
+    if(event.target.firstElementChild.checked) {
+        event.target.firstElementChild.checked = false;
+        todoArray[i].completed = false;
+    } else {
+        event.target.firstElementChild.checked = true;
+        todoArray[i].completed = true;
+    }
+    saveList();
 }
 
 
