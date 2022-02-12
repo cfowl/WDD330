@@ -1,5 +1,5 @@
 body {
-    background-color: whitesmoke;
+    background-color: black;
     margin: 0;
     padding: 0;
     height: 100vh;
@@ -9,7 +9,7 @@ main {
     margin: 0 auto;
     padding: 1rem;
     width: fit-content;
-    background-color: white;
+    background-color: darkgray;
     font-family: 'Courier New', Courier, monospace;
     height: 90vh;
 }
@@ -40,7 +40,7 @@ ul {
 }
 
 .item:hover {
-    background-color: aliceblue;
+    background-color: grey;
 }
 
 .item label {
@@ -87,7 +87,7 @@ ul {
 }
 
 #todo-tabs span {
-    color: red;
+    font-weight: bold;
 }
 
 #addTodo {
@@ -105,6 +105,7 @@ ul {
 button {
     padding: .3rem;
     font-size: 1rem;
+    cursor: pointer;
 }
 
 #theme-btn {
@@ -114,4 +115,12 @@ button {
 .flex {
     display: flex;
     justify-content: right;
+}
+
+a {
+    color: white;
+}
+
+a:hover {
+    color: red;
 }

@@ -8,7 +8,7 @@
     <title>Todo App | WDD330 Portfolio</title>
     <meta name="description" content="Todo Checklist App due Week 06">
     <script src="main.js" type="module" defer></script>
-    <link rel="stylesheet" href="styles.css">
+    <link id="styles" rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -17,13 +17,16 @@
     </header>
 
     <main>
+        
+        
+        <div class="flex"><button id="theme-btn">Dark Mode</button></div>
 
         <h1>Todos</h1> 
         
         <ul id="todoList"></ul>
 
-        <div id="task-tabs">
-            <span id="task-count">Add count here</span>
+        <div id="todo-tabs">
+            <span id="todo-count">Add count here</span>
             <button id="all-btn">All</button>
             <button id="active-btn">Active</button>
             <button id="completed-btn">Completed</button>
@@ -32,7 +35,7 @@
         <form id="addTodo" name="addTodo">
             <input type="text" name="newContent" id="newContent">
             <button id="addTodo" type="submit">Add</button>
-        </form>   
+        </form>
 
     </main>
     
