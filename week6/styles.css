@@ -1,5 +1,8 @@
 body {
     background-color: whitesmoke;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
 }
 
 main {
@@ -8,6 +11,7 @@ main {
     width: fit-content;
     background-color: white;
     font-family: 'Courier New', Courier, monospace;
+    height: 90vh;
 }
 
 h1 {
@@ -18,7 +22,7 @@ h1 {
     margin: 0 auto;
     padding: 2rem;
     border: 2px solid black;
-    border-radius: 1rem;
+    border-radius: 1rem 1rem 0 0;
 }
 
 ul {
@@ -34,16 +38,25 @@ ul {
     justify-content: space-between;
 }
 
+.item:hover {
+    background-color: aliceblue;
+}
+
 .item label {
     padding: .5rem;
     display: flex;
     align-items: center;
+    width: 100%;
 }
 
 .item input {
     margin: 0 .5rem 0 0;
     width: 15px;
     height: 15px;
+}
+
+.checked {
+    text-decoration: line-through;
 }
 
 .delete-btn {
@@ -61,11 +74,27 @@ ul {
     background-color: red;
 }
 
-#addTodo {
-    margin: 1rem 0 0 0;
-    text-align: right;
+#task-tabs {
+    padding: 1rem 2rem;
+    margin: 0 0 2rem 0;
+    border: 2px solid black;
+    border-radius: 0 0 1rem 1rem;
+    border-top: none;
 }
 
-.checked {
-    text-decoration: line-through;
+#addTodo {
+    text-align: right;
+    display: flex;
+    justify-content: right;
+}
+
+#addTodo input {
+    width: 100%;
+    margin: 0 .5rem  0 0;
+    font-size: 1rem;
+}
+
+#addTodo button {
+    padding: .3rem;
+    font-size: 1rem;
 }
