@@ -28,13 +28,13 @@ function saveList() {
 function loadList() {
     const savedTodoArray = JSON.parse(localStorage.getItem(localStorageName));
     todoArray = savedTodoArray;
-    displayList();
+    if(todoArray.length !== 0) displayList();
 }
 
 function displayList() {
     const todoList = document.getElementById('todoList');
     todoList.innerHTML = '';
-    console.log(todoArray);
+    console.table(todoArray);
     for(let i=0; i< todoArray.length; i++) {
         const li = document.createElement('li');
         li.classList.add('item');
