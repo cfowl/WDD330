@@ -27,7 +27,7 @@ function saveList() {
 
 function loadList() {
     const savedTodoArray = JSON.parse(localStorage.getItem(localStorageName));
-    todoArray = savedTodoArray;
+    if(savedTodoArray !== null) todoArray = savedTodoArray;
     if(todoArray.length !== 0) displayList();
 }
 
