@@ -34,7 +34,7 @@ function loadList() {
 function displayList() {
     const todoList = document.getElementById('todoList');
     todoList.innerHTML = '';
-
+    console.log(todoArray);
     for(let i=0; i< todoArray.length; i++) {
         const li = document.createElement('li');
         li.classList.add('item');
@@ -59,7 +59,7 @@ function displayList() {
             addRemoveCheck(i, event);
         });
 
-        // strike through if checked and turn button red on hover
+        // strike through text if checked and turn button red on hover
         if(todoArray[i].completed) {
             label.style.textDecoration = 'line-through';
             button.style.backgroundColor = 'orange';
@@ -92,5 +92,3 @@ function addRemoveCheck(i, event) {
     }
     saveList();
 }
-
-
