@@ -55,7 +55,7 @@ completedButton.addEventListener('click', () => {
 });
 
 // event listener to add new todo
-document.forms['addTodo'].addEventListener('submit', event => {
+document.forms['add-todo'].addEventListener('submit', event => {
     const todo = getNewTodo(event);
     todoArray = loadList();
     todoArray.push(todo);

@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo App | WDD330 Portfolio</title>
     <meta name="description" content="Todo Checklist App due Week 06">
-    <script src="./js/main.js" type="module" defer></script>
     <link id="styles" rel="stylesheet" href="./css/styles.css">
 </head>
 <body>
@@ -23,7 +22,7 @@
 
         <h1>Todos</h1> 
         
-        <ul id="todoList"></ul>
+        <ul id="todo-list"></ul>
 
         <div id="todo-tabs">
             <span id="todo-count">Add count here</span>
@@ -32,12 +31,13 @@
             <button id="completed-btn">Completed</button>
         </div>
 
-        <form id="addTodo" name="addTodo">
-            <input type="text" name="newContent" id="newContent">
-            <button id="addTodo" type="submit">Add</button>
+        <form id="add-todo" name="add-todo">
+            <input type="text" name="newContent" id="new-content">
+            <button id="add-todo-btn" type="submit">Add</button>
         </form>
 
     </main>
     
 </body>
+<script src="./js/main.js" type="module"></script>
 </html>

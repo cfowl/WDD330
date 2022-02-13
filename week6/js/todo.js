@@ -8,7 +8,7 @@ export default class Todo {
 
 export function getNewTodo(event) {
     event.preventDefault();
-    const input = document.forms['addTodo']['newContent'];
+    const input = document.forms['add-todo']['new-content'];
     const newContent = input.value;
     input.value = '';
     const todo = new Todo();

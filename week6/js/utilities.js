@@ -11,7 +11,7 @@ export function display(todoArray, s) {
 }
 
 export function displayList(todoArray, selection) {
-    const todoList = document.getElementById('todoList');
+    const todoList = document.getElementById('todo-list');
     todoList.innerHTML = '';
     document.getElementById('todo-count').innerHTML = `${todoArray.length} total`;
     if(todoArray.length === 0) todoList.innerHTML = 'Add a todo below...'
@@ -58,7 +58,7 @@ export function displayList(todoArray, selection) {
 }
 
 export function displayActiveList(todoArray, selection) {
-    const todoList = document.getElementById('todoList');
+    const todoList = document.getElementById('todo-list');
     todoList.innerHTML = '';
     let activeArray = todoArray.filter(todo => !todo.completed);
     document.getElementById('todo-count').innerHTML = `${activeArray.length} total`;
@@ -96,7 +96,7 @@ export function displayActiveList(todoArray, selection) {
 }
 
 export function displayCompletedList(todoArray, selection) {
-    const todoList = document.getElementById('todoList');
+    const todoList = document.getElementById('todo-list');
     todoList.innerHTML = '';
     let completedArray = todoArray.filter(todo => todo.completed);
     document.getElementById('todo-count').innerHTML = `${completedArray.length} total`;

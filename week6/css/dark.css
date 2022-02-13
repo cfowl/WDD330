@@ -28,7 +28,7 @@ h1 {
     text-align: center;
 }
 
-#todoList {
+#todo-list {
     margin: 0 auto;
     padding: 2rem;
     border: 2px solid #0C1821;
@@ -103,13 +103,13 @@ ul {
     color: #ffffff;
 }
 
-#addTodo {
+#add-todo {
     text-align: right;
     display: flex;
     justify-content: right;
 }
 
-#addTodo input {
+#add-todo input {
     width: 100%;
     margin: 0 .5rem  0 0;
     font-size: 1rem;
