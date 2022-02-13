@@ -1,0 +1,141 @@
+/* https://coolors.co/000000-0c1821-1b2a41-324a5f-ccc9dc
+DARKEST
+black: #000000;
+rich-black-fogra-29: #0c1821;
+oxford-blue: #1b2a41;
+charcoal: #324a5f;
+lavender-gray: #ccc9dc;
+white: #ffffff
+LIGHTEST
+*/
+
+body {
+    background-color: #ccc9dc;
+    margin: 0;
+    padding: 0;
+}
+
+main {
+    margin: 1rem auto 2rem;
+    padding: 1rem;
+    width: fit-content;
+    background-color: #ffffff;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+h1 {
+    text-align: center;
+}
+
+#todoList {
+    margin: 0 auto;
+    padding: 2rem;
+    border: 2px solid #000000;
+    border-radius: 1rem 1rem 0 0;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.item {
+    border: 1px solid #000000;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.item:hover {
+    background-color: #CCC9DC;
+}
+
+.item label {
+    padding: .5rem;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.item input {
+    margin: 0 .5rem 0 0;
+    width: 15px;
+    height: 15px;
+}
+
+.checked {
+    text-decoration: line-through;
+}
+
+.delete-btn {
+    margin: .5rem;
+    padding: .25rem .5rem;
+    background-color: inherit;
+    border: none;
+    border-radius: 1rem;
+    background-color: green;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.delete-btn:hover {
+    background-color: red;
+}
+
+#todo-tabs {
+    padding: 1rem 2rem;
+    margin: 0 0 2rem 0;
+    border: 2px solid #000000;
+    border-radius: 0 0 1rem 1rem;
+    border-top: none;
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+}
+
+#todo-tabs span {
+    color: #1B2A41;
+    font-weight: bold;
+}
+
+#addTodo {
+    text-align: right;
+    display: flex;
+    justify-content: right;
+}
+
+#addTodo input {
+    width: 100%;
+    margin: 0 .5rem  0 0;
+    font-size: 1rem;
+}
+
+button {
+    padding: .3rem;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+button.active {
+    background-color: #324A5F;
+    color: white;
+}
+
+#theme-btn {
+    margin: 2rem 0 0 0;
+}
+
+.flex {
+    display: flex;
+    justify-content: right;
+}
+
+a {
+    color: #000000;
+}
+
+a:hover {
+    color: #324A5F;
+}
