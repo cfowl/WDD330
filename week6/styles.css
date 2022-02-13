@@ -1,5 +1,17 @@
+/*
+DARKEST
+black: #000000;
+rich-black-fogra-29: #0c1821;
+oxford-blue: #1b2a41;
+charcoal: #324a5f;
+lavender-gray: #ccc9dc;
+white: #ffffff
+LIGHTEST
+*/
+
+
 body {
-    background-color: whitesmoke;
+    background-color: #ccc9dc;
     margin: 0;
     padding: 0;
     height: 100vh;
@@ -9,7 +21,7 @@ main {
     margin: 0 auto;
     padding: 1rem;
     width: fit-content;
-    background-color: white;
+    background-color: #ffffff;
     font-family: 'Courier New', Courier, monospace;
     height: 90vh;
 }
@@ -21,7 +33,7 @@ h1 {
 #todoList {
     margin: 0 auto;
     padding: 2rem;
-    border: 2px solid black;
+    border: 2px solid #000000;
     border-radius: 1rem 1rem 0 0;
 }
 
@@ -32,7 +44,7 @@ ul {
 }
 
 .item {
-    border: 1px solid black;
+    border: 1px solid #000000;
     border-radius: 1rem;
     margin-bottom: 1rem;
     display: flex;
@@ -40,7 +52,7 @@ ul {
 }
 
 .item:hover {
-    background-color: aliceblue;
+    background-color: #CCC9DC;
 }
 
 .item label {
@@ -67,7 +79,7 @@ ul {
     border: none;
     border-radius: 1rem;
     background-color: green;
-    color: white;
+    color: #ffffff;
     font-weight: bold;
 }
 
@@ -78,7 +90,7 @@ ul {
 #todo-tabs {
     padding: 1rem 2rem;
     margin: 0 0 2rem 0;
-    border: 2px solid black;
+    border: 2px solid #000000;
     border-radius: 0 0 1rem 1rem;
     border-top: none;
     display: flex;
@@ -87,7 +99,8 @@ ul {
 }
 
 #todo-tabs span {
-    color: red;
+    color: #1B2A41;
+    font-weight: bold;
 }
 
 #addTodo {
@@ -114,4 +127,12 @@ button {
 .flex {
     display: flex;
     justify-content: right;
+}
+
+a {
+    color: #000000;
+}
+
+a:hover {
+    color: #324A5F;
 }
