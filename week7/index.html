@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Chris Fowler">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Week07 | WDD330 Portfolio</title>
+    <meta name="description" content="Week 07">
+
+    <!----------------------------------------------------------- CSS ----------------------------------------------------------->
+    <style>
+        h2 {
+            border: 1px solid black;
+        }
+
+        label {
+            display: block;
+        }
+
+        div {
+            font-family: cursive;
+            font-size: 1.15rem;
+            color: mediumblue;
+        }
+
+        em {
+            color: coral;
+            font-size: .75rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="../">WDD330 Portfolio Home</a>
+    </header>
+
+    <main>
+
+        <h1>Week 07</h1>
+
+        <h2>Code Examples</h2>
+        <h3>Check the console and source code to see the results of using:</h3>
+        <ul>
+            <li>The .call() method</li>
+            <li>Closures</li>
+            <li>High-Order Functions</li>
+            <li>Curried Functions</li>
+        </ul>
+
+        <h3>Fetch an Animal Fact</h3>
+        <form id="animal-form" name="animal-form">
+            <label for="cat">Cat:
+                <input type="radio" name="animals" id="cat">
+            </label>
+            <label for="dog">Dog:
+                <input type="radio" name="animals" id="dog">
+            </label>
+            <button id="fetch-btn">Fetch</button>
+        </form>
+        <div id="display"></div>
+
+        <h2>Notes</h2>
+
+        <h3>Function Properties and Methods</h3>
+
+        <p>Functions all have a length that can be accessed using dot notation. The functions length is equal to the number of its parameters.</p>
+
+        <p>Functions also have a call method. The call method can be used to set the value of 'this' insice the function. If ageDoubled() used 'this.age' within, then you could set 'this.age' by doing ageDouble.call({age: 33}); Obviously this is a simple example used for demonstration purposes. Likely you would code ageDoubled to pass the age as a single parameter. A more practical use might be if you had people objects that contained an age property. You could pass the person object in ageDoubled.call(person) and it would double that person's age. If ageDoubled(greeting) has parameters that need passing you can pass them after the first argument like ageDoubled.call({age: 18}, 'Hola amigo'); If a function doesn't use 'this' you can still call the function using the call method as long as you pass 'null' as the first argument.</p>
+
+        <p>The apply method is similar to the call method except for any additional arguments are passed in as an array, even if there is only one argument. An example might be myFunction.apply(null, [arg1, arg2, arg3]); Since null is the first argument we know myFunction doesn't use 'this'. Event though we only have two arguments and the second one is an array, we are essentially passing in four arguments (including 'null'). The array doesn't remain inside the function.</p>
+
+        <p>You can also create your own properties and methods for your functions. You could do something like myFunction.author = 'Chris Fowler';</p>
+
+        <p>Memoization is a useful feature of custom properties that can be assigned to functions. You can essentially create a cache that is stored within the function which might help save time and resources.</p>
+
+        <h3>Immediately Invoked Function Expressions</h3>
+
+        <p>These are nicknamed IIFE's or IFFY's. These are simply anonymous functions that are called and executed as soon as they are defined. This is done by surrounding the entire function declaration within parenthesis and then placing parenthesis at the end of the function followed by a semicolon. ((//param)=>{//code})(//arg);</p>
+
+        <p>IFFY's can be used to create temporary variables that will not persist outside of the IFFY because of scope. IFFY's can also be used to set up initialized code that only needs to run once, such as a welcome message. IFFY's are also used to enforce strict mode on all your code within the IFFY.</p>
+
+        <p>Much of what IFFY's can do can also be done with blocks of code within curly braces {//code}.</p>
+
+        <h3>Functions that Define and Rewrite Themselves</h3>
+
+        <p>A function can rewrite itself by assigning an anonymous function to a variable with the same name as the original function... all within the original function. The first time the function runs, it executes any code before the anonymous function. After that, only the code within the anonymous function will be executed. Be careful when doing this because function properties will also be rewritten and lost. This technique is sometimes combined with feature checking so that a feature doesn't have to be checked evertime the function is called. Using logic, this means you could dynamically rewrite a function according to the capabilities of the browser executing it.</p>
+
+        <h3>Recursive Functions</h3>
+
+        <p>Recursive functions call themselves. Just like loops, you will want to make sure there is some condition that will not allow the function to infinitely recurse.</p>
+
+    </main>
+    
+</body>
+</html>
+
+<!--------------------------------------------------------- JavaScript --------------------------------------------------------->
+<script>
+
+    // >>>>>>>>>>>> CALL METHOD <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    function ageDoubled() {
+        const name = this.name ? `${this.name}'s age doubled is ` : `${this.age} doubled is `;
+        console.log(name + (this.age * 2));
+        return this.age * 2;
+    }
+    console.log('**We created an ageDoubled function.')
+    console.log(ageDoubled);
+    
+    const chris = {
+        name: 'Chris',
+        age: 33,
+        eyes: 'blue',
+        married: true
+    };
+
+    console.log('\nNow we pass {age: 18} into ageDoubled using the .call() method');
+    ageDoubled.call({age: 18});
+
+    console.log('\nNow we pass an object which contains a name and age into ageDoubled using the .call() method');
+    ageDoubled.call(chris);
+
+
+    // >>>>>>>>>>>> Closures, High Order Functions, Curried Functions <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    function multiply(x) {
+        return y => x*y;
+    }
+    console.log('\n**We created a multiply function that uses a closure and is high order.')
+    console.log(multiply);
+
+    console.log(`\n**Using the double parenthesis trick we calculate 6 x 7 = ${multiply(6)(7)}`);
+
+    const calcSalesTax = multiply(.047);
+    console.log('\n**Now we created a curried calcSalesTax function.')
+    console.log(`The 4.7% sales tax on a $593.13 purchase is $${calcSalesTax(593.13).toFixed(2)}`);
+
+    const calcGasTax = multiply(.498);
+    console.log('\n**Now we created a curried calcGasTax function.')
+    console.log(`The gas tax in Utah for 21 gallons of gas is $${calcGasTax(21).toFixed(2)}`);
+
+    const multiplyBy12 = multiply(12);
+    let twelves = [];
+    for(let i=1; i<=12; i++) twelves.push(multiplyBy12(i));
+    console.log('\n**Now we created a curried multiplyBy12 function.')
+    console.log(`The twelve times tables are: ${twelves.toString()}`);
+
+    function timesTables(z) {
+        let z_s = [];
+        const multiplyByZ = multiply(z);
+        for(let i=1; i<=12; i++) z_s.push(multiplyByZ(i));
+        return z_s;
+    }
+    console.log('\n**Now we create a timesTables uses a curried multiplyByZ function.')
+    console.log(timesTables);
+    console.log(`The two times tables are: ${timesTables(3).toString()}`);
+    console.log(`The two times tables are: ${timesTables(5).toString()}`);
+    console.log(`The two times tables are: ${timesTables(7).toString()}`);
+    console.log(`The two times tables are: ${timesTables(9).toString()}`);
+    console.log(`The two times tables are: ${timesTables(11).toString()}`);
+
+
+    // >>>>>>>>>>>> Fetch Some Animal Facts <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+    console.log('\n**CAT FACTS FETCH');
+    
+    function displayAnimalFact(displayId, animalType='horse') {
+        const url = `https://cat-fact.herokuapp.com/facts/random?animal_type=${animalType}`;
+        const message = animalType === 'horse' ? "<em>You didn't pick an animal so we picked horse:</em><br>" : '';
+        fetch(url)
+        .then(response => response.json())
+        .then(facts => document.getElementById(displayId).innerHTML = `${message}${facts.text}`);
+    }
+
+    document.getElementById('fetch-btn').addEventListener('click', event => {
+        event.preventDefault();
+        let animal;
+        if(document.getElementById('cat').checked) animal = 'cat';
+        else if(document.getElementById('dog').checked) animal = 'dog';
+        displayAnimalFact('display', animal);
+    });
+
+</script>
