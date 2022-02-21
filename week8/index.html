@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Chris Fowler">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template Week08 | WDD330 Portfolio</title>
+    <meta name="description" content="Template Week 08">
+
+    <!----------------------------------------------------------- CSS ----------------------------------------------------------->
+    <style>
+        h2 {
+            border: 1px solid black;
+        }
+
+        h3 {
+            border-bottom: 1px solid black;
+        }
+
+        div {
+            margin: 1rem 2rem;
+            text-align: center;
+        }
+
+        .translate {
+            transform: translate(50px, -23px);
+        }
+
+        .scale {
+            transform: scale(.7);
+        }
+
+        .rotate {
+            transform: rotate(10deg);
+        }
+
+        .skew {
+            transform: skew(50deg, -10deg);
+        }
+
+        .transition {
+            color: black;
+            transform: scale(1);
+            transition: all 900ms ease-out 200ms;
+        }
+
+        .transition:hover {
+            color: red;
+            transform: scale(1.5);
+        }
+
+        .heart {
+            position: relative;
+            width: 100px;
+            height: 90px;
+            margin: 1rem auto;
+        }
+
+        .heart:before,
+        .heart:after {
+            position: absolute;
+            content: "";
+            left: 50px;
+            top: 0;
+            width: 50px;
+            height: 80px;
+            background: red;
+            border-radius: 50px 50px 0 0;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .heart:after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        @keyframes beatingHeart {
+            /* normal state */
+            10%, 25%, 40%, 60%, 75%, 90% { transform: scale(1); }
+            /* scaled state */
+            20%, 35%, 70%, 85% { transform: scale(1.15); }
+        }
+
+        .beating-heart {
+            /* https://developer.mozilla.org/en-US/docs/Web/CSS/animation */
+            /* animation: name, duration, timing-function, iteration-count, direction, delay, fill-mode, and play-state */
+            animation: beatingHeart 3s linear infinite reverse;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="../">WDD330 Portfolio Home</a>
+    </header>
+
+    <main>
+
+        <h1>Week 08</h1>
+
+        <h2>Notes</h2>
+
+        <h3>Transforms</h3>
+
+        <p>Transforms DO NOT WORK on inline elements. Only declare transform once. Multiple transforms go on the same line separated by a space. Transforms are applied in the order they are declared.</p>
+
+        <p><em>Translate</em> moves the position of an element. translateX(+-x) moves something horizontally along the X-axis, translateY(+-y) moves something vertically along the Y-axis. translate(+-x, +-y) is shorthand for translateX and translateY. <div>Not translated</div> <div class="translate">Translated by: translate(50px, -23px);</div></p>
+
+        <p><em>Scale</em> changes an elements scale making it larger or smaller. scaleX(x) and scaleY(y) change the x and y dimensions of the element. scale(x, y) is shorthand for scaleX and scaleY. If only one argument is provided it will be used for both the x and y value. The center of the element will remain in the same place when scaling. <div>Not scaled</div>  <div class="scale">Scaled by: transform: scale(.7);</div></p>
+
+        <p><em>Rotate</em> does what it sounds like, rotating an element around its center. rotate(+-deg) but you can also use grads, radians, or turns. <div>Not rotated</div> <div class="rotate">Rotated by: transform: rotate(10deg);</div></p>
+
+        <p><em>Skew</em> does just that, it skews something along the specified axis and by the specified amount. Values can be any angular unit (a skewnit if you know what I mean). You can use skew(+-x, +-y), skewX(+-x), and skewY(+-y). <div>Not skewed</div> <div class="skew">Skewed by: transform: skew(50deg, -10deg);</div></p>
+
+        <p><em>Tranform Origin</em> changes the point upon which a transform is applied. The center point is defined as 'center center' or '50% 50%'. Possible values are left, center, right, top, bottom, or any typical length value such as px.</p>
+
+        <h3>Transitions</h3>
+
+        <p>Transition syntax = transition: property duration timing-function delay; You can transition all properties with the keyword 'all' or multiple properties separated by a comma.</p>
+
+        <p>Transitions allow CSS properties to change with time, making it look like something is alive on the page. This is nothing new if you think about it. Links typically change color or toggle an underline when you hover over them. This is an example of a transition, but it's a sudden change normally. With transitions you can smooth out the change, be it color, underline, or any other CSS property, including transforms. To implement a transition you will want to follow 3 steps. First, declare the original state of the element. Second, declare the final state of the element. Third, include a transition declaration in your default style block. <div class="transition">Transitioning scale and color on hover by: transition: all 900ms ease-out 200ms;</div></p>
+
+        <h3>Animations</h3>
+
+        <p>Unlike transitions, which only have a beginning and ending state, animations allow you to set multiple states of transition. We declare an animation by using the '@keyframes' keyword followed by whatever you choose the animation name to be, followed by curly braces. For example @keyframes myAnimation { /* CSS here */ }. Within your keyframe you can set multiple states using percentages such as 0% { /* CSS here */ } 25% { /* CSS here */ } 50% { /* CSS here */ } 75% { /* CSS here */ } 100% { /* CSS here */ }. Animations have a name, duration, timing-function, iteration-count, direction, delay, fill-mode, and play-state. These can be declared individually or with shorthand (animation: 300ms ease-in alternate 5s backwards appearDisappear;). <div class="beating-heart"><div class="heart"></div></div></p>
+
+    </main>
+    
+</body>
+</html>
+
+<!--------------------------------------------------------- JavaScript --------------------------------------------------------->
+<script></script>
