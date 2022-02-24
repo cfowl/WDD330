@@ -67,15 +67,15 @@
             transform: scale(1.5);
         }
 
-        .heart {
+        #heart {
             position: relative;
             width: 100px;
             height: 90px;
             margin: 1rem auto;
         }
 
-        .heart:before,
-        .heart:after {
+        #heart:before,
+        #heart:after {
             position: absolute;
             content: "";
             left: 50px;
@@ -88,7 +88,7 @@
             transform-origin: 0 100%;
         }
 
-        .heart:after {
+        #heart:after {
             left: 0;
             transform: rotate(45deg);
             transform-origin: 100% 100%;
@@ -98,10 +98,10 @@
             /* normal state */
             10%, 25%, 40%, 60%, 75%, 90% { transform: scale(1); }
             /* scaled state */
-            20%, 35%, 70%, 85% { transform: scale(1.05); }
+            20%, 35%, 70%, 85% { transform: scale(1.1); }
         }
 
-        .beating-heart {
+        #beating-heart {
             /* https://developer.mozilla.org/en-US/docs/Web/CSS/animation */
             /* animation: name, duration, timing-function, iteration-count, direction, delay, fill-mode, and play-state */
             animation: beatingHeart 3s linear infinite reverse;
@@ -132,6 +132,11 @@
         #drop {
             border: 2px solid black;
             color: black;
+        }
+
+        #heart-btn {
+            display: block;
+            margin: 0 auto;
         }
     </style>
 </head>
@@ -169,7 +174,11 @@
 
         <h3>Animations</h3>
 
-        <p>Unlike transitions, which only have a beginning and ending state, animations allow you to set multiple states of transition. We declare an animation by using the '@keyframes' keyword followed by whatever you choose the animation name to be, followed by curly braces. For example @keyframes myAnimation { /* CSS here */ }. Within your keyframe you can set multiple states using percentages such as 0% { /* CSS here */ } 25% { /* CSS here */ } 50% { /* CSS here */ } 75% { /* CSS here */ } 100% { /* CSS here */ }. Animations have a name, duration, timing-function, iteration-count, direction, delay, fill-mode, and play-state. These can be declared individually or with shorthand (animation: 300ms ease-in alternate 5s backwards appearDisappear;). <div class="beating-heart"><div class="heart"></div></div></p>
+        <p>
+            Unlike transitions, which only have a beginning and ending state, animations allow you to set multiple states of transition. We declare an animation by using the '@keyframes' keyword followed by whatever you choose the animation name to be, followed by curly braces. For example @keyframes myAnimation { /* CSS here */ }. Within your keyframe you can set multiple states using percentages such as 0% { /* CSS here */ } 25% { /* CSS here */ } 50% { /* CSS here */ } 75% { /* CSS here */ } 100% { /* CSS here */ }. Animations have a name, duration, timing-function, iteration-count, direction, delay, fill-mode, and play-state. These can be declared individually or with shorthand (animation: 300ms ease-in alternate 5s backwards appearDisappear;).
+            <div id="beating-heart"><div id="heart"></div></div>
+            <button id="heart-btn">Pause Animation</button>
+        </p>
 
         <h3>Canvas</h3>
 
@@ -252,6 +261,23 @@
         else skewDiv.textContent = 'transform: skew(50deg, -10deg);';
         skewDiv.classList.toggle('skew');
     }
+
+    // ------------------------- ANIMATION --------------------------------------------------------
+    const heartBtn = document.getElementById('heart-btn');
+    const heart = document.getElementById('beating-heart');
+    let isBeating = true;
+    heartBtn.addEventListener('click', event => {
+        event.preventDefault();
+        if(isBeating) {
+            isBeating = false;
+            heartBtn.textContent = 'Play Animation';
+            heart.style.animationPlayState = 'paused';
+        } else {
+            isBeating = true;
+            heartBtn.textContent = 'Pause Animation';
+            heart.style.animationPlayState = 'running';
+        }
+    });
 
     // ------------------------- CANVAS -----------------------------------------------------------
     const testCanvas = document.getElementById('test-canvas');
