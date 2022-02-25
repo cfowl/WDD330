@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Chris Fowler">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>People | Star Wars</title>
+    <meta name="description" content="Star Wars API, SWAPI, People">
+
+    <!----------------------------------------------------------- CSS ---------------------------------------------------------->
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+        }
+        main {
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            width: 100%;
+            background-color: whitesmoke;
+        }
+        h1 {
+            margin: 0 0 1rem 0;
+            text-align: center;
+        }
+        ul {
+            padding: 0;
+            margin: 0 auto;
+            list-style-type: none;
+            width: fit-content;
+        }
+        li {
+            padding: 1rem;
+            margin: .5rem;
+            border: 1px solid black;
+            border-radius: 5px;
+        }
+        li:hover {
+            background-color: aliceblue;
+            cursor: pointer;
+        }
+        h2 {
+            margin: 0;
+            font-size: 1.1rem;
+        }
+        #buttons {
+            width: fit-content;
+            margin: 1rem auto 0;
+        }
+
+        button {
+            margin: 0 2rem;
+            cursor: pointer;
+        }
+        .details {
+            background-color: aliceblue;
+        }
+    </style>
+</head>
+<body>
+    
+    <main>
+
+        <h1>People of Star Wars</h1>
+        <ul id="display"></ul>
+        <div id="buttons"></div>
+
+    </main>
+    
+</body>
+</html>
+
+<!--------------------------------------------------------- JavaScript --------------------------------------------------------->
+<script>
+
+    getData('https://swapi.dev/api/people');
+
+    function getData(url) {
+
+        const ul = document.getElementById('display');
+        const btns = document.getElementById('buttons');
+        ul.innerHTML = '';
+        btns.innerHTML = '';
+
+        fetch(url)
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.results);
+            // add each person to the page
+            data.results.forEach(d => {
+                const li = document.createElement('li');
+                li.innerHTML = d.name;
+                ul.appendChild(li);
+
+                // person details click listener
+                li.addEventListener('click', event => {
+                    if(li.classList.contains('details')) li.innerHTML = d.name;
+                    else {
+                        li.innerHTML = `<h2>${d.name}</h2>
+                                    <ul>
+                                        <li>Gender: ${d.gender}</li>
+                                        <li>Birth Year: ${d.birth_year}</li>
+                                        <li>Eye Color: ${d.eye_color}</li>
+                                        <li>Hair Color: ${d.hair_color}</li>
+                                        <li>Skin Color: ${d.skin_color}</li>
+                                        <li>Height: ${d.height}</li>
+                                        <li>Mass: ${d.mass}</li>
+                                    </ul>`;
+                    }
+                    li.classList.toggle('details');
+                });
+
+            }); // end of forEach
+
+            // create buttons and add them to the page
+            const prev = document.createElement('button');
+            const next = document.createElement('button');
+            prev.innerHTML = 'Prev';
+            next.innerHTML = 'Next';
+            prev.setAttribute('title', data.previous)
+            next.setAttribute('title', data.next);
+            btns.appendChild(prev);
+            btns.appendChild(next);
+            
+            // next & previous button click listeners
+            prev.addEventListener('click', event => {
+                event.preventDefault();
+                getData(data.previous);
+            });
+            next.addEventListener('click', event => {
+                event.preventDefault();
+                getData(data.next);
+            });
+
+        }); // end of fetch
+
+    };  // end of getData function
+
+</script>
