@@ -76,9 +76,9 @@
 <!--------------------------------------------------------- JavaScript --------------------------------------------------------->
 <script>
 
-    getData('https://swapi.dev/api/people');
+    getData();
 
-    function getData(url) {
+    function getData(url='https://swapi.dev/api/people/') {
 
         const ul = document.getElementById('display');
         const btns = document.getElementById('buttons');
@@ -88,7 +88,6 @@
         fetch(url)
         .then(response => response.json())
         .then(data => {
-            console.log(data.results);
             // add each person to the page
             data.results.forEach(d => {
                 const li = document.createElement('li');
@@ -134,6 +133,7 @@
                 event.preventDefault();
                 getData(data.next);
             });
+
 
         }); // end of fetch
 
