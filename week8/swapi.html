@@ -13,33 +13,43 @@
         * {
             box-sizing: border-box;
         }
-        body {
+        html {
             margin: 0;
+            padding: 0;
+            height: fit-content;
+        }
+        body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            font-family: monospace;
         }
         main {
             margin: 0 auto;
             padding: 1rem 2rem;
             width: 100%;
+            height: 100%;
             background-color: whitesmoke;
         }
         h1 {
             margin: 0 0 1rem 0;
             text-align: center;
         }
-        ul {
+        #display {
             padding: 0;
             margin: 0 auto;
             list-style-type: none;
             width: fit-content;
         }
-        li {
+        .name {
             padding: 1rem;
             margin: .5rem;
             border: 1px solid black;
             border-radius: 5px;
         }
-        li:hover {
-            background-color: aliceblue;
+        .name:hover {
+            background-color: black;
+            color: whitesmoke;
             cursor: pointer;
         }
         h2 {
@@ -50,13 +60,19 @@
             width: fit-content;
             margin: 1rem auto 0;
         }
-
+        #page-num {
+            display: block;
+            width: fit-content;
+            margin: 0 auto;
+            color: red;
+        }
         button {
             margin: 0 2rem;
             cursor: pointer;
         }
         .details {
-            background-color: aliceblue;
+            background-color: black;
+            color: whitesmoke;
         }
     </style>
 </head>
@@ -64,7 +80,10 @@
     
     <main>
 
-        <h1>People of Star Wars</h1>
+        <header>
+            <h1>People of Star Wars</h1>
+            <div id="page-num"></div>
+        </header>
         <ul id="display"></ul>
         <div id="buttons"></div>
 
@@ -80,8 +99,10 @@
 
     function getData(url='https://swapi.dev/api/people/') {
 
+        const page = document.getElementById('page-num');
         const ul = document.getElementById('display');
         const btns = document.getElementById('buttons');
+        page.innerHTML = '';
         ul.innerHTML = '';
         btns.innerHTML = '';
 
@@ -92,6 +113,7 @@
             data.results.forEach(d => {
                 const li = document.createElement('li');
                 li.innerHTML = d.name;
+                li.classList.add('name');
                 ul.appendChild(li);
 
                 // person details click listener
@@ -114,28 +136,61 @@
 
             }); // end of forEach
 
-            // create buttons and add them to the page
-            const prev = document.createElement('button');
-            const next = document.createElement('button');
-            prev.innerHTML = 'Prev';
-            next.innerHTML = 'Next';
-            prev.setAttribute('title', data.previous)
-            next.setAttribute('title', data.next);
-            btns.appendChild(prev);
-            btns.appendChild(next);
             
-            // next & previous button click listeners
-            prev.addEventListener('click', event => {
-                event.preventDefault();
-                getData(data.previous);
-            });
-            next.addEventListener('click', event => {
-                event.preventDefault();
-                getData(data.next);
-            });
+            // display which page we are on
+            const num = url.substring(35);
+            if(num === '') page.innerHTML = 'Page 1';
+            else page.innerHTML = `Page ${num}`;
+
+            // if there is a previous, create the button and listener
+            if(data.previous) {
+                const num = data.previous.substring(35);
+                const prev = document.createElement('button');
+                prev.innerHTML = `Prev (${num})`;
+                prev.setAttribute('title', data.previous);
+                btns.appendChild(prev);
+                prev.addEventListener('click', event => {
+                    event.preventDefault();
+                    getData(data.previous);
+                });
+            }
+
+            // if there is a next, create the button and listener
+            if(data.next) {
+                const num = data.next.substring(35);
+                const next = document.createElement('button');
+                next.innerHTML = `Next (${num})`;
+                next.setAttribute('title', data.next);
+                btns.appendChild(next);
+                next.addEventListener('click', event => {
+                    event.preventDefault();
+                    getData(data.next);
+                });
+            }
 
         }); // end of fetch
 
-    };  // end of getData function
+    }   // end of getData function
+
+    // HELPER function to fetch the data from an external source and return it as json
+    function getJSON(url) {
+        return fetch(url)
+                .then(response => {
+                    if(response.ok) return response.json();
+                    else throw Error(response.statusText);
+                })
+                .catch(error => console.log(error));
+
+    }   // end of getJSON function
+
+    // MODEL function to get data/database
+    function getPeople(url) {
+        return getJSON(url);
+
+    }   // end of getPeople function
+
+    // CONTROLLER function
+
+    // VIEW function
 
 </script>
