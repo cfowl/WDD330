@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Chris Fowler">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template Week09 | WDD330 Portfolio</title>
+    <meta name="description" content="Week 09 Notes and Code">
+
+    <!----------------------------------------------------------- CSS ----------------------------------------------------------->
+    <style></style>
+</head>
+<body>
+
+    <header>
+        <a href="../">WDD330 Portfolio Home</a>
+    </header>
+
+    <main>
+
+        <h1>Week 09</h1>
+
+        <h2>The Window Object</h2>
+
+        <h3>The Browser Object Model</h3>
+
+        <p>Global variables defined without the keywords let, var, const, are actually properties of the window object. To check if a global variable exists you can use window.varName which returns false rather than throwing a reference error if the variable doesn't exist. parseInt and isNaN are actually methods of the window object.</p>
+
+        <p>alert() is an alert that pops up. confirm() asks the user to confirm and returns true if 'ok' is clicked and false if 'cancel' is clicked. prompt() will prompt the user for input. These are also methods of the window object. Popups are generally considered bad UX and should be used sparingly.</p>
+
+        <h3>Browser Information</h3>
+
+        <p>The window object has a location property which contains information about the URL of the page. location.href shows the entire URL. This property is read/write so if you set it to another URL the user will be redirected. The protocol returns whether the URL is using http, https, pop2, ftp, or other protocols. The host property will return the host domain and port number if there is one. hostname will return just the host domain. port will return the port number. pathname will return the path that follows the domain. The search property will return a string starting with ? followed by the query string parameters. The origin property will return the protocol and domain. The reload() method will force a reload of the page (from the server if the true arguments is passed in). The assign() method will load whatever URL/resource is passed in as a string. The replace() method does the same thing except the current page will not be stored in history so the user cannot navigate back to it.</p>
+
+        <h3>Browser History</h3>
+
+        <p>history is a property of the window object that contains information and methods dealing with the current tab's history. history.length shows how many pages the current tab his visited in the current session. the go() method can be used to go back, reload, or go forward (arguments of -1, 0, and 1 respectively). There are also methods forward() and back().</p>
+
+        <h3>Controlling Windows</h3>
+
+        <p>open() will open a new tab and can be given a URL to navigate to and other options regarding the tab's properties. close() will close the current tab.</p>
+
+        <h3>Screen Information</h3>
+
+        <p>screen is a property of the window object and can give information about the user's screen, such as width, height, and colorDepth.</p>
+
+        <h3>The Document Object</h3>
+
+        <p>The document object has a cookie property. Cookies save information locally on a user's system that can be used to help personalize the UX. The document.cookie property is a string that stores name/value pairs separated by a semicolon.</p>
+
+        <h3>Timing Functions</h3>
+
+        <p>setTimeout() is a timing function that takes a callback function as the first argument and a number of milliseconds as the second argument. The callback function will be executed after the time has expired. setTimeout returns an ID which can be referenced in clearTimeout().</p>
+
+        <p>setInterval() is a repetative function that takes a callback function as the first argument and a number of milliseconds as the second argument. The callback function will be executed infinitely on the set interval of milliseconds. setInterval returns an ID which can be referenced in clearInterval().</p>
+
+        <p>Warning!! The 'this' keyword is bound to the window object when using the setTimeout and setInterval functions, not to anything else that may be inside the callback function.</p>
+
+        <h3>Animations</h3>
+
+        <p>setInterval and setTimeout can be used to animate elements on the page, however they can be slow and choppy. A better way to do it is to use window.requestAnimationFrame() that accepts a callback function as an argument. This runs better because it is run according to the browser's capabilities. An even better way to animate is to use CSS.</p>
+
+        <h2>HTML API's</h2>
+        <ul>
+            <li>localStorage</li>
+            <li>geolocation</li>
+            <li>Web Workers</li>
+            <li>Websockets</li>
+            <li>Notifications</li>
+            <li>Multimedia (audio/video)</li>
+            <li>Canvas</li>
+            <li>But wait... there's more!</li>
+        </ul>
+
+    </main>
+    
+</body>
+</html>
+
+<!--------------------------------------------------------- JavaScript --------------------------------------------------------->
+<script>
+
+    // let choice;
+    // choice = confirm('Do you want to visit facebook?');
+    // if (choice) location.href = 'https://www.facebook.com';
+    // else alert('Thanks for choosing to stay with me.');
+
+
+</script>
