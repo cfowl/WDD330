@@ -13,6 +13,18 @@
         header a {
             display: block;
         }
+        h2 {
+            border: 1px solid black;
+        }
+        h3 {
+            border-bottom: 1px solid black;
+            width: fit-content;
+        }
+        span {
+            margin: 0 0 0 1rem;
+            font-family: monospace;
+            font-size: 1.2rem;
+        }
     </style>
 </head>
 <body>
@@ -26,11 +38,39 @@
 
         <h1>Week 09</h1>
 
+
+        <!-- CODE -->
         <h2>Code Examples</h2>
 
-        <!-- Put Examples Here!! -->
+        <h3>Popups</h3>
+        <p>Try clicking the buttons below.</p>
+        <button id="alert">Alert</button>
+        <button id="prompt">Prompt</button>
+        <button id="confirm">Confirm</button>
 
-        <h2>The Window Object</h2>
+        <h3>Background Focus & Blur</h3>
+        <p>Open the console and click inside it somewhere to blur the page. Click back on the page to restore focus.</p>
+
+        <h3>Your Browser</h3>
+        <p id="browser-info"></p>
+        <p id="url-info"></p>
+
+        <h3>Tab History</h3>
+        <p id="tab-history"></p>
+
+        <h3>Window Size</h3>
+        <p id="window-size"></p>
+
+        <h3>Second Counter</h3>
+        <button id="count">Count</button>
+        <span id="count-display"></span>
+
+        <h3>Your Location</h3>
+        <p id="location-info"></p>
+
+
+        <!-- NOTES -->
+        <h2>Notes: The Window Object</h2>
 
         <h3>The Browser Object Model</h3>
 
@@ -70,7 +110,7 @@
 
         <p>setInterval and setTimeout can be used to animate elements on the page, however they can be slow and choppy. A better way to do it is to use window.requestAnimationFrame() that accepts a callback function as an argument. This runs better because it is run according to the browser's capabilities. An even better way to animate is to use CSS.</p>
 
-        <h2>HTML API's</h2>
+        <h2>Notes: HTML API's</h2>
         <ul>
             <li>localStorage</li>
             <li>geolocation</li>
@@ -90,10 +130,73 @@
 <!--------------------------------------------------------- JavaScript --------------------------------------------------------->
 <script>
 
-    // let choice;
-    // choice = confirm('Do you want to visit facebook?');
-    // if (choice) location.href = 'https://www.facebook.com';
-    // else alert('Thanks for choosing to stay with me.');
+    const background = document.getElementsByTagName('body')[0];
+
+    // blur the background when it loses focus
+    window.addEventListener('blur', () => background.style.opacity = .2);
+    window.addEventListener('focus', () => background.style.opacity = 1);
+    
+    // show an alert message when the button is clicked
+    const alertBtn = document.getElementById('alert');
+    alertBtn.addEventListener('click', event => {
+        event.preventDefault();
+        alert('The alert button displays this message.\nThe prompt button will let you choose the background color.\nThe confirm button will close this tab if you click \'OK\'.');
+    });
+
+    // set the background color by prompting the user for a color when the button is clicked
+    const promptBtn = document.getElementById('prompt');
+    promptBtn.addEventListener('click', event => {
+        event.preventDefault();
+        background.style.background = prompt('What color do you want the background to be? You can even choose an image, just put the image url inside of url()');
+    });
+
+    // ask the user if they want to close the tab when the button is clicked
+    const confirmBtn = document.getElementById('confirm');
+    confirmBtn.addEventListener('click', event => {
+        event.preventDefault();
+        const close = confirm('Do you want to close this tab?');
+        if(close) window.close();
+        else alert('Thanks for staying with me!');
+    });
+
+    // display browser and URL info
+    const browserInfo = document.getElementById('browser-info');
+    const urlInfo = document.getElementById('url-info');
+    browserInfo.innerHTML = `This may or may not be your browser info: ${window.navigator.userAgent}`;
+    urlInfo.innerHTML = `You are currently at this URL: ${window.location.href}`;
+
+    // display tab history
+    const tabHistory = document.getElementById('tab-history');
+    tabHistory.innerHTML = `This tab his visited ${window.history.length} page since being opened.`;
+
+    // display height and width of the window
+    const windowSize = document.getElementById('window-size');
+    windowSize.innerHTML = `Your window is ${window.screen.width}px wide and ${window.screen.height}px high.`;
+
+    // count to 10 when button is pressed
+    const countBtn = document.getElementById('count');
+    const countDisplay = document.getElementById('count-display')
+    countBtn.addEventListener('click', countSeconds);
+    function countSeconds(event) {
+        event.preventDefault();
+        let num = 1;
+        setInterval(() => {
+            countDisplay.innerHTML = num;
+            num += 1;
+        }, 1000);
+        countBtn.removeEventListener('click', countSeconds);
+        countBtn.style.display = 'none';
+    }
+
+    // display location information
+    const locationInfo = document.getElementById('location-info');
+    window.navigator.geolocation.getCurrentPosition(displayLocation);
+    function displayLocation(position) {
+        const lat = position.coords.latitude;
+        const long = position.coords.longitude;
+        locationInfo.innerHTML = `<a href="https://www.google.com/maps?q=(${lat},+${long})" target="blank">(${lat}, ${long})</a>`;
+    }
+
 
 
 </script>
