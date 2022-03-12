@@ -12,6 +12,10 @@
     <style>
         header a {
             display: block;
+            margin: .2rem 0;
+        }
+        #songButton {
+            margin: 1rem 0;
         }
         h2 {
             border: 1px solid black;
@@ -27,6 +31,9 @@
     <header>
         <a href="../">WDD330 Portfolio Home</a>
         <a href="/week10/earthquakes/" target="blank">Earthquakes</a>
+        <!-- My Motivational Song -->
+        <audio id="takeIt" src="/week10/audio/'Til You Can't.m4a">Your Browser Does Not Support Audio</audio>
+        <button id="songButton">Play Song</button>
     </header>
 
     <main>
@@ -35,8 +42,7 @@
 
         <h2>Code Examples</h2>
 
-        <form id="">
-        </form>
+        
 
     </main>
     
@@ -46,6 +52,19 @@
 <!--------------------------------------------------------- JavaScript --------------------------------------------------------->
 <script>
 
-    
-    
+    // SONG
+    // If you've got a dream, chase it, cause a dream won't chase you back
+    const playButton = document.getElementById('songButton');
+    playButton.addEventListener('click', event => {
+        event.preventDefault();
+        const takeIt = document.getElementById('takeIt');
+        if(playButton.innerHTML === 'Play Song') {
+            playButton.innerHTML = 'Pause Song';
+            takeIt.play();
+        } else {
+            playButton.innerHTML = 'Play Song';
+            takeIt.pause();
+        }
+    });
+   
 </script>
