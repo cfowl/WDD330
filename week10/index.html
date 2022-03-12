@@ -24,6 +24,49 @@
             border-bottom: 1px solid black;
             width: fit-content;
         }
+        form#signup {
+            max-width: 300px;
+        }
+        fieldset {
+            padding: 1.5rem 2rem 1rem 1rem;
+            border-radius: 10px;
+        }
+        input {
+            display: block;
+            margin: 0 0 1rem 0;
+        }
+        input:required:invalid {
+            background-color: #ff220022;
+        }
+        input:required:valid {
+            background-color: #00ff0022;
+        }
+        span.hint {
+            display: block;
+        }
+        .hint {
+            color: red;
+            font-size: .8rem;
+        }
+        button#register {
+            margin: 1rem 0 0 0;
+            cursor: pointer;
+        }
+        footer {
+            border: 1px solid black;
+            padding: 1rem;
+            margin: 3rem 0 0 0;
+            background-color: lightgray;
+        }
+        #display {
+            margin: 1rem 0;
+        }
+        footer a {
+            color: blue;
+        }
+        footer a:hover {
+            color: red;
+        }
     </style>
 </head>
 <body>
@@ -41,6 +84,61 @@
         <h1>Week 10</h1>
 
         <h2>Code Examples</h2>
+
+        <p>Click this <a href="earthquakes/" target="blank">Earthquakes</a> link for an example of fetch. I also implemented client side form validation and a type of server side form validation on the form there.</p>
+
+        <p>The following account creation example implements client side validation and server side validation. The first name, last name, email, and password fields are all required. The email must be in email format. The password must be 8-32 long and contain at least one: digit, lowercase, uppercase, and special character. I also created my own validation messages. I then used CSS to style the validations.</p>
+
+        <form id="signup">
+            <fieldset>
+                <legend>Create a New Account</legend>
+
+                <label for="fname">First Name:
+                    <input type="text" name="fname" id="fname" maxlength="30" required>
+                </label>
+    
+                <label for="lname">Last Name:
+                    <input type="text" name="lname" id="lname" maxlength="40" required>
+                </label>
+    
+                <label for="email">Email Address:
+                    <input type="email" name="email" id="email" required>
+                </label>
+    
+                <label for="password">Password:
+                    <span class="hint">
+                        Must be 8-32 long and have at least one: digit, lowercase, uppercase, special character.
+                    </span>
+                    <input type="password" name="password" id="password" required
+                    pattern="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[`~!@#$%^&*()_+={}[\]|;:,.?\/\\]).{8,32}">
+                </label>
+
+                <label for="comment">
+                    <textarea name="comment" id="comment" cols="30" rows="10"
+                    placeholder="Please tell us how you heard about this site..."></textarea>
+                </label>
+                
+                <button id="register" type="submit">Register</button>
+
+            </fieldset>
+        </form>
+
+        <div id="display"></div>
+
+        <h2>Notes: Validating Forms</h2>
+
+        <p>Form validation means that you enforce rules on the data that a user enters or submits in an HTML form. On most forms there will be required information. If the information is not entered then the data will not be submitted. Also, most forms have inputs that require a certain format or type, such as email, phone number, password. It is common that the password has to match a certain pattern or it is not valid. There are many different ways which you will want to control the information being entered or submitted in your forms.</p>
+
+        <p>Forms should be validated both on the client side and on the server side. Client side validation is done in the browser, usually via HTML. If a field is required and the user tries to submit without completing the required field, the browser will stop the submission and alert the user of such. However, client side validation is easy to bypass by malicious users. Server side validation is done after information is submitted in the form. Server side validation is a lot harder to bypass. If a field was required but somehow bypassed by the user, you can check for empty or missing informaiton on the server side before submitting it to the database or elsewhere.</p>
+
+        <p>CSS can also be used to help enhance the UX/UI of your form. Some examples of CSS pseudo are :valid, :invalid, :out-of-range, and :required.</p>
+
+        <footer>
+            <ul>
+                <li>Thanks to <a href="https://www.ocpsoft.org/tutorials/regular-expressions/password-regular-expression/" target="blank">ocpsoft</a> for helping with the regular expression for the password's pattern requirements.</li>
+                <li>Thanks to <a href="https://regex101.com/" target="blank">regex101</a> for helping me test the regular expression for the password's pattern requirements.</li>
+            </ul>
+        </footer>
 
         
 
@@ -66,5 +164,63 @@
             takeIt.pause();
         }
     });
+
+
+    // FORM
+    // Validate the form and check for missing values, incorrect data types, incorrect patterns, etc...
+    const signup = document.forms['signup'];
+    signup.addEventListener('submit', event => {
+        event.preventDefault();
+        display.innerHTML = `${signup.fname.value} ${signup.lname.value}, your new account is being created. We sent a confirmation email to ${signup.email.value}... OK, not really!`;
+    });
+    signup.register.addEventListener('click', event => {
+        checkValueMissing();
+        checkEmail();
+        checkPatternMismatch();
+    });
+    signup.register.addEventListener('touchend', event => {
+        checkValueMissing();
+        checkEmail();
+        checkPatternMismatch();
+    });
+    signup.addEventListener('submit', event => {
+        checkValueMissing();
+        checkEmail();
+        checkPatternMismatch();
+    });
+
+    function checkValueMissing() {
+        if(signup.fname.validity.valueMissing) {
+            signup.fname.setCustomValidity('Your first name is required!');
+            signup.fname.reportValidity();
+        } else if(signup.lname.validity.valueMissing) {
+            signup.lname.setCustomValidity('Your last name is required!');
+            signup.lname.reportValidity();
+        } else if(signup.email.validity.valueMissing) {
+            signup.email.setCustomValidity('Your email address is required!');
+            signup.email.reportValidity();
+        } else if(signup.password.validity.valueMissing) {
+            signup.password.setCustomValidity('You cannot create an account without a password!');
+            signup.password.reportValidity();
+        }
+    }
+
+    function checkEmail() {
+        if(signup.email.validity.typeMismatch) {
+            signup.email.setCustomValidity('You did not enter a valid email address!');
+            signup.email.reportValidity();
+        }
+    }
+
+    function checkPatternMismatch() {
+        if(signup.email.validity.patternMismatch) {
+            signup.email.setCustomValidity('You did not enter a valid email address!');
+            signup.email.reportValidity();
+        } else if(signup.password.validity.patternMismatch) {
+            signup.password.setCustomValidity('Your password does not meet the requirements!');
+            signup.password.reportValidity();
+        }
+    }
+
    
 </script>
