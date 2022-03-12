@@ -1,38 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+<head>
     <meta charset="utf-8" />
-        <title>Local Quakes</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <style>
-            * {
-                box-sizing: border-box;
-            }
-            body {
-                background-color: azure;
-            }
-            input {
-                display: block;
-                margin: 0 0 1rem 0;
-            }
-            #quakeList, #quakeDetails {
-                background-color: snow;
-                padding: 1.5rem 2.5rem;
-                width: fit-content;
-                border-radius: 5px;
-                box-shadow: 0 0 10px darkslategray;
-            }
-            .quake {
-                padding: .7rem 0 0 0;
-                cursor: pointer;
-                border-bottom: 1px dashed black;
-                width: fit-content;
-            }
-            .quake:hover {
-                background-color: moccasin;
-            }
-        </style>
-    </head>
+    <title>Local Quakes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            background-color: azure;
+        }
+        input {
+            display: block;
+            margin: 0 0 1rem 0;
+        }
+        #quakeList, #quakeDetails {
+            background-color: snow;
+            padding: 1.5rem 2.5rem;
+            width: fit-content;
+            border-radius: 5px;
+            box-shadow: 0 0 10px darkslategray;
+        }
+        .quake {
+            padding: .7rem 0 0 0;
+            cursor: pointer;
+            border-bottom: 1px dashed black;
+            width: fit-content;
+        }
+        .quake:hover {
+            background-color: moccasin;
+        }
+    </style>
+</head>
 
     <body>
         <main>
@@ -53,6 +53,8 @@
                 <button id="searchButton">Search</button>
             </form>
 
+            <!-- for testing with iphone -->
+            <div id="dates"></div>
 
             <div id="quakeDisplay">
                 <div id="quakes">
