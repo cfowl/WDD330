@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8" />
+        <title>Local Quakes</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+            body {
+                background-color: azure;
+            }
+            input {
+                display: block;
+                margin: 0 0 1rem 0;
+            }
+            #quakeList, #quakeDetails {
+                background-color: snow;
+                padding: 1.5rem 2.5rem;
+                width: fit-content;
+                border-radius: 5px;
+                box-shadow: 0 0 10px darkslategray;
+            }
+            .quake {
+                padding: .7rem 0 0 0;
+                cursor: pointer;
+                border-bottom: 1px dashed black;
+                width: fit-content;
+            }
+            .quake:hover {
+                background-color: moccasin;
+            }
+        </style>
+    </head>
+
+    <body>
+        <main>
+            <h1>Earthquakes</h1>
+
+            <form id="searchParams">
+                <label for="startDate">Start Date:
+                    <input type="date" name="startDate" id="startDate" value="2020-03-14" required>
+                </label>
+
+                <label for="endDate">End Date:
+                    <input type="date" name="endDate" id="endDate" value="2020-03-22" required>
+                </label>
+
+                <label for="userRadius">Radius:
+                    <input type="number" name="userRadius" id="userRadius" min="0" autofocus required>
+                </label>
+                <button id="searchButton">Search</button>
+            </form>
+
+
+            <div id="quakeDisplay">
+                <div id="quakes">
+                    <h2>Quake List</h2>
+                    <ul id="quakeList" >Enter a radius and click search...</ul>
+                </div>
+            </div>
+        </main>
+
+        <script src="index.js" type="module"></script>
+    </body>
+
+    
+</html>
