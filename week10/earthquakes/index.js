@@ -10,8 +10,6 @@ form.addEventListener('submit', event => {
     const endDate = form['endDate'].value;
     const radius = form['userRadius'].value;
 
-    document.getElementById('dates').innerHTML = `${startDate}<br>${endDate}<br>${radius}`;
-
     // create controller and initialize it
     const quakeController = new QuakesController('#quakeList', startDate, endDate, radius);
     quakeController.init();
