@@ -12,7 +12,6 @@ export default class QuakesController {
     this.endDate = endDate;
     // sometimes the DOM won't exist/be ready when the Class gets instantiated, so we will set this later in the init()
     this.parentElement = null;
-    this.detailsElement = null;
     // let's give ourselves the option of using a location other than the current location by passing it in.
     this.position = position || {
       lat: 0,
@@ -27,7 +26,6 @@ export default class QuakesController {
   async init() {
     // use this as a place to grab the element identified by this.parent, do the initial call of this.initPos(), and display some quakes by calling this.getQuakesByRadius()
     this.parentElement = document.querySelector(this.parent);
-    this.detailsElement = document.querySelector(this.details);
     this.checkDates();
     this.quakes = new Quake(this.startDate, this.endDate);
     this.checkRadius();
