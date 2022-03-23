@@ -38,6 +38,10 @@ const links = [
     {
         label: 'Week 10 Code & Notes',
         url: 'week10/'
+    },
+    {
+        label: 'Final Project: NASA API',
+        url: 'NASAAPI/'
     }
 ];
 
