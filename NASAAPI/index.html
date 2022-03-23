@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Chris Fowler">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NASA API | WDD330 Portfolio</title>
+    <meta name="description" content="Final Project Application for Web Design and Development 330 (WDD330) at Brigham Young University - Idaho (BYU-I). This app uses the NASA Image and Video Library API found at https://api.nasa.gov/. ">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Audiowide&family=Sunflower:wght@300&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/small.css">
+    <!-- JavaScript -->
+    <script src="js/index.js" type="module" defer></script>
+    <script src="js/dates.js" defer></script>
+</head>
+<body>
+
+    <header>
+        <h1>NASA Image and Video Library</h1>
+    </header>
+
+    <main>
+
+        <form id="search-form" class="center-align">
+            <div id="back-container" class="btn-container"></div>
+            <label for="keyword" title="Enter a keyword">
+                <input type="text" name="keyword" id="keyword" placeholder="search a keyword" autofocus required>
+            </label>
+            <div class="btn-container"><button type="submit" id="search-btn">&#129138;</button></div>
+        </form>
+
+        <div id="info" class="center-align">
+            <h2 id="result-title"></h2>
+            <ol id="results"></ol>
+            <div id="details" class="center-txt"></div>
+        </div>
+
+    </main>
+
+    <footer>
+        <span>
+            <span id="copyright">
+                &copy;<span id="year"></span>
+                <a href="https://cfowl.github.io/" title="Chris Fowler's GitHub Portfolio">Chris Fowler</a>
+            </span>
+            
+            <a href="../" title="Web Design & Development 330 Portfolio Home Page">WDD330 Portfolio Home</a>
+        </span>
+        
+    </footer>
+    
+</body>
+</html>
