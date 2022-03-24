@@ -158,7 +158,7 @@ function buildBackButton(container) {
     // build the button and append it to its container
     const button = document.createElement('button');
     button.id = 'back-btn';
-    button.innerHTML = '&#129136;';
+    button.innerHTML = '<i class="fa fa-arrow-left"></i>';
     container.appendChild(button);
 
     // back button event listener
