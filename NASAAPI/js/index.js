@@ -147,7 +147,7 @@ function buildResultList(element, items) {
     // iterate through the results and add them to the page
     items.forEach(item => {
         //if(item.data[0].media_type === 'image') {       // do something for video and audio ???????????????????????
-        element.innerHTML += `<li class='image-link' id="${item.data[0].nasa_id}">${item.data[0].title}</li>`;
+        element.innerHTML += `<li class='image-link' id="${item.data[0].nasa_id}" title="Click to see the details">${item.data[0].title}</li>`;
     });
 
     // if no results were added to the page then notify the user
@@ -158,6 +158,7 @@ function buildBackButton(container) {
     // build the button and append it to its container
     const button = document.createElement('button');
     button.id = 'back-btn';
+    button.title = 'Go back'
     button.innerHTML = '<i class="fa fa-arrow-left"></i>';
     container.appendChild(button);
 
@@ -219,7 +220,7 @@ function buildFavoritesList(display) {
 
     // iterate through the results and add them to the page
     favorites.forEach(f => {
-        display.innerHTML += `<li class='image-link' id="${f.data[0].nasa_id}">${f.data[0].title}</li>`;
+        display.innerHTML += `<li class='image-link' id="${f.data[0].nasa_id}" title="Click to see more details">${f.data[0].title}</li>`;
     });
 
     display.onclick = event => {
