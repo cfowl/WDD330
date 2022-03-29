@@ -40,17 +40,11 @@ body {
     background-color: #222e4f;
 }
 
-html, body {
-    margin: 0;
+html, body, main {
+    margin: 0 auto;
     padding: 0;
     width: 100%;
     max-width: 100%;
-}
-
-main {
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
 }
 
 header {
@@ -61,15 +55,16 @@ header {
 
 form {
     text-align: center;
-    display: flex;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    gap: .5rem;
+    justify-items: center;
     padding: 0 .5rem;
-    width: 100%;
     max-width: 100%;
 }
 
 form * {
-    margin: 0 .5rem;
+    margin: 0 auto;
 }
 
 input {
@@ -80,6 +75,7 @@ input {
     padding: 0;
     border: none;
     height: 100%;
+    width: 100%;
     transition: all 400ms cubic-bezier(0,2,1,.99);
 }
 
@@ -115,8 +111,9 @@ input::placeholder {
 }
 
 #info {
-    margin: 0 1rem;
+    padding: 0 1rem;
     max-width: 100%;
+    word-wrap: break-word;
 }
 
 #results {
@@ -147,6 +144,7 @@ li:hover {
     position: relative;
     width: fit-content;
     height: fit-content;
+    margin: 0 auto;
 }
 
 img {

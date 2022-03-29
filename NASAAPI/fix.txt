@@ -4,6 +4,7 @@
 4. Buttons animate right or left when clicked ??
 5. Fix sizes for mobile screen
 6. buildFavoritesList use the buildResultList function instead??
+7. Add NASA API link and info to footer
 
 ----------------------------
 1. Validate HTML/CSS, WAVE
