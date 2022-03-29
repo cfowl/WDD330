@@ -35,9 +35,15 @@ function getKeyWord() {
     return form.keyword.value.toLowerCase();
 }
 
+function getMediaType() {
+    return form.mediaType.value;
+}
+
 form.addEventListener('submit', event => {
     event.preventDefault();
     const keyword = getKeyWord();
+    const mediaType = getMediaType();
+    console.log(mediaType);
     if(keyword === 'favorite' || keyword === 'favorites') buildFavoritesList(results);
     else getInfo(keyword);
 });

@@ -27,12 +27,22 @@
     <main>
 
         <form id="search-form" class="center-align">
-            <div id="back-container" class="btn-container"></div>
-            <label for="keyword" title="Enter a keyword">
-                <input type="text" name="keyword" id="keyword" placeholder="search a keyword" autofocus required>
-            </label>
-            <div class="btn-container">
-                <button type="submit" id="search-btn" title="Search"><i class="fa fa-arrow-right"></i></button>
+            <div class="form-main">
+                <div id="back-container" class="btn-container"></div>
+                <label for="keyword" title="Enter a keyword">
+                    <input type="text" name="keyword" id="keyword" placeholder="search a keyword" autofocus required>
+                </label>
+                <div class="btn-container">
+                    <button type="submit" id="search-btn" title="Search"><i class="fa fa-arrow-right"></i></button>
+                </div>
+            </div>
+            <div class="form-options">
+                <label for="image-type" class="right-txt">Images
+                    <input type="radio" name="mediaType" id="image-type" value="image" checked required>
+                </label>
+                <label for="video-type">Videos
+                    <input type="radio" name="mediaType" id="video-type" value="video" required>
+                </label>
             </div>
         </form>
 

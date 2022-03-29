@@ -2,7 +2,6 @@
 2. Searching favorites from a keyword detail shows "There were no results for your Search. Please try again."
 3. Only display heart button when image has loaded.
 4. Buttons animate right or left when clicked ??
-5. Fix sizes for mobile screen
 6. buildFavoritesList use the buildResultList function instead??
 7. Add NASA API link and info to footer
 
