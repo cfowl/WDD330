@@ -161,14 +161,14 @@ li:hover {
     color: #bfc0c0;
 }
 
-#img-container {
+#img-container, #vid-container {
     position: relative;
     width: fit-content;
     height: fit-content;
     margin: 0 auto;
 }
 
-img {
+img, video {
     max-width: 100%;
     max-height: 100%;
     display: block;

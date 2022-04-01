@@ -45,10 +45,10 @@ form.addEventListener('submit', event => {
     const mediaType = getMediaType();
     console.log(mediaType);
     if(keyword === 'favorite' || keyword === 'favorites') buildFavoritesList(results);
-    else getInfo(keyword);
+    else getInfo(keyword, mediaType);
 });
 
-function getInfo(keyword) {
+function getInfo(keyword, media) {
 
     // set h2 innerHTML to the keyword
     document.getElementById('result-title').innerHTML = keyword.charAt(0).toUpperCase() + keyword.slice(1);
@@ -68,20 +68,32 @@ function getInfo(keyword) {
     
     const json = getJSON(url);
     json.then(data => {
-        const items = data.collection.items;
+        let items = data.collection.items;
         currentResults = data.collection.items;
-        const images = items.filter(item => item.href.includes('/image/'));
-        const videos = items.filter(item => item.href.includes('/video/'));     // contains AUDIOS also...
+        if(media === 'image') {
+            items = items.filter(item => item.href.includes('/image/'));      // does this change items
+            console.log('getting images');
+        } else if(media === 'video') {
+            items = items.filter(item => item.href.includes('/video/'));
+            console.log(items);
+        }
 
-        buildResultList(results, images);
+        // contains AUDIOS also...
 
-        //                  GET SECOND PAGE OF RESULTS ?????????????????????????????
+
+        buildResultList(results, items);
+
+        // GET SECOND PAGE OF RESULTS ?????????????????????????????
     })
     .then(() => {
         results.onclick = event => {
 
             // show description on hover??
             if(event.target.id !== 'results' && event.target.id !== '') {
+
+                // DO SOMETHING FOR VIDEOS HERE ?!?!?!?!?!?!?!?!?!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                // add item info as dataset in html tag
+                const mediaType = event.target.dataset.media_type;
 
                 let item = currentResults.filter(r => r.data[0].nasa_id === event.target.id);
                 item = item[0];
@@ -91,7 +103,16 @@ function getInfo(keyword) {
                 results.classList.add('hidden');
                 details.classList.remove('hidden');
 
-                buildDetailsDisplay(details, item);
+                // Display image or video details <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<--------------------
+                if(mediaType === 'image') buildImageDetailsDisplay(details, item);
+                else if(mediaType === 'video') {
+                    const videoJSON = getJSON(item.href);
+                    videoJSON.then(data => {
+                        const link = data.find(i => i.includes('orig.mp4'));
+                        item.links.push(link);
+                        buildVideoDetailsDisplay(details, item);
+                    });
+                }
 
                 const container = document.getElementById('back-container');
                 buildBackButton(container);
@@ -152,8 +173,18 @@ function buildResultList(element, items) {
 
     // iterate through the results and add them to the page
     items.forEach(item => {
-        //if(item.data[0].media_type === 'image') {       // do something for video and audio ???????????????????????
-        element.innerHTML += `<li class='image-link' id="${item.data[0].nasa_id}" title="Click to see the details">${item.data[0].title}</li>`;
+        console.log(item);
+        
+        // save pertinent info into dataset
+        element.innerHTML += `
+            <li class='image-link' id="${item.data[0].nasa_id}"
+            data-href="${item.href}"
+            data-title="${item.data[0].title}"
+            data-description="${item.data[0].description}"
+            data-keywords="${item.data[0].keywords}"
+            data-media_type="${item.data[0].media_type}"
+            title="Click to see the details"
+            >${item.data[0].title}</li>`;
     });
 
     // if no results were added to the page then notify the user
@@ -176,7 +207,7 @@ function buildBackButton(container) {
     });
 }
 
-function buildDetailsDisplay(display, item) {
+function buildImageDetailsDisplay(display, item) {
     // reset display
     display.innerHTML = '';
 
@@ -212,6 +243,47 @@ function buildDetailsDisplay(display, item) {
 
     display.appendChild(imgDiv);
     // display.appendChild(favButton);
+    display.appendChild(detailDiv);
+}
+
+function buildVideoDetailsDisplay(display, item) { // Display video details <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<------------
+    console.log('building video display');
+    console.log(item);
+
+    // reset display
+    display.innerHTML = '';
+
+    // separate keywords by commas
+    const keywords = item.data[0].keywords.toString().replaceAll(',', ', ');
+
+    // image title
+    document.getElementById('result-title').innerHTML = item.data[0].title;
+    // image
+    const vidDiv = document.createElement('div');
+    vidDiv.id = 'vid-container';
+    vidDiv.innerHTML = `<video controls autoplay="false" poster="${item.links[0]}">
+                            <source src="${item.links.slice(-1).pop()}" type="video/mp4">
+                            Sorry, your browser does not support the video tag.
+                        </video>`;
+
+    // favorite button
+    const favButton = document.createElement('i');
+    favButton.id = 'fav-button';
+    favButton.classList.add('fa', 'fa-heart-o');
+    if(favorites.some(f => f.data[0].nasa_id === item.data[0].nasa_id)) {
+        favButton.classList.add('remove-fav');
+    } else {
+        favButton.classList.add('add-fav');
+    }
+
+    vidDiv.appendChild(favButton);
+
+    const detailDiv = document.createElement('div');
+    detailDiv.classList.add('left-txt');
+    detailDiv.innerHTML += `<h3>Details</h3><p>${item.data[0].description}</p>`;
+    detailDiv.innerHTML += `<h3>Keywords</h3><p>${keywords}</p>`;
+
+    display.appendChild(vidDiv);
     display.appendChild(detailDiv);
 }
 

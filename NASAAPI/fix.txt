@@ -4,6 +4,9 @@
 4. Buttons animate right or left when clicked ??
 6. buildFavoritesList use the buildResultList function instead??
 7. Add NASA API link and info to footer
+8. messes up when hitting back button after video results
+9. fix videos favorite button
+10. fix videos back button
 
 ----------------------------
 1. Validate HTML/CSS, WAVE
