@@ -353,41 +353,82 @@ function buildFavoritesList(display) {
             results.classList.add('hidden');
             details.classList.remove('hidden');
 
-            buildDetailsDisplay(details, item);
+            if(event.target.dataset.media_type === 'image') {
+                buildImageDetailsDisplay(details, item);
 
-            const container = document.getElementById('back-container');
-            buildBackButton(container);
+                const container = document.getElementById('back-container');
+                buildBackButton(container);
 
-            // add to favorites                     SAVE FAV AS THE ENTIRE ITEM SO WE CAN CLICK ON IT AND DO SOMETHING!!
-            const favButton = document.getElementById('fav-button');
-            favButton.addEventListener('click', event => {
-                event.preventDefault();
-                const id = item.data[0].nasa_id;
-                // const title = item.data[0].title;
-                // const fav = {id: id, title: title};
+                // add to favorites                     SAVE FAV AS THE ENTIRE ITEM SO WE CAN CLICK ON IT AND DO SOMETHING!!
+                const favButton = document.getElementById('fav-button');
+                favButton.addEventListener('click', event => {
+                    event.preventDefault();
+                    const id = item.data[0].nasa_id;
+                    // const title = item.data[0].title;
+                    // const fav = {id: id, title: title};
 
 
-                // item already saved, remove it from favorites
-                if(favorites.some(f => f.data[0].nasa_id === id)) {
-                    event.target.classList.toggle('add-fav');
-                    event.target.classList.toggle('remove-fav');
-                    // event.target.innerHTML = 'Add to Favorites';
-                    const index = favorites.findIndex(f => {
-                        return f.data[0].nasa_id === id;
-                    })
-                    favorites.splice(index, 1);
-                }
-                // add item to favorites
-                else {
-                    event.target.classList.toggle('add-fav');
-                    event.target.classList.toggle('remove-fav');
-                    // event.target.innerHTML = 'Remove from Favorites';
-                    favorites.push(item);
-                }
-                
-                // save the favorites array after adding or removing
-                saveFavorites(favorites);
-            });
+                    // item already saved, remove it from favorites
+                    if(favorites.some(f => f.data[0].nasa_id === id)) {
+                        event.target.classList.toggle('add-fav');
+                        event.target.classList.toggle('remove-fav');
+                        // event.target.innerHTML = 'Add to Favorites';
+                        const index = favorites.findIndex(f => {
+                            return f.data[0].nasa_id === id;
+                        })
+                        favorites.splice(index, 1);
+                    }
+                    // add item to favorites
+                    else {
+                        event.target.classList.toggle('add-fav');
+                        event.target.classList.toggle('remove-fav');
+                        // event.target.innerHTML = 'Remove from Favorites';
+                        favorites.push(item);
+                    }
+                    
+                    // save the favorites array after adding or removing
+                    saveFavorites(favorites);
+                });
+            }
+            else if(event.target.dataset.media_type === 'video') {
+                buildVideoDetailsDisplay(details, item);
+
+                const container = document.getElementById('back-container');
+                buildBackButton(container);
+
+                // add to favorites                     SAVE FAV AS THE ENTIRE ITEM SO WE CAN CLICK ON IT AND DO SOMETHING!!
+                const favButton = document.getElementById('fav-button');
+                favButton.addEventListener('click', event => {
+                    event.preventDefault();
+                    const id = item.data[0].nasa_id;
+                    // const title = item.data[0].title;
+                    // const fav = {id: id, title: title};
+
+
+                    // item already saved, remove it from favorites
+                    if(favorites.some(f => f.data[0].nasa_id === id)) {
+                        event.target.classList.toggle('add-fav');
+                        event.target.classList.toggle('remove-fav');
+                        // event.target.innerHTML = 'Add to Favorites';
+                        const index = favorites.findIndex(f => {
+                            return f.data[0].nasa_id === id;
+                        })
+                        favorites.splice(index, 1);
+                    }
+                    // add item to favorites
+                    else {
+                        event.target.classList.toggle('add-fav');
+                        event.target.classList.toggle('remove-fav');
+                        // event.target.innerHTML = 'Remove from Favorites';
+                        favorites.push(item);
+                    }
+                    
+                    // save the favorites array after adding or removing
+                    saveFavorites(favorites);
+                });
+            }
+
+            
         }
     }
 }
