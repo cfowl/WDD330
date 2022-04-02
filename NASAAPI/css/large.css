@@ -23,10 +23,6 @@
         border-radius: 20px;
     }
 
-    #info.empty {
-        display: none;
-    }
-
     #result-title, #detail-title {
         margin: 2rem 0;
         display: block;
@@ -40,9 +36,13 @@
         margin: 0;
         
     }
+    
+    #img-container, #vid-container {
+        margin: 0;
+    }
 
-    .hidden {
-        display: unset;
+    .small-hide {
+        display: initial;
     }
 
     footer {

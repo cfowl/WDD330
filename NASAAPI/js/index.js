@@ -51,11 +51,11 @@ form.addEventListener('submit', event => {
 
 function getInfo(keyword, media) {
 
-    // toggle hidden
-    results.classList.remove('hidden');
-    resultTitle.classList.remove('hidden');
-    details.classList.add('hidden');
-    detailTitle.classList.add('hidden');
+    // toggle hidden for small screens
+    results.classList.remove('small-hide');
+    resultTitle.classList.remove('small-hide');
+    details.classList.add('small-hide');
+    detailTitle.classList.add('small-hide');
 
     // set h2 innerHTML to the keyword
     document.getElementById('result-title').innerHTML = keyword.charAt(0).toUpperCase() + keyword.slice(1);
@@ -105,14 +105,20 @@ function getInfo(keyword, media) {
 
                 // const results = document.getElementById('results');
                 // const details = document.getElementById('details');
-                results.classList.add('hidden');
-                resultTitle.classList.add('hidden');
-                details.classList.remove('hidden');
-                detailTitle.classList.remove('hidden');
+                results.classList.add('small-hide');
+                resultTitle.classList.add('small-hide');
+                details.classList.remove('small-hide');
+                detailTitle.classList.remove('small-hide');
 
                 // Display image or video details <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<--------------------
                 if(mediaType === 'image') {
                     buildImageDetailsDisplay(details, item);
+
+                    // don't show the favorite heart until after the image loads
+                    const imgElement = document.getElementById('img-container').firstElementChild;
+                    imgElement.addEventListener('load', event => {
+                        document.getElementById('fav-button').classList.remove('hide');
+                    });
 
                     const container = document.getElementById('back-container');
                     buildBackButton(container);
@@ -153,7 +159,14 @@ function getInfo(keyword, media) {
                     videoJSON.then(data => {
                         const link = data.find(i => i.includes('orig.mp4'));
                         item.links.push(link);
+
                         buildVideoDetailsDisplay(details, item);
+
+                        // don't show the favorite heart until after the video loads
+                        const vidElement = document.getElementById('vid-container').firstElementChild;
+                        vidElement.addEventListener('loadstart', event => {
+                            document.getElementById('fav-button').classList.remove('hide');
+                        });
 
                         const container = document.getElementById('back-container');
                         buildBackButton(container);
@@ -275,7 +288,7 @@ function buildImageDetailsDisplay(display, item) {
     // favorite button
     const favButton = document.createElement('i');
     favButton.id = 'fav-button';
-    favButton.classList.add('fa', 'fa-heart-o');
+    favButton.classList.add('fa', 'fa-heart-o', 'hide');
     if(favorites.some(f => f.data[0].nasa_id === item.data[0].nasa_id)) {
         favButton.classList.add('remove-fav');
         // favButton.innerHTML = 'Remove from Favorites';
@@ -319,7 +332,7 @@ function buildVideoDetailsDisplay(display, item) { // Display video details <<<<
     // favorite button
     const favButton = document.createElement('i');
     favButton.id = 'fav-button';
-    favButton.classList.add('fa', 'fa-heart-o');
+    favButton.classList.add('fa', 'fa-heart-o', 'hide');
     if(favorites.some(f => f.data[0].nasa_id === item.data[0].nasa_id)) {
         favButton.classList.add('remove-fav');
     } else {
@@ -367,10 +380,10 @@ function buildFavoritesList(display) {
 
             // const results = document.getElementById('results');
             // const details = document.getElementById('details');
-            results.classList.add('hidden');
-            resultTitle.classList.add('hidden');
-            details.classList.remove('hidden');
-            detailTitle.classList.remove('hidden');
+            results.classList.add('small-hide');
+            resultTitle.classList.add('small-hide');
+            details.classList.remove('small-hide');
+            detailTitle.classList.remove('small-hide');
 
             if(mediaType === 'image') {
                 buildImageDetailsDisplay(details, item);

@@ -141,6 +141,10 @@ input#keyword::placeholder {
     word-wrap: break-word;
 }
 
+#info.empty {
+    display: none;
+}
+
 #results {
     margin: 0;
     padding: 0 1rem;
@@ -199,7 +203,7 @@ img, video {
     color: #bfc0c0;
 }
 
-.hidden {
+.small-hide, .hide {
     display: none;
 }
 
