@@ -388,10 +388,16 @@ function buildFavoritesList(display) {
             if(mediaType === 'image') {
                 buildImageDetailsDisplay(details, item);
 
+                // don't show the favorite heart until after the image loads
+                const imgElement = document.getElementById('img-container').firstElementChild;
+                imgElement.addEventListener('load', event => {
+                    document.getElementById('fav-button').classList.remove('hide');
+                });
+
                 const container = document.getElementById('back-container');
                 buildBackButton(container);
 
-                // add to favorites                     SAVE FAV AS THE ENTIRE ITEM SO WE CAN CLICK ON IT AND DO SOMETHING!!
+                // add to favorites
                 const favButton = document.getElementById('fav-button');
                 favButton.addEventListener('click', event => {
                     event.preventDefault();
@@ -424,6 +430,12 @@ function buildFavoritesList(display) {
             }
             else if(mediaType === 'video') {
                 buildVideoDetailsDisplay(details, item);
+
+                // don't show the favorite heart until after the image loads
+                const vidElement = document.getElementById('vid-container').firstElementChild;
+                vidElement.addEventListener('loadstart', event => {
+                    document.getElementById('fav-button').classList.remove('hide');
+                });
 
                 const container = document.getElementById('back-container');
                 buildBackButton(container);

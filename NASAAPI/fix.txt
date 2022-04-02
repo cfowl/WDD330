@@ -1,5 +1,4 @@
 
-3. Only display heart button when image has loaded.
 4. Buttons animate right or left when clicked ??
 6. buildFavoritesList use the buildResultList function instead??
 11. add a favorites link to access list
