@@ -43,17 +43,18 @@ form.addEventListener('submit', event => {
     event.preventDefault();
     const keyword = getKeyWord();
     const mediaType = getMediaType();
-    console.log(mediaType);
-    if(keyword === 'favorite' || keyword === 'favorites') buildFavoritesList(results);
-    else getInfo(keyword, mediaType);
+    
+    getInfo(keyword, mediaType);
 });
 
 function getInfo(keyword, media) {
 
+    // toggle hidden
+    results.classList.remove('hidden');
+    details.classList.add('hidden');
+
     // set h2 innerHTML to the keyword
     document.getElementById('result-title').innerHTML = keyword.charAt(0).toUpperCase() + keyword.slice(1);
-
-    const url = `https://images-api.nasa.gov/search?keywords=${keyword}`;
 
     // remove back button if it exists
     if(document.getElementById('back-btn')) {
@@ -61,10 +62,15 @@ function getInfo(keyword, media) {
         bb.parentElement.removeChild(bb);
     }
 
-    // toggle hidden
-    results.classList.remove('hidden');
-    details.classList.add('hidden');
+    // if the user wants to display the favorites list then only do that
+    if(keyword === 'favorite' || keyword === 'favorites') {
+        buildFavoritesList(results); // CHANGE WHERE THIS HAPPENS??
+        return;
+    }
+    // otherwise keep going
 
+
+    const url = `https://images-api.nasa.gov/search?keywords=${keyword}`;
     
     const json = getJSON(url);
     json.then(data => {
@@ -80,10 +86,7 @@ function getInfo(keyword, media) {
 
         // contains AUDIOS also...
 
-
         buildResultList(results, items);
-
-        // GET SECOND PAGE OF RESULTS ?????????????????????????????
     })
     .then(() => {
         results.onclick = event => {
@@ -91,8 +94,6 @@ function getInfo(keyword, media) {
             // show description on hover??
             if(event.target.id !== 'results' && event.target.id !== '') {
 
-                // DO SOMETHING FOR VIDEOS HERE ?!?!?!?!?!?!?!?!?!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                // add item info as dataset in html tag
                 const mediaType = event.target.dataset.media_type;
 
                 let item = currentResults.filter(r => r.data[0].nasa_id === event.target.id);
@@ -336,14 +337,20 @@ function buildFavoritesList(display) {
     display.innerHTML = '';
 
     // iterate through the results and add them to the page
-    favorites.forEach(f => {
-        display.innerHTML += `<li class='image-link' id="${f.data[0].nasa_id}" title="Click to see more details">${f.data[0].title}</li>`;
+    favorites.forEach(fav => {
+        display.innerHTML += `
+            <li class='image-link' id="${fav.data[0].nasa_id}"
+            data-media_type="${fav.data[0].media_type}"
+            title="Click to see more details"
+            >${fav.data[0].title}</li>`;
     });
 
     display.onclick = event => {
         event.preventDefault();
         
         if(event.target.id !== 'results' && event.target.id !== '') {
+
+            const mediaType = event.target.dataset.media_type;
             
             let item = favorites.filter(r => r.data[0].nasa_id === event.target.id);
             item = item[0];
@@ -353,7 +360,7 @@ function buildFavoritesList(display) {
             results.classList.add('hidden');
             details.classList.remove('hidden');
 
-            if(event.target.dataset.media_type === 'image') {
+            if(mediaType === 'image') {
                 buildImageDetailsDisplay(details, item);
 
                 const container = document.getElementById('back-container');
@@ -368,7 +375,7 @@ function buildFavoritesList(display) {
                     // const fav = {id: id, title: title};
 
 
-                    // item already saved, remove it from favorites
+                    // remove item from favorites if it's in the list
                     if(favorites.some(f => f.data[0].nasa_id === id)) {
                         event.target.classList.toggle('add-fav');
                         event.target.classList.toggle('remove-fav');
@@ -378,7 +385,7 @@ function buildFavoritesList(display) {
                         })
                         favorites.splice(index, 1);
                     }
-                    // add item to favorites
+                    // add item to favorites if it's not in the list
                     else {
                         event.target.classList.toggle('add-fav');
                         event.target.classList.toggle('remove-fav');
@@ -390,13 +397,13 @@ function buildFavoritesList(display) {
                     saveFavorites(favorites);
                 });
             }
-            else if(event.target.dataset.media_type === 'video') {
+            else if(mediaType === 'video') {
                 buildVideoDetailsDisplay(details, item);
 
                 const container = document.getElementById('back-container');
                 buildBackButton(container);
 
-                // add to favorites                     SAVE FAV AS THE ENTIRE ITEM SO WE CAN CLICK ON IT AND DO SOMETHING!!
+                // add to favorites
                 const favButton = document.getElementById('fav-button');
                 favButton.addEventListener('click', event => {
                     event.preventDefault();
@@ -405,7 +412,7 @@ function buildFavoritesList(display) {
                     // const fav = {id: id, title: title};
 
 
-                    // item already saved, remove it from favorites
+                    // remove item from favorites if it's in the list
                     if(favorites.some(f => f.data[0].nasa_id === id)) {
                         event.target.classList.toggle('add-fav');
                         event.target.classList.toggle('remove-fav');
@@ -415,7 +422,7 @@ function buildFavoritesList(display) {
                         })
                         favorites.splice(index, 1);
                     }
-                    // add item to favorites
+                    // add item to favorites if it's not in the list
                     else {
                         event.target.classList.toggle('add-fav');
                         event.target.classList.toggle('remove-fav');

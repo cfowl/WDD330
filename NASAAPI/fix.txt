@@ -1,5 +1,4 @@
-1. Clicking back from a favorites detail shows "There were no results for your search. Please try again."
-2. Searching favorites from a keyword detail shows "There were no results for your Search. Please try again."
+
 3. Only display heart button when image has loaded.
 4. Buttons animate right or left when clicked ??
 6. buildFavoritesList use the buildResultList function instead??
