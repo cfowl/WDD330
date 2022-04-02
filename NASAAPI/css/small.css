@@ -24,12 +24,16 @@ h1, h2 {
 }
 
 h1 {
-    color: #048ba8;
-    text-shadow: -1px -1px #bfc0c0;
+    color: #fdb833;
+    border-top: 5px solid #048ba8;
+    border-bottom: 5px solid #048ba8;
+    width: 100%;
+    margin: 1rem 0 2.5rem;
+    padding: .5rem 0;
 }
 
 h2, h3 {
-    color: #fdb833;
+    color: #048ba8;
 }
 
 body, input {
@@ -49,7 +53,6 @@ html, body, main {
 
 header {
     margin: 0 auto;
-    width: fit-content;
     text-align: center;
 }
 
@@ -132,6 +135,7 @@ input#keyword::placeholder {
 }
 
 #info {
+    margin: 2rem 0 0 0;
     padding: 0 1rem;
     max-width: 100%;
     word-wrap: break-word;
@@ -217,19 +221,21 @@ img, video {
 }
 
 footer {
-    margin: 0 auto;
-    padding: 1rem 5rem;
+    margin: 2rem auto 0;
+    padding: 1rem 2rem 0;
     text-align: center;
-    width: fit-content;
-}
-
-footer a {
-    
+    width: 100%;
+    border-top: 5px solid #048ba8;
+    border-bottom: 5px solid #048ba8;
     color: #bfc0c0;
 }
 
-footer a:hover {
+footer a {
     color: #ffffff;
+}
+
+footer a:hover {
+    color: #bfc0c0;
 }
 
 #copyright, #copyright a {
@@ -238,5 +244,5 @@ footer a:hover {
 }
 
 #copyright a:hover {
-    color: #ffffff;
+    color: #bfc0c0;
 }
