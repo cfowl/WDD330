@@ -34,7 +34,7 @@ let favorites = loadFavorites();
 if(favorites === null) favorites = [];
 
 function getKeyWord() {
-    return form.keyword.value.toLowerCase();
+    return form.keyword.value.toLowerCase().trim();
 }
 
 function getMediaType() {
