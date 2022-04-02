@@ -104,49 +104,85 @@ function getInfo(keyword, media) {
                 details.classList.remove('hidden');
 
                 // Display image or video details <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<--------------------
-                if(mediaType === 'image') buildImageDetailsDisplay(details, item);
+                if(mediaType === 'image') {
+                    buildImageDetailsDisplay(details, item);
+
+                    const container = document.getElementById('back-container');
+                    buildBackButton(container);
+
+                    // add to favorites
+                    const favButton = document.getElementById('fav-button');
+                    favButton.addEventListener('click', event => {
+                        event.preventDefault();
+                        const id = item.data[0].nasa_id;
+                        // const title = item.data[0].title;
+                        // const fav = {id: id, title: title};
+
+
+                        // item already saved, remove it from favorites
+                        if(favorites.some(f => f.data[0].nasa_id === id)) {
+                            event.target.classList.toggle('add-fav');
+                            event.target.classList.toggle('remove-fav');
+                            // event.target.innerHTML = 'Add to Favorites';
+                            const index = favorites.findIndex(f => {
+                                return f.data[0].nasa_id === id;
+                            })
+                            favorites.splice(index, 1);
+                        }
+                        // add item to favorites
+                        else {
+                            event.target.classList.toggle('add-fav');
+                            event.target.classList.toggle('remove-fav');
+                            // event.target.innerHTML = 'Remove from Favorites';
+                            favorites.push(item);
+                        }
+                        
+                        // save the favorites array after adding or removing
+                        saveFavorites(favorites);
+                    });
+                }
                 else if(mediaType === 'video') {
                     const videoJSON = getJSON(item.href);
                     videoJSON.then(data => {
                         const link = data.find(i => i.includes('orig.mp4'));
                         item.links.push(link);
                         buildVideoDetailsDisplay(details, item);
+
+                        const container = document.getElementById('back-container');
+                        buildBackButton(container);
+
+                        // add to favorites
+                        const favButton = document.getElementById('fav-button');
+                        favButton.addEventListener('click', event => {
+                            event.preventDefault();
+                            const id = item.data[0].nasa_id;
+                            // const title = item.data[0].title;
+                            // const fav = {id: id, title: title};
+
+
+                            // item already saved, remove it from favorites
+                            if(favorites.some(f => f.data[0].nasa_id === id)) {
+                                event.target.classList.toggle('add-fav');
+                                event.target.classList.toggle('remove-fav');
+                                // event.target.innerHTML = 'Add to Favorites';
+                                const index = favorites.findIndex(f => {
+                                    return f.data[0].nasa_id === id;
+                                })
+                                favorites.splice(index, 1);
+                            }
+                            // add item to favorites
+                            else {
+                                event.target.classList.toggle('add-fav');
+                                event.target.classList.toggle('remove-fav');
+                                // event.target.innerHTML = 'Remove from Favorites';
+                                favorites.push(item);
+                            }
+                            
+                            // save the favorites array after adding or removing
+                            saveFavorites(favorites);
+                        });
                     });
                 }
-
-                const container = document.getElementById('back-container');
-                buildBackButton(container);
-
-                // add to favorites                     SAVE FAV AS THE ENTIRE ITEM SO WE CAN CLICK ON IT AND DO SOMETHING!!
-                const favButton = document.getElementById('fav-button');
-                favButton.addEventListener('click', event => {
-                    event.preventDefault();
-                    const id = item.data[0].nasa_id;
-                    // const title = item.data[0].title;
-                    // const fav = {id: id, title: title};
-
-
-                    // item already saved, remove it from favorites
-                    if(favorites.some(f => f.data[0].nasa_id === id)) {
-                        event.target.classList.toggle('add-fav');
-                        event.target.classList.toggle('remove-fav');
-                        // event.target.innerHTML = 'Add to Favorites';
-                        const index = favorites.findIndex(f => {
-                            return f.data[0].nasa_id === id;
-                        })
-                        favorites.splice(index, 1);
-                    }
-                    // add item to favorites
-                    else {
-                        event.target.classList.toggle('add-fav');
-                        event.target.classList.toggle('remove-fav');
-                        // event.target.innerHTML = 'Remove from Favorites';
-                        favorites.push(item);
-                    }
-                    
-                    // save the favorites array after adding or removing
-                    saveFavorites(favorites);
-                });
             }
 
         }
@@ -178,13 +214,15 @@ function buildResultList(element, items) {
         // save pertinent info into dataset
         element.innerHTML += `
             <li class='image-link' id="${item.data[0].nasa_id}"
-            data-href="${item.href}"
-            data-title="${item.data[0].title}"
-            data-description="${item.data[0].description}"
-            data-keywords="${item.data[0].keywords}"
             data-media_type="${item.data[0].media_type}"
             title="Click to see the details"
             >${item.data[0].title}</li>`;
+
+        
+        // data-href="${item.href}"
+        // data-title="${item.data[0].title}"
+        // data-description="${item.data[0].description}" THIS WAS MESSING UP BECUASE OF HTML IN STRING
+        // data-keywords='${item.data[0].keywords}'
     });
 
     // if no results were added to the page then notify the user
@@ -203,7 +241,8 @@ function buildBackButton(container) {
     button.addEventListener('click', event => {
         event.preventDefault();
         const keyword = getKeyWord();
-        getInfo(keyword);                            
+        const mediaType = getMediaType();
+        getInfo(keyword, mediaType);
     });
 }
 
@@ -261,7 +300,7 @@ function buildVideoDetailsDisplay(display, item) { // Display video details <<<<
     // image
     const vidDiv = document.createElement('div');
     vidDiv.id = 'vid-container';
-    vidDiv.innerHTML = `<video controls autoplay="false" poster="${item.links[0]}">
+    vidDiv.innerHTML = `<video controls autoplay">
                             <source src="${item.links.slice(-1).pop()}" type="video/mp4">
                             Sorry, your browser does not support the video tag.
                         </video>`;
