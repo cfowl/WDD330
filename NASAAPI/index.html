@@ -39,18 +39,26 @@
             </div>
             <div class="form-options">
                 <label for="image-type" class="right-txt">Images
-                    <input type="radio" name="mediaType" id="image-type" value="image" required>
+                    <input type="radio" name="mediaType" id="image-type" value="image" checked required>
                 </label>
                 <label for="video-type">Videos
-                    <input type="radio" name="mediaType" id="video-type" value="video" checked required>
+                    <input type="radio" name="mediaType" id="video-type" value="video" required>
                 </label>
             </div>
         </form>
 
-        <div id="info" class="center-align">
-            <h2 id="result-title"></h2>
-            <ol id="results"></ol>
-            <div id="details" class="center-txt"></div>
+        <div id="info" class="center-align empty">
+            
+            <div id="result-block">
+                <h2 id="result-title"></h2>
+                <ol id="results"></ol>
+            </div>
+
+            <div id="detail-block">
+                <h2 id="detail-title">Media Details</h2>
+                <div id="details" class="center-txt">Click on a media link to see the details...</div>
+            </div>
+
         </div>
 
     </main>

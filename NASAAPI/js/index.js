@@ -25,6 +25,8 @@ const form = document.forms['search-form'];
 
 const results = document.getElementById('results');
 const details = document.getElementById('details');
+const resultTitle = document.getElementById('result-title');
+const detailTitle = document.getElementById('detail-title');
 
 let currentResults = [];
 
@@ -43,7 +45,7 @@ form.addEventListener('submit', event => {
     event.preventDefault();
     const keyword = getKeyWord();
     const mediaType = getMediaType();
-    
+    document.getElementById('info').classList.remove('empty');    
     getInfo(keyword, mediaType);
 });
 
@@ -51,7 +53,9 @@ function getInfo(keyword, media) {
 
     // toggle hidden
     results.classList.remove('hidden');
+    resultTitle.classList.remove('hidden');
     details.classList.add('hidden');
+    detailTitle.classList.add('hidden');
 
     // set h2 innerHTML to the keyword
     document.getElementById('result-title').innerHTML = keyword.charAt(0).toUpperCase() + keyword.slice(1);
@@ -59,7 +63,7 @@ function getInfo(keyword, media) {
     // remove back button if it exists
     if(document.getElementById('back-btn')) {
         const bb = document.getElementById('back-btn');
-        bb.parentElement.removeChild(bb);
+        bb.parentElement.innerHTML = '';
     }
 
     // if the user wants to display the favorites list then only do that
@@ -99,10 +103,12 @@ function getInfo(keyword, media) {
                 let item = currentResults.filter(r => r.data[0].nasa_id === event.target.id);
                 item = item[0];
 
-                const results = document.getElementById('results');
-                const details = document.getElementById('details');
+                // const results = document.getElementById('results');
+                // const details = document.getElementById('details');
                 results.classList.add('hidden');
+                resultTitle.classList.add('hidden');
                 details.classList.remove('hidden');
+                detailTitle.classList.remove('hidden');
 
                 // Display image or video details <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<--------------------
                 if(mediaType === 'image') {
@@ -231,6 +237,10 @@ function buildResultList(element, items) {
 }
 
 function buildBackButton(container) {
+    // don't build the back button if one already exists
+    if(document.getElementById('back-btn')) {
+        return;
+    }
     // build the button and append it to its container
     const button = document.createElement('button');
     button.id = 'back-btn';
@@ -255,7 +265,7 @@ function buildImageDetailsDisplay(display, item) {
     const keywords = item.data[0].keywords.toString().replaceAll(',', ', ');
 
     // image title
-    document.getElementById('result-title').innerHTML = item.data[0].title;
+    document.getElementById('detail-title').innerHTML = item.data[0].title;
     // image
     const imgDiv = document.createElement('div');
     imgDiv.id = 'img-container';
@@ -297,7 +307,7 @@ function buildVideoDetailsDisplay(display, item) { // Display video details <<<<
     const keywords = item.data[0].keywords.toString().replaceAll(',', ', ');
 
     // image title
-    document.getElementById('result-title').innerHTML = item.data[0].title;
+    document.getElementById('detail-title').innerHTML = item.data[0].title;
     // image
     const vidDiv = document.createElement('div');
     vidDiv.id = 'vid-container';
@@ -358,7 +368,9 @@ function buildFavoritesList(display) {
             // const results = document.getElementById('results');
             // const details = document.getElementById('details');
             results.classList.add('hidden');
+            resultTitle.classList.add('hidden');
             details.classList.remove('hidden');
+            detailTitle.classList.remove('hidden');
 
             if(mediaType === 'image') {
                 buildImageDetailsDisplay(details, item);
