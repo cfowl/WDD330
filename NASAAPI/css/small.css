@@ -87,6 +87,8 @@ input#keyword {
     border-radius: 2rem;
     font-size: 1.15rem;
     color: #048ba8;
+    padding: auto;
+    line-height: 100%;
     border: none;
     height: 100%;
     width: 100%;
