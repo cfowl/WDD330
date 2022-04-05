@@ -1,24 +1,12 @@
+
+
+//----- Favorites Model -----//
+const key = 'user-favorites';
+
 export function saveFavorites(favorites) {
-    localStorage.setItem('user-favorites', JSON.stringify(favorites));
+    localStorage.setItem(key, JSON.stringify(favorites));
 }
 
 export function loadFavorites() {
-    return JSON.parse(localStorage.getItem('user-favorites'));
+    return JSON.parse(localStorage.getItem(key));
 }
-
-
-
-// const localStorageName = 'todoList';
-// let todoArray = [];
-
-// export function saveList(todoArray) {
-//     localStorage.setItem(localStorageName, JSON.stringify(todoArray));
-//     loadList();
-// }
-
-// export function loadList() {
-//     const savedTodoArray = JSON.parse(localStorage.getItem(localStorageName));
-//     if(savedTodoArray !== null) todoArray = savedTodoArray;
-    
-//     return todoArray;
-// }
