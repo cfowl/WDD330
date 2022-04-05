@@ -87,16 +87,15 @@ input#keyword {
     border-radius: 2rem;
     font-size: 1.15rem;
     color: #048ba8;
-    padding: 0;
     border: none;
     height: 100%;
     width: 100%;
 }
 
-/* input#keyword:focus {
+input#keyword:focus {
     outline: none;
     transform: scale(1.1);
-} */
+}
 
 input#keyword::placeholder {
     color: #048ba8;
