@@ -2,10 +2,20 @@
     /* */
     header {
         width: fit-content;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: top;
+        padding: 2rem 0 0 0;
     }
 
     h1 {
         padding: .5rem 2rem;
+        margin: 0;
+        border: none;
+    }
+
+    #search-form {
+        padding: 0;
     }
 
     #back-btn {
