@@ -22,17 +22,27 @@
 <body>
 
     <header>
-        <h1> NASA Image & Video App</h1>
-    </header>
-
-    <main>
+        <h1> NASA Image & Video</h1>
 
         <form id="search-form" class="center-align">
             <div class="form-main">
                 <div id="back-container" class="btn-container"></div>
                 <label for="keyword" title="Enter a keyword">
-                    <input type="text" name="keyword" id="keyword" class="center-txt"
+                    <input list="words" type="text" name="keyword" id="keyword" class="center-txt"
                     placeholder="search a keyword" autofocus required>
+                    <datalist id="words">
+                        <option value="Black Hole">
+                        <option value="Favorites"></option>
+                        <option value="Galaxy">
+                        <option value="Hurricane">
+                        <option value="Launch">
+                        <option value="Moon">
+                        <option value="Nebula">
+                        <option value="Pluto">
+                        <option value="Saturn">
+                        <option value="Sun">
+                        <option value="Supernova">
+                      </datalist>
                 </label>
                 <div class="btn-container">
                     <button type="submit" id="search-btn" title="Search"><i class="fa fa-arrow-right"></i></button>
@@ -42,22 +52,32 @@
                 <label for="image-type" class="right-txt">Images
                     <input type="radio" name="mediaType" id="image-type" value="image" checked required>
                 </label>
-                <label for="video-type">Videos
+                <label for="video-type" class="left-txt">Videos
                     <input type="radio" name="mediaType" id="video-type" value="video" required>
                 </label>
             </div>
         </form>
+    </header>
 
-        <div id="info" class="center-align empty">
+    <main>
+
+        
+
+        <div id="info" class="center-align ">
             
             <div id="result-block">
-                <h2 id="result-title"></h2>
-                <ol id="results"></ol>
+                <h2 id="result-title">Welcome!</h2>
+                <ol id="results">
+                    <li>Search a keyword above to see NASA results</li>
+                    <li>Be creative... try 'Pluto', 'Launch', or 'Nebula'</li>
+                    <li>OR literally any other keyword</li>
+                    <li>Search 'Favorites' to see your list of favorites</li>
+                </ol>
             </div>
 
             <div id="detail-block">
-                <h2 id="detail-title">Media Details</h2>
-                <div id="details" class="center-txt">Click on a media link to see the details...</div>
+                <h2 id="detail-title" class="small-hide">Media Details</h2>
+                <div id="details" class="center-txt small-hide">Click on a search result to see the details here...</div>
             </div>
 
         </div>
