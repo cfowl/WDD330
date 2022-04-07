@@ -1,24 +1,37 @@
 import { getJSON } from './utilities.js';
+import { loadFavorites, saveFavorites } from './localStorage.js';
 
 
 //----- NASA Model -----//
 export default class Nasa {
-  constructor(keyword = 'galaxy') {
-    this.url = `https://images-api.nasa.gov/search?keywords=${keyword}`;
-    // this is where we will store the last batch of retrieved results in the model. I don't always do this... in this case the api doesn't have an endpoint to request one quake.
-    this._results = []; // do we need this?? see comments above...
-    this._favorites = []; // ??
+  constructor() {
+    this.baseUrl = `https://images-api.nasa.gov/search?keywords=`;
+    this._results = [];
+  }
+
+  async getResultsByKeyword(keyword) {
+    const keywordUrl = this.baseUrl += keyword;
+    const results = await getJSON(keywordUrl);
+    return results.collection.items;
   }
 
   async getImagesByKeyword(keyword) {
-    // do stuff
+    console.log('function getImagesByKeyword() called!');
+    const results = await this.getResultsByKeyword(keyword)
+    this._results = results.filter(item => item.href.includes('/image/'));
+    return this._results;
   }
 
   async getVideosByKeyword(keyword) {
-    // do stuff
+    console.log('function getVideosByKeyword() called!');
+    const results = await this.getResultsByKeyword(keyword)
+    this._results = results.filter(item => item.href.includes('/video/'));
+    return this._results;
   }
 
   async getVideoSourceByURL(url) {
-    // do stuff
+    console.log('function getVideoSourceByURL() called!');
+    const results = await getJSON(url);
+    return results.find(i => i.includes('orig.mp4'));
   }
 }

@@ -78,7 +78,7 @@ function getInfo(keyword, media) {
     }
 
     // if the user wants to display the favorites list then only do that
-    if(keyword === 'favorite' || keyword === 'favorites') {
+    if(keyword === 'Favorites') {
         buildFavoritesList(results); // CHANGE WHERE THIS HAPPENS??
         return;
     }
@@ -92,11 +92,9 @@ function getInfo(keyword, media) {
         let items = data.collection.items;
         currentResults = data.collection.items;
         if(media === 'image') {
-            items = items.filter(item => item.href.includes('/image/'));      // does this change items
-            console.log('getting images');
+            items = items.filter(item => item.href.includes('/image/'));
         } else if(media === 'video') {
             items = items.filter(item => item.href.includes('/video/'));
-            console.log(items);
         }
 
         // contains AUDIOS also...
@@ -126,7 +124,7 @@ function getInfo(keyword, media) {
 
                 // Display image or video details <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<--------------------
                 if(mediaType === 'image') {
-                    buildImageDetailsDisplay(details, item);
+                    buildImageDetailsDisplay(details, item); // WENT TO THIS POINT ....................... //
 
                     // don't show the favorite heart until after the image loads
                     const imgElement = document.getElementById('img-container').firstElementChild;
