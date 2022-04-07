@@ -1,12 +1,9 @@
 
-1. examples of what to search for (maybe on opening screen)
-2. center input on iphones
-3. quick links to common searches (dropdown in existing input??)
 5. keywords clickable links to a new search
 7. favorite search by image and video also
 4. Buttons animate right or left when clicked ??
 6. buildFavoritesList use the buildResultList function instead??
-11. add a favorites link to access list
+14. update list anytime mediaType changes and keyword is not blank
 
 ----------------------------
 1. Validate HTML/CSS, WAVE
