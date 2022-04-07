@@ -20,6 +20,7 @@ import { saveFavorites, loadFavorites } from "./localStorage.js";
 // display widht and heigth to size layout and CSS display
 console.log(window.innerWidth + ' x ' + window.innerHeight);
 
+const h1 = document.querySelector('h1');
 
 const form = document.forms['search-form'];
 
@@ -34,12 +35,19 @@ let favorites = loadFavorites();
 if(favorites === null) favorites = [];
 
 function getKeyWord() {
-    return form.keyword.value.toLowerCase().trim();
+    const keyword = form.keyword.value.trim();
+    let keywords = keyword.split(' ').map(word => word[0].toUpperCase() + word.substring(1)).join(' ');
+    return keywords;
 }
 
 function getMediaType() {
     return form.mediaType.value;
 }
+
+h1.addEventListener('click', event => {
+    event.preventDefault();
+    location.reload();
+});
 
 form.addEventListener('submit', event => {
     event.preventDefault();
@@ -58,7 +66,10 @@ function getInfo(keyword, media) {
     detailTitle.classList.add('small-hide');
 
     // set h2 innerHTML to the keyword
-    document.getElementById('result-title').innerHTML = keyword.charAt(0).toUpperCase() + keyword.slice(1);
+    resultTitle.innerHTML = keyword;
+
+    // set results innerHTML to let the user know the results are coming
+    results.innerHTML = `Please wait, we are fetching results for '${keyword}'`;
 
     // remove back button if it exists
     if(document.getElementById('back-btn')) {
@@ -109,6 +120,9 @@ function getInfo(keyword, media) {
                 resultTitle.classList.add('small-hide');
                 details.classList.remove('small-hide');
                 detailTitle.classList.remove('small-hide');
+
+                // let the user know the details are coming
+                details.innerHTML = `<div class="left-txt">The details are loading for:<p>${event.target.id}</p></div>`;
 
                 // Display image or video details <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<--------------------
                 if(mediaType === 'image') {
@@ -233,7 +247,7 @@ function buildResultList(element, items) {
         
         // save pertinent info into dataset
         element.innerHTML += `
-            <li class='image-link' id="${item.data[0].nasa_id}"
+            <li class='result-link' id="${item.data[0].nasa_id}"
             data-media_type="${item.data[0].media_type}"
             title="Click to see the details"
             >${item.data[0].title}</li>`;
