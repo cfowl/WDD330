@@ -19,36 +19,39 @@ fa
     box-sizing: border-box;
 }
 
-h1, h2 {
-    font-family: 'Audiowide', cursive;
-}
-
-h1 {
-    color: #fdb833;
-    border-top: 5px solid #048ba8;
-    border-bottom: 5px solid #048ba8;
+html, body, main {
+    margin: 0 auto;
+    padding: 0;
     width: 100%;
-    margin: 1rem 0 2.5rem;
-    padding: .5rem 0;
-}
-
-h2, h3 {
-    color: #048ba8;
+    max-width: 100%;
 }
 
 body, input {
     font-family: 'Sunflower', sans-serif;
 }
 
+h1, h2 {
+    font-family: 'Audiowide', cursive;
+}
+
 body {
     background-color: #222e4f;
 }
 
-html, body, main {
-    margin: 0 auto;
-    padding: 0;
+main {
+    min-height: 52vh;
+}
+
+h1 {
+    color: #fdb833;
+    border-bottom: 2px solid #048ba8;
     width: 100%;
-    max-width: 100%;
+    margin: .5rem 0 1.5rem;
+    padding: .5rem 0;
+}
+
+h2, h3 {
+    color: #048ba8;
 }
 
 header {
@@ -74,7 +77,7 @@ form {
 .form-options {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
+    gap: 1rem;
     color: #ffffff;
     margin: .5rem 0;
 }
@@ -101,6 +104,10 @@ input#keyword:focus {
 
 input#keyword::placeholder {
     color: #048ba8;
+}
+
+input#keyword::-webkit-calendar-picker-indicator {
+    display: none !important;
 }
 
 .form-options input {
@@ -156,7 +163,7 @@ li {
     width: fit-content;
 }
 
-li:hover {
+li.result-link:hover {
     color: #fdb833;
     cursor: pointer;
 }
@@ -229,8 +236,7 @@ footer {
     padding: 1rem 2rem 0;
     text-align: center;
     width: 100%;
-    border-top: 5px solid #048ba8;
-    border-bottom: 5px solid #048ba8;
+    border-top: 2px solid #048ba8;
     color: #bfc0c0;
 }
 
