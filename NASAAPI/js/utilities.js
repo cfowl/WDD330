@@ -4,12 +4,8 @@
 export function getJSON(url) {
     return fetch(url)
     .then(response => {
-        if(response.ok) {
-            return response.json();
-        }
-        else {
-            throw Error(response.statusText);
-        }
+        if(response.ok) return response.json();
+        else throw Error(response.statusText);
     })
     .catch(error => console.log(error))
 }
@@ -19,8 +15,6 @@ export function formatKeyword(keyword = 'favorites') {
     if(keyword !== '') {
         const keywords = keyword.split(' ').map(word => word[0].toUpperCase() + word.substring(1)).join(' ');
         return keywords;
-    } else {
-        return 'Favorites';
     }
-    
+    else return 'Favorites';
 }

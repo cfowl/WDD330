@@ -1,5 +1,4 @@
 import { getJSON } from './utilities.js';
-import { loadFavorites, saveFavorites } from './localStorage.js';
 
 
 //----- NASA Model -----//
@@ -16,21 +15,18 @@ export default class Nasa {
   }
 
   async getImagesByKeyword(keyword) {
-    console.log('function getImagesByKeyword() called!');
     const results = await this.getResultsByKeyword(keyword)
     this._results = results.filter(item => item.href.includes('/image/'));
     return this._results;
   }
 
   async getVideosByKeyword(keyword) {
-    console.log('function getVideosByKeyword() called!');
     const results = await this.getResultsByKeyword(keyword)
     this._results = results.filter(item => item.href.includes('/video/'));
     return this._results;
   }
 
   async getVideoSourceByURL(url) {
-    console.log('function getVideoSourceByURL() called!');
     const results = await getJSON(url);
     return results.find(i => i.includes('orig.mp4'));
   }

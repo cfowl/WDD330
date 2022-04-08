@@ -1,6 +1,6 @@
 
 
-//----- Favorites Model -----//
+//----- Favorites Model (AKA Local Storage for user-favorites) -----//
 const key = 'user-favorites';
 
 export function saveFavorites(favorites) {

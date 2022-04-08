@@ -8,6 +8,7 @@ export default class NasaView {
         element.innerHTML = message;
     }
 
+    // this function hides display 1 & 3 and shows display 2 & 4
     toggleDisplay(display1, display2, display3, display4) {
         display1.classList.add('small-hide');
         display3.classList.add('small-hide');
@@ -38,10 +39,6 @@ export default class NasaView {
                 title="Click to see the details"
                 >${item.data[0].title}</li>`;
         });
-    }
-
-    buildFavoritesList(display) {
-        // is this function necessary or could buildResultsList() be used??
     }
     
     // this function builds the innerHTML for the image details display
@@ -106,12 +103,6 @@ export default class NasaView {
         favButton.id = 'fav-button';
         favButton.classList.add('fa', 'fa-heart-o', 'hide');
 
-        // if(favorites.some(f => f.data[0].nasa_id === item.data[0].nasa_id)) {
-        //     favButton.classList.add('remove-fav');
-        // } else {
-        //     favButton.classList.add('add-fav');
-        // }
-
         vidDiv.appendChild(favButton);
 
         const detailDiv = document.createElement('div');
@@ -145,8 +136,8 @@ export default class NasaView {
         container.appendChild(button);
     }
 
+    // this function removes the back button
     removeBackButton() {
-        // reset innerHTML on back button container
         document.getElementById('back-container').innerHTML = '';
     }
 }
