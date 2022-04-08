@@ -200,7 +200,6 @@ img, video {
 .remove-fav {
     color: red;
     font-weight: bold;
-    /*transform: scale(1.3);              /* TURN INTO ANIMATION ?? */
 }
 
 .add-fav {
