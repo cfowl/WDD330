@@ -9,7 +9,6 @@ const copyright = document.getElementById('year');
 copyright.innerHTML = year;
 
 
-// check time for CSS dark/light mode
-const colorMode = document.getElementById('color-mode');
+// check time for CSS dark/light mode (this is not implemented yet)
 if(hour <= 8 || hour >= 20) console.log('Dark Mode');
 else console.log('Light Mode');
