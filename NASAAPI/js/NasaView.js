@@ -17,9 +17,12 @@ export default class NasaView {
     }
 
     // this function builds the innerHTML for the results element
-    buildResultsList(element, items, title, keyword) {
+    buildResultsList(element, items, title, keyword, mediaType) {
+        // format media type
+        mediaType = mediaType.charAt(0).toUpperCase() + mediaType.slice(1) + 's';
+
         // results title
-        title.innerHTML = keyword;
+        title.innerHTML = `${keyword} ${mediaType}`;
 
         // if no results were found, then notify the user and do nothing else
         if(items.length === 0) {
@@ -116,6 +119,46 @@ export default class NasaView {
         this.buildBackButton();
         
         return [vidDiv.firstElementChild, favButton];
+    }
+    
+    // this function builds the innerHTML for the audio details display
+    buildAudioDetailsDisplay(display, title, item) {
+
+        // reset display
+        display.innerHTML = '';
+
+        // image title
+        title.innerHTML = item.data[0].title;
+
+        // separate keywords by commas
+        const keywords = item.data[0].keywords.toString().replaceAll(',', ', ');
+
+        // image
+        const audioDiv = document.createElement('div');
+        audioDiv.id = 'vid-container';
+        audioDiv.innerHTML = `<video controls autoplay">
+                                <source src="${item.src}" type="audio/x-wav">
+                                Sorry, your browser does not support the video tag (used to play the audio).
+                            </video>`;
+
+        // favorite button
+        const favButton = document.createElement('i');
+        favButton.id = 'fav-button';
+        favButton.classList.add('fa', 'fa-heart-o');
+
+        audioDiv.appendChild(favButton);
+
+        const detailDiv = document.createElement('div');
+        detailDiv.classList.add('left-txt');
+        detailDiv.innerHTML += `<h3>Details</h3><p>${item.data[0].description}</p>`;
+        detailDiv.innerHTML += `<h3>Keywords</h3><p>${keywords}</p>`;
+
+        display.appendChild(audioDiv);
+        display.appendChild(detailDiv);
+
+        this.buildBackButton();
+        
+        return [audioDiv.firstElementChild, favButton];
     }
     
     // this function builds the back button for the details display

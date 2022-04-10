@@ -26,8 +26,19 @@ export default class Nasa {
     return this._results;
   }
 
+  async getAudiosByKeyword(keyword) {
+    const results = await this.getResultsByKeyword(keyword)
+    this._results = results.filter(item => item.href.includes('/audio/'));
+    return this._results;
+  }
+
   async getVideoSourceByURL(url) {
     const results = await getJSON(url);
     return results.find(i => i.includes('orig.mp4'));
+  }
+
+  async getAudioSourceByURL(url) {
+    const results = await getJSON(url);
+    return results.find(i => i.includes('~orig.'));
   }
 }

@@ -77,7 +77,7 @@ form {
 
 .form-options {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 1rem;
     color: #ffffff;
     margin: .5rem 0;

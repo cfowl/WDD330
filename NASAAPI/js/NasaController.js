@@ -66,8 +66,14 @@ export default class NasaController {
       if(keyword.toLowerCase() === 'favorites') items = this.favorites.filter(item => item.href.includes('/video/'));
       else items = await this.nasa.getVideosByKeyword(keyword);
     }
+    // get video items
+    else if(mediaType === 'audio') {
+      if(keyword.toLowerCase() === 'favorites') items = this.favorites.filter(item => item.href.includes('/audio/'));
+      else items = await this.nasa.getAudiosByKeyword(keyword);
+    }
 
-    this.nasaView.buildResultsList(this.resultsElement, items, this.resultTitleElement, this.keyword);
+    this.nasaView.buildResultsList(this.resultsElement, items, this.resultTitleElement,
+      this.keyword, this.mediaType);
 
     // let the results be clicked on the get item's details
     this.resultsElement.onclick = event => {
@@ -108,7 +114,20 @@ export default class NasaController {
             this.responsiveBackButton();
             // add heart button event listener and other responsive features
             this.responsiveHeartButton(media_heart[0], media_heart[1], item);
-
+          });
+        }
+        else if(itemMediaType === 'audio') {
+          // get the video's src
+          const link = this.nasa.getAudioSourceByURL(item.href);
+          link.then(link => {
+            // add the video's src to the item
+            item.src = link;
+            // render the video details and get the media and heart in return
+            const media_heart = this.nasaView.buildAudioDetailsDisplay(this.detailsElement, this.detailTitleElement, item);
+            // add back button event listener
+            this.responsiveBackButton();
+            // add heart button event listener and other responsive features
+            this.responsiveHeartButton(media_heart[0], media_heart[1], item);
           });
         }
       }

@@ -32,7 +32,7 @@
                     placeholder="search a keyword" autofocus required>
                     <datalist id="words">
                         <option value="Black Hole">
-                        <option value="Favorites"></option>
+                        <option value="Favorites">
                         <option value="Galaxy">
                         <option value="Hurricane">
                         <option value="Launch">
@@ -50,11 +50,14 @@
             </div>
             
             <div class="form-options">
-                <label for="image-type" class="right-txt">Images
-                    <input type="radio" name="mediaType" id="image-type" value="image" checked required>
+                <label for="image" class="right-txt">Images
+                    <input type="radio" name="mediaType" id="image" value="image" required checked>
                 </label>
-                <label for="video-type" class="left-txt">Videos
-                    <input type="radio" name="mediaType" id="video-type" value="video" required>
+                <label for="video" class="center-txt">Videos
+                    <input type="radio" name="mediaType" id="video" value="video" required>
+                </label>
+                <label for="audio" class="left-txt">Audio
+                    <input type="radio" name="mediaType" id="audio" value="audio" required>
                 </label>
             </div>
         </form>
