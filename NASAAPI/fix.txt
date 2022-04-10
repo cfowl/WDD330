@@ -1,8 +1,8 @@
 
+2. night/day mode (by sunrise/sunset times?)
+3. option to choose list view (done) or gallery view (not done)
 5. keywords clickable links to a new search
-7. favorite search by image and video also
 4. Buttons animate right or left when clicked ??
-6. buildFavoritesList use the buildResultList function instead??
 14. update list anytime mediaType changes and keyword is not blank
 
 ----------------------------
