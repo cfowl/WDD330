@@ -160,7 +160,7 @@ li {
     width: fit-content;
 }
 
-li.result-link:hover {
+li:not(.tip):hover {
     color: #fdb833;
     cursor: pointer;
 }
@@ -185,6 +185,11 @@ img, video {
     max-height: 100%;
     display: block;
     margin: 0 auto;
+}
+
+#keyword-list {
+    padding: 0 0 0 1rem;
+    margin: 0;
 }
 
 #fav-button {

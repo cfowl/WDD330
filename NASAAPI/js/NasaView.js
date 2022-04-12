@@ -48,6 +48,7 @@ export default class NasaView {
     buildImageDetailsDisplay(display, title, item) {
         // reset display
         display.innerHTML = '';
+        console.log(item);
 
         // separate keywords by commas
         const keywords = item.data[0].keywords.toString().replaceAll(',', ', ');
@@ -67,10 +68,8 @@ export default class NasaView {
 
         imgDiv.appendChild(favButton);
 
-        const detailDiv = document.createElement('div');
-        detailDiv.classList.add('left-txt');
-        detailDiv.innerHTML += `<h3>Details</h3><p>${item.data[0].description}</p>`;
-        detailDiv.innerHTML += `<h3>Keywords</h3><p>${keywords}</p>`;
+        // build details general to image, video, and audio
+        const detailDiv = this.buildDetails(item);
 
         display.appendChild(imgDiv);
         // display.appendChild(favButton);
@@ -83,9 +82,9 @@ export default class NasaView {
     
     // this function builds the innerHTML for the video details display
     buildVideoDetailsDisplay(display, title, item) {
-
         // reset display
         display.innerHTML = '';
+        console.log(item);
 
         // image title
         title.innerHTML = item.data[0].title;
@@ -108,10 +107,8 @@ export default class NasaView {
 
         vidDiv.appendChild(favButton);
 
-        const detailDiv = document.createElement('div');
-        detailDiv.classList.add('left-txt');
-        detailDiv.innerHTML += `<h3>Details</h3><p>${item.data[0].description}</p>`;
-        detailDiv.innerHTML += `<h3>Keywords</h3><p>${keywords}</p>`;
+        // build details general to image, video, and audio
+        const detailDiv = this.buildDetails(item);
 
         display.appendChild(vidDiv);
         display.appendChild(detailDiv);
@@ -123,15 +120,15 @@ export default class NasaView {
     
     // this function builds the innerHTML for the audio details display
     buildAudioDetailsDisplay(display, title, item) {
-
         // reset display
         display.innerHTML = '';
+        console.log(item);
 
         // image title
         title.innerHTML = item.data[0].title;
 
         // separate keywords by commas
-        const keywords = item.data[0].keywords.toString().replaceAll(',', ', ');
+        //const keywords = item.data[0].keywords.toString().replaceAll(',', ', ');
 
         // image
         const audioDiv = document.createElement('div');
@@ -148,10 +145,8 @@ export default class NasaView {
 
         audioDiv.appendChild(favButton);
 
-        const detailDiv = document.createElement('div');
-        detailDiv.classList.add('left-txt');
-        detailDiv.innerHTML += `<h3>Details</h3><p>${item.data[0].description}</p>`;
-        detailDiv.innerHTML += `<h3>Keywords</h3><p>${keywords}</p>`;
+        // build details general to image, video, and audio
+        const detailDiv = this.buildDetails(item);
 
         display.appendChild(audioDiv);
         display.appendChild(detailDiv);
@@ -160,17 +155,36 @@ export default class NasaView {
         
         return [audioDiv.firstElementChild, favButton];
     }
+
+    buildDetails(item) {
+        const detailDiv = document.createElement('div');
+        detailDiv.classList.add('left-txt');
+        let date = item.data[0].date_created.substring(0, item.data[0].date_created.indexOf('T'));
+        detailDiv.innerHTML += `<h3>Date Created</h3><p>${date}</p>`;
+        if(item.data[0].location) detailDiv.innerHTML += `<h3>Location</h3><p>${item.data[0].location}</p>`;
+        detailDiv.innerHTML += `<h3>Details</h3><p>${item.data[0].description}</p>`;
+        //detailDiv.innerHTML += `<h3>Keywords</h3><p>${keywords}</p>`;
+        detailDiv.innerHTML += '<h3>Keywords</h3>';
+        let keywords;
+        if(item.data[0].keywords[0].includes(',')) keywords = item.data[0].keywords[0].split(',');
+        else keywords = item.data[0].keywords;
+        const ul = document.createElement('ul');
+        ul.id = 'keyword-list';
+        keywords.forEach(k => {
+            ul.innerHTML+= `<li class="keyword-link">${k}</li>`;
+        });
+        detailDiv.appendChild(ul);
+        return detailDiv;
+    }
     
     // this function builds the back button for the details display
     buildBackButton() {
         // get back button container
         const container = document.getElementById('back-container');
-
         // don't build the back button if one already exists
         if(document.getElementById('back-btn')) {
             return;
         }
-
         // build the button and append it to its container
         const button = document.createElement('button');
         button.id = 'back-btn';

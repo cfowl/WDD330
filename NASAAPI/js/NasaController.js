@@ -60,16 +60,22 @@ export default class NasaController {
     if(mediaType === 'image') {
       if(keyword.toLowerCase() === 'favorites') items = this.favorites.filter(item => item.href.includes('/image/')); 
       else items =  await this.nasa.getImagesByKeyword(keyword);
+      console.log(keyword);
+      console.log('type image');
     }
     // get video items
     else if(mediaType === 'video') {
       if(keyword.toLowerCase() === 'favorites') items = this.favorites.filter(item => item.href.includes('/video/'));
       else items = await this.nasa.getVideosByKeyword(keyword);
+      console.log(keyword);
+      console.log('type video');
     }
     // get video items
     else if(mediaType === 'audio') {
       if(keyword.toLowerCase() === 'favorites') items = this.favorites.filter(item => item.href.includes('/audio/'));
       else items = await this.nasa.getAudiosByKeyword(keyword);
+      console.log(keyword);
+      console.log('type audio');
     }
 
     this.nasaView.buildResultsList(this.resultsElement, items, this.resultTitleElement,
@@ -101,6 +107,8 @@ export default class NasaController {
           this.responsiveBackButton();
           // add heart button event listener and other responsive features
           this.responsiveHeartButton(media_heart[0], media_heart[1], item);
+          // make keywords list responsive
+          this.responsiveKeywordList();
         }
         else if(itemMediaType === 'video') {
           // get the video's src
@@ -114,6 +122,8 @@ export default class NasaController {
             this.responsiveBackButton();
             // add heart button event listener and other responsive features
             this.responsiveHeartButton(media_heart[0], media_heart[1], item);
+            // make keywords list responsive
+            this.responsiveKeywordList();
           });
         }
         else if(itemMediaType === 'audio') {
@@ -128,10 +138,25 @@ export default class NasaController {
             this.responsiveBackButton();
             // add heart button event listener and other responsive features
             this.responsiveHeartButton(media_heart[0], media_heart[1], item);
+            // make keywords list responsive
+            this.responsiveKeywordList();
           });
         }
       }
     }
+  }
+
+  // this function
+  responsiveKeywordList() {
+    const list = document.getElementById('keyword-list');
+
+    list.addEventListener('click', event => {
+      event.preventDefault();
+      if(event.target.id === 'keyword-list') return;
+      const keyword = event.target.innerHTML;
+      this.keyword = keyword.trim();
+      this.getResultsByKeyword(this.keyword, this.mediaType);
+    });
   }
 
   // this function adds responsiveness to the back button with clicks
