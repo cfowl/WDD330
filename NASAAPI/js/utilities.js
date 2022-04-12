@@ -13,7 +13,7 @@ export function getJSON(url) {
 // this function capitalizes each keyword
 export function formatKeyword(keyword = 'favorites') {
     if(keyword !== '') {
-        const keywords = keyword.split(' ').map(word => word[0].toUpperCase() + word.substring(1)).join(' ');
+        const keywords = keyword.trim().split(' ').map(word => word[0].toUpperCase() + word.substring(1)).join(' ');
         return keywords;
     }
     else return 'Favorites';
