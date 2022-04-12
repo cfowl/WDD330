@@ -9,7 +9,7 @@ export default class Nasa {
   }
 
   async getResultsByKeyword(keyword) {
-    const keywordUrl = this.baseUrl += keyword;
+    const keywordUrl = this.baseUrl + keyword;
     const results = await getJSON(keywordUrl);
     return results.collection.items;
   }
