@@ -163,6 +163,7 @@ li {
 li:not(.tip):hover {
     color: #fdb833;
     cursor: pointer;
+    text-decoration: underline;
 }
 
 #details {
@@ -190,6 +191,10 @@ img, video {
 #keyword-list {
     padding: 0 0 0 1rem;
     margin: 0;
+}
+
+.keyword-link {
+    text-decoration: underline;
 }
 
 #fav-button {
