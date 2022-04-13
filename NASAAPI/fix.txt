@@ -1,7 +1,6 @@
 
 2. night/day mode (by sunrise/sunset times?)
 3. option to choose list view (done) or gallery view (not done)
-5. keywords clickable links to a new search
 4. Buttons animate right or left when clicked ??
 14. update list anytime mediaType changes and keyword is not blank
 
