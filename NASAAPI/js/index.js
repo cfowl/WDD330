@@ -15,7 +15,6 @@ const form = document.forms['search-form'];
 form.addEventListener('submit', event => {
     event.preventDefault();
     const keyword = formatKeyword(form.keyword.value);
-    form.keyword.value = '';
     const mediaType = form.mediaType.value;
 
     // create controller and initialize it

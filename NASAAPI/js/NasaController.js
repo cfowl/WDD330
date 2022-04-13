@@ -60,22 +60,16 @@ export default class NasaController {
     if(mediaType === 'image') {
       if(keyword.toLowerCase() === 'favorites') items = this.favorites.filter(item => item.href.includes('/image/')); 
       else items =  await this.nasa.getImagesByKeyword(keyword);
-      console.log(keyword);
-      console.log('type image');
     }
     // get video items
     else if(mediaType === 'video') {
       if(keyword.toLowerCase() === 'favorites') items = this.favorites.filter(item => item.href.includes('/video/'));
       else items = await this.nasa.getVideosByKeyword(keyword);
-      console.log(keyword);
-      console.log('type video');
     }
     // get video items
     else if(mediaType === 'audio') {
       if(keyword.toLowerCase() === 'favorites') items = this.favorites.filter(item => item.href.includes('/audio/'));
       else items = await this.nasa.getAudiosByKeyword(keyword);
-      console.log(keyword);
-      console.log('type audio');
     }
 
     this.nasaView.buildResultsList(this.resultsElement, items, this.resultTitleElement,
@@ -157,6 +151,7 @@ export default class NasaController {
       if(event.target.id === 'keyword-list') return;
       const keyword = event.target.innerHTML;
       this.keyword = keyword.trim();
+      this.setKeywordInput(this.keyword);
       this.getResultsByKeyword(this.keyword, this.mediaType);
     });
   }
@@ -222,4 +217,9 @@ export default class NasaController {
     // save the updated favorites array
     saveFavorites(this.favorites);
   }
-}
+
+  // this function
+  setKeywordInput(keyword) {
+    document.forms['search-form'].keyword.value = keyword;
+  }
+} // END OF NasaController Class //
