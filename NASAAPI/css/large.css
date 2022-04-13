@@ -4,7 +4,6 @@
         width: fit-content;
         display: grid;
         grid-template-columns: 1fr 1fr;
-        align-items: top;
         padding: 2rem 0 0 0;
     }
 
