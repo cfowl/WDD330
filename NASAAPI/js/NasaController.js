@@ -143,6 +143,8 @@ export default class NasaController {
           });
         }
       }
+      // scroll to top of window to display details in view
+      window.scroll(0,120);
     }
   }
 
